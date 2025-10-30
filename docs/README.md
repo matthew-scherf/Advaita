@@ -1,85 +1,45 @@
-# Documentation
+# Documentation Index
 
-This directory contains all human-readable documentation for the formalization.
+This directory contains comprehensive documentation for the Advaita Vedanta formalization.
 
-## Quick Navigation
+## Core Documentation
 
-**Choose your entry point based on your goal:**
+AXIOMS.md: Complete listing of all 114 axioms organized by module, with formal statements and philosophical interpretations. Consult this document to understand the foundational principles of the formalization.
 
-| I want to... | Read this |
-|--------------|-----------|
-| Understand quickly (5 min) | `executive_summary.pdf` |
-| Full philosophical context (1 hour) | `master_paper.pdf` |
-| See all axioms/theorems | `technical_reference.pdf` |
-| Verify in my experience | `experiential_guide.pdf` |
-| Run the verification myself | `verification_guide.pdf` |
+THEOREMS.md: Catalog of 40+ proven theorems including the master theorem (Tat Tvam Asi). Each theorem includes formal statement, proof strategy, and philosophical significance.
 
-## Files
+METHODOLOGY.md: Detailed explanation of the formalization approach, including translation strategy, design decisions, verification process, and philosophical interpretation. Essential reading for understanding how traditional doctrine was converted to formal logic.
 
-### Primary Documents
+## Navigation Guide
 
-**`master_paper.pdf`** (~20 pages)
-- Complete exposition with philosophical context
-- Full technical explanation
-- Implications and applications
-- Citations and references
+For newcomers to the formalization: Begin with the main README.md, then consult METHODOLOGY.md to understand the approach, followed by AXIOMS.md to see the foundational principles.
 
-**Target audience:** Academics, serious students, anyone wanting the complete story
+For researchers investigating specific doctrines: Use AXIOMS.md to locate relevant axiom groups, then check THEOREMS.md for proven consequences.
 
----
+For formal verification specialists: METHODOLOGY.md explains design decisions and verification approach. The source code files in the AdvaitaVedanta directory contain the actual Lean 4 implementations.
 
-**`executive_summary.pdf`**
-- What we proved
-- How we proved it
-- Why it matters
-- How to verify
+For philosophers of Indian philosophy: THEOREMS.md provides the most philosophically significant results with detailed interpretations. METHODOLOGY.md addresses questions of textual fidelity and translation.
 
-**Target audience:** Everyone - start here if unsure
+For comparative philosophy: METHODOLOGY.md discusses how the formalization relates to other systems and identifies potential points of comparison.
 
----
+## File Relationships
 
-**`technical_reference.pdf`** 
-- All 40+ axioms listed clearly
-- All 30+ theorems with statements
-- Proof sketch overview
-- Quick reference card
+The documentation files form a logical progression:
 
-**Target audience:** Logicians, people checking the formal details
+1. README.md provides overview and motivation
+2. METHODOLOGY.md explains the formalization approach
+3. AXIOMS.md presents the foundational principles
+4. THEOREMS.md shows what can be proven from those principles
+5. CONTRIBUTING.md explains how to extend the work
 
----
+## Technical References
 
-### Guides
+For Lean 4 syntax and features: Consult the official Lean documentation at https://leanprover.github.io/lean4/doc/
 
-**`experiential_guide.pdf`**
-- How the logic maps to direct experience
-- Meditation instructions
-- What to look for
-- "When you see X, that's theorem Y"
-- From conceptual to experiential
+For Advaita Vedanta sources: The formalization draws primarily on Brahma Sutras with Shankaracharya's commentary, principal Upanishads, and contemporary scholarship by scholars such as Eliot Deutsch, Anantanand Rambachan, and others.
 
-**Target audience:** Practitioners, meditators, those seeking realization
+For formal ontology and grounding theory: The formalization connects to contemporary work in analytic metaphysics, particularly theories of ontological dependence and fundamentality.
 
----
+## Updates
 
-**`verification_guide.pdf`** 
-- Installing Isabelle
-- Running the verification
-- Reading the output
-- Troubleshooting
-- Step-by-step with screenshots
-
-**Target audience:** People who want to verify the proofs themselves
-
----
-
-## Citation
-
-When citing this work, refer to the master paper:
-
-```
-Scherf, M. (2025). Complete Formal Axiomatization of Advaita Vedanta:
-Machine-Verified Non-Dual Metaphysics. 
-```
-
-Or cite the specific document if relevant.
-
+This documentation reflects formalization version 4.5.0. Significant changes to axioms or theorems will be documented in CHANGELOG.md (when available) and reflected in updated documentation files.

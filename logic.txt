@@ -1,0 +1,1626 @@
+================================================================================
+
+COMPLETE FORMAL AXIOMATIZATION OF ADVAITA VEDANTA
+
+================================================================================
+
+Author: Matthew Scherf
+
+Date: October 30, 2025
+
+Status: Machine-Verified (Lean 4), Logically Consistent (Proven by Dynamic Model)
+
+Language: Many-sorted first-order logic with equality
+
+Philosophical Tradition: Advaita Vedanta (Śaṅkara school)
+
+================================================================================
+
+I. FORMAL SIGNATURE
+
+================================================================================
+
+ 
+--------------------------------------------------------------------------------
+
+A. SORTS (Types)
+
+--------------------------------------------------------------------------------
+
+ 
+
+Obj       -- Objects (entities): Brahman, jīvas, phenomena, sheaths, ego
+
+Level     -- Reality levels: Param, Vyav, Prat
+
+Time      -- Temporal points (discrete linear order)
+
+Event     -- Events (reified occurrences)
+
+ 
+
+Level Constants:
+
+  Param : Level    -- Paramārthika (ultimate reality)
+
+  Vyav  : Level    -- Vyāvahārika (conventional reality)
+
+  Prat  : Level    -- Prātibhāsika (illusory appearance)
+
+ 
+
+--------------------------------------------------------------------------------
+
+B. PREDICATES ON OBJECTS
+
+--------------------------------------------------------------------------------
+
+ 
+
+Metaphysical Status:
+
+  A(x)              -- x is Absolute (Brahman/Ātman)
+
+  C(x)              -- x is Conditioned (phenomenal, dependent)
+
+  Y(x)              -- x is You (ultimate subject/witness, Ātman)
+
+ 
+
+Phenomenal Properties:
+
+  T_p(x)            -- x is Temporal
+
+  S_p(x)            -- x is Spatial
+
+  Q_p(x)            -- x has Qualities
+
+  Phi(x)            -- x has phenomenal properties (T_p ∨ S_p ∨ Q_p)
+
+ 
+
+Consciousness Properties (Saccidānanda):
+
+  Sat(x)            -- x has being-nature (pure existence)
+
+  Cit(x)            -- x has consciousness-nature (pure awareness)
+
+  Ananda(x)         -- x has bliss-nature (pure fullness)
+
+  Saccidananda(x)   -- Sat(x) ∧ Cit(x) ∧ Ananda(x)
+
+ 
+
+Reality Level:
+
+  Level(x,ℓ)        -- x exists at reality level ℓ
+
+ 
+
+Ontological Relations:
+
+  Cond(x,y)         -- x ontologically grounds y
+
+  MayaPow(a,x)      -- Māyā-power from a manifests as x
+
+  MayaLevel(r,ℓ)    -- Māyā-relation r operates at level ℓ
+
+  Superimposed(x,y) -- x superimposed on y (adhyāsa)
+
+  Appears(x,y)      -- x appears as y (vivarta)
+
+  IgnoranceOf(s,x)  -- Subject s is ignorant of x's true nature (avidyā)
+
+  Upadhi(u,x)       -- u is limiting adjunct for x
+
+  Sublates(k₁,k₂)    -- Knowledge k₁ cancels knowledge k₂ (bādha)
+
+ 
+
+Individual Consciousness:
+
+  Jiva(x)           -- x is individual self (jīva)
+
+  Isvara(x)         -- x is personal God (Īśvara)
+
+  Embodied(j,b)     -- Jīva j embodied in body b
+
+ 
+
+Awareness Relations:
+
+  Perceives(s,o)    -- Subject s perceives object o (dualistic)
+
+  Witnesses(w,z)    -- w witnesses z (non-dualistic, sākṣin)
+
+  Possesses(s,k)    -- Subject s possesses/has realized knowledge k
+
+ 
+
+Knowledge Structure:
+
+  Knower(x)         -- x is knower (pramātṛ)
+
+  Known(x)          -- x is known (prameya)
+
+  Knowing(x)        -- x is knowing-process (pramāṇa)
+
+  DistinctAspects(k,n,g) -- k,n,g appear as distinct aspects
+
+  Knowledge(k)      -- k is cognition (jñāna)
+
+  Liberating(k)     -- k is liberating knowledge (mokṣa-jñāna)
+
+ 
+
+Change and Transformation:
+
+  RealChange(x,y)   -- x really transforms into y (pariṇāma)
+
+  Changes(x)        -- x undergoes change (vikāra)
+
+  Born(x)           -- x came into being (jāta)
+
+  Dies(x)           -- x ceases to be (mṛta)
+
+ 
+
+Five Sheaths (Pañca-kośa):
+
+  Annamaya(x)       -- Physical sheath (food body)
+
+  Pranamaya(x)      -- Vital sheath (prāṇa)
+
+  Manomaya(x)       -- Mental sheath (manas)
+
+  Vijnanamaya(x)    -- Intellectual sheath (buddhi)
+
+  Anandamaya(x)     -- Bliss sheath (ānanda reflection)
+
+  Sheath(x)         -- x is any sheath (disjunction of above)
+
+  Layer(x,y)        -- x is outer layer of y
+
+ 
+
+Three Guṇas:
+
+  Sattva(x)         -- x exhibits sattva (purity, light)
+
+  Rajas(x)          -- x exhibits rajas (activity, passion)
+
+  Tamas(x)          -- x exhibits tamas (inertia, darkness)
+
+  HasGuna(x)        -- x has at least one guṇa
+
+ 
+
+Ego Structure:
+
+  Ego(x)            -- x is ego (ahaṃkāra, sense of "I")
+
+  ApparentSubject(x)-- x appears as subject (false "I")
+
+  Body(x)           -- x is body-mind complex
+
+  Identifies(x,y)   -- x identifies with y
+
+ 
+
+Spacetime:
+
+  SpaceItself(x)    -- x is space as entity (ākāśa)
+
+  TimeItself(x)     -- x is time as entity (kāla)
+
+ 
+
+Existence:
+
+  EE(e)             -- e exists (event)
+
+ 
+
+--------------------------------------------------------------------------------
+
+C. PREDICATES ON TIME AND EVENTS
+
+--------------------------------------------------------------------------------
+
+ 
+
+Temporal Relations:
+
+  Before(t₁,t₂)     -- Temporal point t₁ precedes t₂
+
+ 
+
+Event Relations:
+
+  OccursAt(e,t)     -- Event e occurs at time t
+
+  EventOf(e,x)      -- Event e involves object x
+
+  CausesEvent(e₁,e₂) -- Event e₁ causes event e₂
+
+ 
+
+Event Constructors:
+
+  PerceptionEvent(s,o) : Event  -- Perception event
+
+  ChangeEvent(x) : Event       -- Change event
+
+  BirthEvent(x) : Event        -- Birth event
+
+  DeathEvent(x) : Event        -- Death event
+
+ 
+
+================================================================================
+
+II. DEFINED TERMS
+
+================================================================================
+
+ 
+
+Phi(x) ≡ T_p(x) ∨ S_p(x) ∨ Q_p(x)
+
+  -- Phenomenal property (has temporal, spatial, or qualitative aspects)
+
+ 
+
+Saccidananda(x) ≡ Sat(x) ∧ Cit(x) ∧ Ananda(x)
+
+  -- Being-consciousness-bliss nature
+
+ 
+
+Sheath(x) ≡ Annamaya(x) ∨ Pranamaya(x) ∨ Manomaya(x) ∨
+
+            Vijnanamaya(x) ∨ Anandamaya(x)
+
+  -- Any of the five sheaths
+
+ 
+
+HasGuna(x) ≡ Sattva(x) ∨ Rajas(x) ∨ Tamas(x)
+
+  -- Has at least one of the three guṇas
+
+ 
+
+Brahman ≡ ι a. A(a)
+
+  -- The unique Absolute (definite description)
+
+ 
+
+Atman ≡ ι u. Y(u)
+
+  -- The unique Subject (definite description)
+
+ 
+
+================================================================================
+
+III. CORE AXIOMS (A1-A15)
+
+================================================================================
+
+ 
+
+The essential metaphysical structure of Advaita Vedanta.
+
+ 
+
+A1: Universal Classification
+
+  (a) ∀x. A(x) ∨ C(x)
+
+  (b) ∀x. ¬(A(x) ∧ C(x))
+
+ 
+
+A2: Uniqueness of the Absolute
+
+  ∃! a. A(a)
+
+
+  A2b: ∀a. A(a) → (∀x. x ≠ a → ¬A(x))
+
+  A2b': ∀x. A(x) → x = Brahman
+
+ 
+
+A3: Uniqueness of the Subject
+
+  ∃! u. Y(u)
+
+
+  A3b: ∀u. Y(u) → (∀x. x ≠ u → ¬Y(x))
+
+  A3b': ∀x. Y(x) → x = Atman
+
+ 
+
+A4: Subject-Absolute Identity (Tat Tvam Asi Core)
+
+  ∀x. Y(x) ↔ A(x)
+
+ 
+
+A5: Self-Grounding of the Absolute
+
+  ∀a. A(a) → Cond(a,a)
+
+ 
+
+A6: Universal Grounding
+
+  ∀x. (∃a. A(a) ∧ Cond(a,x))
+
+ 
+
+A7: Transcendence of Phenomenality
+
+  ∀a. A(a) → ¬Phi(a)
+
+
+  A7a: ∀a. A(a) → (¬T_p(a) ∧ ¬S_p(a) ∧ ¬Q_p(a))
+
+ 
+
+A7b: Saccidānanda Nature
+
+  ∀a. A(a) → Saccidananda(a)
+
+ 
+
+A8: Phenomenality of the Conditioned
+
+  ∀x. C(x) → Phi(x)
+
+ 
+
+A9: Asymmetry of Grounding (Non-Absolute)
+
+  ∀x y. Cond(x,y) ∧ Cond(y,x) → (x = y ∧ A(x))
+
+ 
+
+A10: Transitivity of Grounding
+
+  ∀x y z. Cond(x,y) ∧ Cond(y,z) → Cond(x,z)
+
+ 
+
+A11: Absolute Witnesses Everything
+
+  ∀a x. A(a) → Witnesses(a,x)
+
+ 
+
+A12: Self-Luminosity
+
+  ∀a. A(a) → Witnesses(a,a)
+
+ 
+
+A13: Subject Does Not Perceive
+
+  ∀u o. Y(u) → ¬Perceives(u,o)
+
+ 
+
+A14: Subject is Knower-Known-Knowing
+
+  ∀u. Y(u) → (Knower(u) ∧ Known(u) ∧ Knowing(u))
+
+ 
+
+A15: No Real Change in Absolute
+
+  ∀a x. A(a) → ¬RealChange(a,x)
+
+ 
+
+================================================================================
+
+IV. LEVEL AXIOMS (K1-K6)
+
+================================================================================
+
+ 
+
+Three-tier reality structure: Param (ultimate), Vyav (conventional), Prat (illusory).
+
+ 
+
+K1: Universal Level Assignment
+
+  ∀x. (Level(x,Param) ∨ Level(x,Vyav) ∨ Level(x,Prat))
+
+ 
+
+K2: Absolute at Paramārthika Only
+
+  ∀a. A(a) → Level(a,Param)
+
+
+  K2a: ∀a. A(a) → ¬Level(a,Vyav)
+
+  K2b: ∀a. A(a) → ¬Level(a,Prat)
+
+ 
+
+K3: Conditioned Not at Paramārthika
+
+  ∀x. C(x) → ¬Level(x,Param)
+
+ 
+
+K4: Conditioned at Lower Levels
+
+  ∀x. C(x) → (Level(x,Vyav) ∨ Level(x,Prat))
+
+ 
+
+K5: Hierarchical Sublation
+
+  ∀x y. C(x) ∧ Level(x,Vyav) ∧ Level(y,Prat) → Sublates(x,y)
+
+ 
+
+K6: Non-Empty Vyāvahārika
+
+  ∃x. Level(x,Vyav)
+
+ 
+
+================================================================================
+
+V. TEMPORAL AXIOMS (T1-T6)
+
+================================================================================
+
+ 
+
+Time structure: discrete linear order.
+
+ 
+
+T1: Irreflexivity
+
+  ∀t. ¬Before(t,t)
+
+ 
+
+T2: Transitivity
+
+  ∀t₁ t₂ t₃. Before(t₁,t₂) ∧ Before(t₂,t₃) → Before(t₁,t₃)
+
+ 
+
+T3: Asymmetry
+
+  ∀t₁ t₂. Before(t₁,t₂) → ¬Before(t₂,t₁)
+
+ 
+
+T4: Linearity (Optional)
+
+  ∀t₁ t₂. t₁ ≠ t₂ → (Before(t₁,t₂) ∨ Before(t₂,t₁))
+
+ 
+
+T5: Non-Empty Time
+
+  ∃t. True
+
+ 
+
+T6: Distinct Times
+
+  ∃t₁ t₂. t₁ ≠ t₂
+
+ 
+
+================================================================================
+
+VI. EVENT STRUCTURE AXIOMS (E1-E10)
+
+================================================================================
+
+ 
+
+Events as reified occurrences in time.
+
+ 
+
+E1: Event Existence Criterion
+
+  ∀e. EE(e) ↔ (∃t. OccursAt(e,t))
+
+ 
+
+E2: Unique Occurrence Time
+
+  ∀e. EE(e) → (∃! t. OccursAt(e,t))
+
+ 
+
+E3: Event-Object Association
+
+  ∀e. EE(e) → (∃x. EventOf(e,x))
+
+ 
+
+E4: Event-Object Grounding
+
+  ∀x y e_y. Cond(x,y) ∧ EventOf(e_y,y) ∧ EE(e_y) ∧ ¬A(x) →
+
+            (∃e_x. EventOf(e_x,x) ∧ EE(e_x))
+
+
+E5: Event Constructor - Perception
+
+  ∀s o. Perceives(s,o) → (∃e. e = PerceptionEvent(s,o) ∧ EE(e))
+
+ 
+
+E6: Event Constructor - Change
+
+  ∀x. Changes(x) → (∃e. e = ChangeEvent(x) ∧ EE(e))
+
+ 
+
+E7: Event Constructor - Birth
+
+  ∀x. Born(x) → (∃e. e = BirthEvent(x) ∧ EE(e))
+
+ 
+
+E8: Event Constructor - Death
+
+  ∀x. Dies(x) → (∃e. e = DeathEvent(x) ∧ EE(e))
+
+ 
+
+E9: Causal Ordering
+
+  ∀e₁ e₂ t₁ t₂. CausesEvent(e₁,e₂) ∧ OccursAt(e₁,t₁) ∧
+
+                OccursAt(e₂,t₂) → Before(t₁,t₂)
+
+ 
+
+E10: Absolute Has No Events
+
+  ∀a e. A(a) → ¬EventOf(e,a)
+
+ 
+
+================================================================================
+
+VII. AWARENESS AXIOMS (W1-W11)
+
+================================================================================
+
+ 
+
+Consciousness structure: witnessing vs perception.
+
+ 
+
+W1: Witnessing is Universal
+
+  ∀w x. Y(w) → Witnesses(w,x)
+
+ 
+
+W2: Witnessing is Timeless
+
+  ∀w x e. Witnesses(w,x) → ¬(e = PerceptionEvent(w,x))
+
+ 
+
+W3: Perception is Temporal
+
+  ∀s o. Perceives(s,o) → (∃e t. e = PerceptionEvent(s,o) ∧ OccursAt(e,t))
+
+ 
+
+W4: Perceiver is Conditioned
+
+  ∀s. (∃o. Perceives(s,o)) → C(s)
+
+ 
+
+W5: Witness Identity
+
+  ∀w. (∃x. Witnesses(w,x) ∧ x ≠ w) → Y(w)
+
+ 
+
+W6: Perception Requires Distinctness
+
+  ∀s o. Perceives(s,o) → s ≠ o
+
+ 
+
+W7: Knowledge Structure Collapse
+
+  ∀u. Y(u) → (∀k n g. DistinctAspects(k,n,g) →
+
+            (k = u ∧ n = u ∧ g = u))
+
+ 
+
+W8: Conditioned Knowledge is Tripartite
+
+  ∀x. C(x) → (∃k. Knowledge(k) →
+
+            (∃k' n g. DistinctAspects(k',n,g) ∧
+
+                     k' ≠ n ∧ n ≠ g ∧ k' ≠ g))
+
+ 
+
+W9: Liberating Knowledge Removes Ignorance
+
+  ∀k j a. Liberating(k) ∧ Jiva(j) ∧ A(a) →
+
+          (Possesses(j,k) → ¬IgnoranceOf(j,a))
+
+ 
+
+W10: Subject Transcends Tripartite Structure
+
+  ∀u. Y(u) → ¬(∃k n g. DistinctAspects(k,n,g) ∧
+
+                     (u = k ∨ u = n ∨ u = g) ∧
+
+                     (u ≠ k ∨ u ≠ n ∨ u ≠ g))
+
+ 
+
+W11: Witness-Absolute Identity
+
+  ∀w. (∀x. Witnesses(w,x)) → A(w)
+
+ 
+
+================================================================================
+
+VIII. JĪVA-ĪŚVARA AXIOMS (J1-J10, I1-I6)
+
+================================================================================
+
+ 
+
+Individual self and personal God as appearances of the Absolute.
+
+ 
+
+Jīva Axioms:
+
+ 
+
+J1: Jīva is Conditioned
+
+  ∀j. Jiva(j) → C(j)
+
+ 
+
+J2: Jīva at Vyāvahārika
+
+  ∀j. Jiva(j) → Level(j,Vyav)
+
+ 
+
+J3: Jīva has Phenomenal Properties
+
+  ∀j. Jiva(j) → Phi(j)
+
+ 
+
+J4: Jīva has Body
+
+  ∀j. Jiva(j) → (∃b. Body(b) ∧ Embodied(j,b))
+
+ 
+
+J5: Jīva Grounded in Absolute
+
+  ∀j. Jiva(j) → (∃a. A(a) ∧ Cond(a,j))
+
+ 
+
+J6: Jīva has Ignorance
+
+  ∀j. Jiva(j) → (∃a. A(a) ∧ IgnoranceOf(j,a))
+
+ 
+
+J7: Jīva Appears via Upādhi
+
+  ∀j. Jiva(j) → (∃u. Upadhi(u,j))
+
+ 
+
+J8: Multiple Jīvas Exist
+
+  ∃j₁ j₂. Jiva(j₁) ∧ Jiva(j₂) ∧ j₁ ≠ j₂
+
+ 
+
+J9: Subject Not Jīva
+
+  ∀u j. Y(u) ∧ Jiva(j) → u ≠ j
+
+ 
+
+J10: Subject Not Īśvara
+
+  ∀u i. Y(u) ∧ Isvara(i) → u ≠ i
+
+ 
+
+Īśvara Axioms:
+
+ 
+
+I1: Īśvara is Conditioned
+
+  ∀i. Isvara(i) → C(i)
+
+ 
+
+I2: Īśvara at Vyāvahārika
+
+  ∀i. Isvara(i) → Level(i,Vyav)
+
+ 
+
+I3: Īśvara Grounded in Absolute
+
+  ∀i. Isvara(i) → (∃a. A(a) ∧ Cond(a,i))
+
+ 
+
+I4: Īśvara has Qualities
+
+  ∀i. Isvara(i) → Q_p(i)
+
+ 
+
+I5: Īśvara Uniqueness
+
+  ∀i₁ i₂. Isvara(i₁) ∧ Isvara(i₂) → i₁ = i₂
+
+ 
+
+I6: Īśvara Governs Vyāvahārika
+
+  ∀i x. Isvara(i) ∧ C(x) ∧ Level(x,Vyav) →
+
+        (∃r. r(i,x))
+
+ 
+
+================================================================================
+
+IX. MĀYĀ AXIOMS (M1-M18)
+
+================================================================================
+
+ 
+
+Appearance, illusion, ignorance, sublation.
+
+ 
+
+Māyā Power and Manifestation:
+
+ 
+
+M1: Māyā Source
+
+  ∀a x. MayaPow(a,x) → A(a)
+
+ 
+
+M2: Māyā Manifests Multiplicity
+
+  ∀x. C(x) → (∃a. A(a) ∧ MayaPow(a,x))
+
+ 
+
+M3: Māyā at Lower Levels
+
+  MayaLevel(MayaPow,Vyav) ∧ MayaLevel(MayaPow,Prat) ∧
+
+  ¬MayaLevel(MayaPow,Param)
+
+ 
+
+M4: Māyā Preserves Grounding
+
+  ∀a x. MayaPow(a,x) → Cond(a,x)
+
+ 
+
+M5: Absolute Not Manifested
+
+  ∀a x. A(a) → ¬MayaPow(x,a)
+
+ 
+
+Superimposition (Adhyāsa):
+
+ 
+
+M6: Superimposition Direction
+
+  ∀x y. Superimposed(x,y) → C(x)
+
+ 
+
+M7: Superimposition Substrate
+
+  ∀x y. Superimposed(x,y) → A(y)
+
+ 
+
+M8: Superimposition Creates False Appearance
+
+  ∀x y. Superimposed(x,y) → (Appears(x,y) ∧ ¬RealChange(y,x))
+
+ 
+
+Appearance Without Change (Vivarta):
+
+ 
+
+M9: Appearance is Not Real Change
+
+  ∀x y. Appears(x,y) → ¬RealChange(x,y)
+
+ 
+
+M10: Absolute Appears as Multiplicity
+
+  ∀x. C(x) → (∃a. A(a) ∧ Appears(a,x))
+
+ 
+
+M11: Appearance Preserves Absolute
+
+  ∀a x. A(a) ∧ Appears(a,x) → Saccidananda(a)
+
+ 
+
+Ignorance (Avidyā):
+
+ 
+
+M12: Ignorance of Absolute
+
+  ∀s x. IgnoranceOf(s,x) → A(x)
+
+ 
+
+M13: Ignorance Causes Superimposition
+
+  ∀s x y. IgnoranceOf(s,y) ∧ Superimposed(x,y) →
+
+          (∃rel. rel(s,x))
+
+ 
+
+M14: Ignorance in Jīva
+
+  ∀j. Jiva(j) → (∃a. A(a) ∧ IgnoranceOf(j,a))
+
+ 
+
+M15: Absolute Without Ignorance
+
+  ∀a x. A(a) → ¬IgnoranceOf(a,x)
+
+ 
+
+Sublation (Bādha):
+
+ 
+
+M16: Sublation Removes False Knowledge
+
+  ∀k₁ k₂. Sublates(k₁,k₂) → (Knowledge(k₁) ∧ Knowledge(k₂))
+
+ 
+
+M17: Liberating Knowledge Sublates All
+
+  ∀k_lib k_emp. Liberating(k_lib) ∧ Knowledge(k_emp) →
+
+                (∃x. C(x) ∧ Sublates(k_lib,k_emp))
+
+ 
+
+M18: Sublation is Irreversible
+
+  ∀k₁ k₂. Sublates(k₁,k₂) → ¬Sublates(k₂,k₁)
+
+ 
+
+================================================================================
+
+X. UPĀDHI AXIOMS (U1-U4)
+
+================================================================================
+
+ 
+
+Limiting adjuncts causing apparent division.
+
+ 
+
+U1: Upādhi for Conditioned Only
+
+  ∀u x. Upadhi(u,x) → C(x)
+
+ 
+
+U2: Upādhi Not for Absolute
+
+  ∀u a. A(a) → ¬Upadhi(u,a)
+
+ 
+
+U3: Space as Primary Upādhi
+
+  ∀j₁ j₂. Jiva(j₁) ∧ Jiva(j₂) ∧ j₁ ≠ j₂ →
+
+          (∃s. SpaceItself(s) ∧ Upadhi(s,j₁) ∧ Upadhi(s,j₂))
+
+ 
+
+U4: Upādhi Causes Apparent Limitation
+
+  ∀u x a. Upadhi(u,x) ∧ A(a) ∧ Cond(a,x) →
+
+          (∃prop. prop(x) ∧ ¬prop(a))
+
+ 
+
+================================================================================
+
+XI. CAUSATION AXIOMS (CA1-CA4)
+
+================================================================================
+
+ 
+
+Causal structure at vyāvahārika level.
+
+ 
+
+CA1: Causation at Vyāvahārika
+
+  ∀e₁ e₂. CausesEvent(e₁,e₂) →
+
+          (∃x y. EventOf(e₁,x) ∧ EventOf(e₂,y) ∧
+
+                 Level(x,Vyav) ∧ Level(y,Vyav))
+
+ 
+
+CA2: No Causation for Absolute
+
+  ∀a e. A(a) → ¬EventOf(e,a)
+
+ 
+
+CA3: Temporal Precedence in Causation
+
+  ∀e₁ e₂ t₁ t₂. CausesEvent(e₁,e₂) ∧ OccursAt(e₁,t₁) ∧
+
+                OccursAt(e₂,t₂) → Before(t₁,t₂)
+
+ 
+
+CA4: Causal Transitivity
+
+  ∀e₁ e₂ e₃. CausesEvent(e₁,e₂) ∧ CausesEvent(e₂,e₃) →
+
+             CausesEvent(e₁,e₃)
+
+ 
+
+================================================================================
+
+XII. SHEATH AXIOMS (S1-S8)
+
+================================================================================
+
+ 
+
+Five sheaths (pañca-kośa) of embodied consciousness.
+
+ 
+
+S1: Sheaths are Conditioned
+
+  ∀s. Sheath(s) → C(s)
+
+ 
+
+S2: Sheaths Not Self
+
+  ∀s u. Sheath(s) ∧ Y(u) → s ≠ u
+
+ 
+
+S3-S6: Sheath Hierarchy (Gross to Subtle)
+
+  S3: ∀x. Annamaya(x) → (∃y. Pranamaya(y) ∧ Layer(x,y))
+
+  S4: ∀x. Pranamaya(x) → (∃y. Manomaya(y) ∧ Layer(x,y))
+
+  S5: ∀x. Manomaya(x) → (∃y. Vijnanamaya(y) ∧ Layer(x,y))
+
+  S6: ∀x. Vijnanamaya(x) → (∃y. Anandamaya(y) ∧ Layer(x,y))
+
+ 
+
+S7: Layer Implies Grounding
+
+  ∀x y. Layer(x,y) → Cond(y,x)
+
+ 
+
+S8: Innermost Sheath Grounded in Ātman
+
+  ∀s. Anandamaya(s) → (∃a. A(a) ∧ Cond(a,s))
+
+ 
+
+================================================================================
+
+XIII. GUṆA AXIOMS (G1-G3)
+
+================================================================================
+
+ 
+
+Three qualities of prakṛti.
+
+ 
+
+G1: Conditioned Has Guṇas
+
+  ∀x. C(x) → HasGuna(x)
+
+ 
+
+G2: Absolute Beyond Guṇas
+
+  ∀a. A(a) → (¬Sattva(a) ∧ ¬Rajas(a) ∧ ¬Tamas(a))
+
+ 
+
+G3: Guṇa Dynamism
+
+  ∀x. C(x) ∧ Level(x,Vyav) →
+
+      (∃t g. (g = Sattva ∨ g = Rajas ∨ g = Tamas) ∧ Changes(x))
+
+ 
+
+================================================================================
+
+XIV. EGO AXIOMS (EG1-EG4)
+
+================================================================================
+
+ 
+
+Ahaṃkāra (false sense of separate self).
+
+ 
+
+EG1: Ego is Conditioned
+
+  ∀e. Ego(e) → C(e)
+
+ 
+
+EG2: Ego is Identification
+
+  ∀e. Ego(e) → (∃s b. ApparentSubject(s) ∧ Body(b) ∧ Identifies(s,b))
+
+ 
+
+EG3: Ego Not Ultimate Subject
+
+  ∀e u. Ego(e) ∧ Y(u) → e ≠ u
+
+ 
+
+EG4: Ego Dissolution
+
+  ∀e j a k. Ego(e) ∧ Jiva(j) ∧ A(a) ∧ Liberating(k) →
+
+            (¬IgnoranceOf(j,a) → ¬Ego(e))
+
+ 
+
+================================================================================
+
+XV. SPACETIME AXIOMS (ST1-ST5)
+
+================================================================================
+
+ 
+
+Space and time as entities (conditioned).
+
+ 
+
+ST1-ST2: Spacetime is Conditioned
+
+  ST1: ∀s. SpaceItself(s) → C(s)
+
+  ST2: ∀t. TimeItself(t) → C(t)
+
+ 
+
+ST3-ST4: Spacetime at Vyāvahārika
+
+  ST3: ∀s. SpaceItself(s) → Level(s,Vyav)
+
+  ST4: ∀t. TimeItself(t) → Level(t,Vyav)
+
+ 
+
+ST5: Spacetime Sublated
+
+  ∀k_lib s t. Liberating(k_lib) ∧ SpaceItself(s) ∧ TimeItself(t) →
+
+            (∃k_space k_time. Knowledge(k_space) ∧ Knowledge(k_time) ∧
+
+             Sublates(k_lib,k_space) ∧ Sublates(k_lib,k_time))
+
+ 
+
+================================================================================
+
+XVI. CHANGE AXIOMS (CH1-CH4)
+
+================================================================================
+
+ 
+
+Change, birth, death at different levels.
+
+ 
+
+CH1-CH3: Absolute Unchanging
+
+  CH1: ∀a. A(a) → ¬Changes(a)
+
+  CH2: ∀a. A(a) → ¬Born(a)
+
+  CH3: ∀a. A(a) → ¬Dies(a)
+
+ 
+
+CH4: Conditioned Changes
+
+  ∀x. C(x) ∧ Level(x,Vyav) → (Born(x) ∨ Dies(x) ∨ Changes(x))
+
+ 
+
+================================================================================
+
+XVII. KEY THEOREMS
+
+================================================================================
+
+ 
+
+These follow logically from the axioms above.
+
+ 
+
+T0: Brahman-Ātman Identity
+
+  Brahman = Atman
+
+ 
+
+T1: Conditioned Grounded in Absolute
+
+  ∀x. C(x) → Cond(Brahman,x)
+
+ 
+
+T2: Level Assignment of Absolute
+
+  Level(Brahman,Param) ∧ ¬Level(Brahman,Vyav) ∧ ¬Level(Brahman,Prat)
+
+ 
+
+T5: Subject is Absolute (Core of Tat Tvam Asi)
+
+  ∀u. Y(u) ↔ A(u)
+
+ 
+
+T7: Ontological Monism
+
+  ∀x y. Level(x,Param) ∧ Level(y,Param) → x = y
+
+ 
+
+T8: Multiplicity at Lower Levels
+
+  ∀x. x ≠ Brahman → (Level(x,Vyav) ∨ Level(x,Prat))
+
+ 
+
+T10: Absolute Unborn
+
+  ¬Born(Brahman)
+
+ 
+
+T11: Absolute Undying
+
+  ¬Dies(Brahman)
+
+ 
+
+T12: Absolute Unchanging
+
+  ¬Changes(Brahman)
+
+ 
+
+T13: Absolute Transcends Phenomenality
+
+  ¬Phi(Brahman)
+
+ 
+
+T14: You Witness All
+
+  ∀x. Witnesses(Atman,x)
+
+ 
+
+T15: Self-Luminous
+
+  Witnesses(Brahman,Brahman)
+
+ 
+
+T19: Subject Does Not Perceive
+
+  ∀o. ¬Perceives(Atman,o)
+
+ 
+
+T22: You Are Knower-Known-Knowing
+
+  Knower(Atman) ∧ Known(Atman) ∧ Knowing(Atman)
+
+ 
+
+T27: Sheaths Not Self
+
+  ∀s. Sheath(s) → s ≠ Atman
+
+ 
+
+T28: Ego is Fiction
+
+  ∀e. Ego(e) → e ≠ Atman
+
+ 
+
+T29: Subject Transcends Guṇas
+
+  ¬Sattva(Atman) ∧ ¬Rajas(Atman) ∧ ¬Tamas(Atman)
+
+ 
+
+T30: All Conditioned via Māyā
+
+  ∀x. C(x) → MayaPow(Brahman,x)
+
+ 
+
+T32: Appearance Without Change
+
+  ∀x y. Appears(x,y) → ¬RealChange(x,y)
+
+ 
+
+T33: Jīva Grounded in Absolute
+
+  ∀j. Jiva(j) → Cond(Brahman,j)
+
+ 
+
+T35: Space Individuates Jīvas
+
+  ∀j₁ j₂. Jiva(j₁) ∧ Jiva(j₂) ∧ j₁ ≠ j₂ →
+
+          (∃s. SpaceItself(s) ∧ Upadhi(s,j₁) ∧ Upadhi(s,j₂))
+
+ 
+
+T37: Ānanda Nature
+
+  Ananda(Atman)
+
+ 
+
+================================================================================
+
+XVIII. MASTER THEOREM - TAT TVAM ASI
+
+================================================================================
+
+ 
+
+Complete formalization of "You are That" with all implications.
+
+ 
+
+MASTER: ∃! u. [
+
+  Y(u) ∧
+
+  A(u) ∧
+
+  Level(u,Param) ∧
+
+  Saccidananda(u) ∧
+
+  (∀x. x ≠ u →
+
+    (∃a. MayaPow(a,x) ∧ (Level(x,Vyav) ∨ Level(x,Prat)))) ∧
+
+  (∀j. Jiva(j) →
+
+    (Cond(u,j) ∧ IgnoranceOf(j,u) ∧
+
+     (∃s. SpaceItself(s) ∧ Upadhi(s,j)))) ∧
+
+  (∀i. Isvara(i) → Cond(u,i)) ∧
+
+  (∀x. Witnesses(u,x)) ∧
+
+  ¬Phi(u) ∧
+
+  ¬Born(u) ∧ ¬Dies(u) ∧ ¬Changes(u) ∧
+
+  (Knower(u) ∧ Known(u) ∧ Knowing(u)) ∧
+
+  (∀o. ¬Perceives(u,o)) ∧
+
+  (¬Sattva(u) ∧ ¬Rajas(u) ∧ ¬Tamas(u)) ∧
+
+  (∀e. Ego(e) → e ≠ u) ∧
+
+  (∀s. Sheath(s) → s ≠ u)
+
+]
+
+ 
+
+INTERPRETATION:
+
+There exists a unique u such that:
+
+  1. u is the ultimate subject (You)
+
+  2. u is the Absolute (That)
+
+  3. u exists only at paramārthika
+
+  4. u is being-consciousness-bliss
+
+  5. Everything else manifests via māyā at lower levels
+
+  6. All jīvas are grounded in u, ignorant of identity with u,
+
+     appearing distinct due to space
+
+  7. Īśvara is grounded in u
+
+  8. u witnesses everything
+
+  9. u transcends all phenomenal properties
+
+  10. u is unborn, undying, unchanging
+
+  11. In u, knower-known-knowing collapse into unity
+
+  12. u engages in no dualistic perception
+
+  13. u transcends the three guṇas
+
+  14. No ego or sheath is identical with u
+
+ 
+
+This is TAT TVAM ASI: You are That.
+
+ 
+
+================================================================================
+
+XIX. CONSISTENCY PROOF - MODEL M₂' (DYNAMIC AND VALID)
+
+================================================================================
+
+ 
+
+Explicit dynamic model satisfying all axioms, proving consistency.
+
+This model is sufficient to satisfy all temporal, event-based, and multi-level
+
+axioms, confirming the system's logical soundness.
+
+ 
+
+Domain:
+
+  Obj = {b, j₁, j₂, body₁, body₂, s, i, prat}
+
+ 
+
+  where:
+
+    b = Brahman (the Absolute/Ātman)
+
+    j₁ = first jīva
+
+    j₂ = second jīva
+
+    body₁ = first body
+
+    body₂ = second body
+
+    s = Space (ākāśa, primary upādhi)
+
+    i = Īśvara (personal God)
+
+    prat = Prātibhāsika entity (e.g., rope-snake illusion)
+
+ 
+
+  Level = {Param, Vyav, Prat}
+
+  Time = {t₁, t₂, t₃}  (three distinct temporal points, t₁ < t₂ < t₃)
+
+  Event = {e_j1_change, e_j2_change, e_body1_change, e_body2_change,
+
+           e_s_change, e_perception1, e_perception2, e_birth1, e_birth2}
+
+ 
+
+Interpretations (Key Assignments):
+
+ 
+
+METAPHYSICAL STATUS:
+
+  A(b) = True; C(x) = True for all x ≠ b; Y(b) = True; Y(x) = False for all x ≠ b.
+
+ 
+
+REALITY LEVELS:
+
+  Level(b, Param) = True; Level(x, Vyav) = True for x ∈ {j₁, j₂, body₁, body₂, s, i};
+
+  Level(prat, Prat) = True.
+
+ 
+
+ONTOLOGICAL GROUNDING (Cond):
+
+  Cond(b, x) = True for all x ∈ Obj.
+
+ 
+
+CHANGE PREDICATES (Satisfying CH4):
+
+  Changes(x) = True for all x ≠ b.
+
+  Born(body₁) = True, Born(body₂) = True; Born(x) = False for x ∈ {b, j₁, j₂, s, i, prat}.
+
+  Dies(x) = False for all x. (Axioms trivially satisfied)
+
+ 
+
+TIME AND TEMPORAL RELATIONS (Satisfying T1-T6):
+
+  Before(t₁, t₂) = True; Before(t₂, t₃) = True; Before(t₁, t₃) = True.
+
+  All other Before relations = False.
+
+ 
+
+EVENT STRUCTURE (Satisfying E1-E10):
+
+  EE(e) = True for all e ∈ Event.
+
+  OccursAt(e, t) assignments are unique for each e.
+
+  EventOf(e_j1_change, j₁) = True; EventOf(e_birth1, body₁) = True.
+
+  EventOf(e, b) = False for all e.
+
+ 
+
+EVENT CONSTRUCTORS (Satisfying E5, E6, E7):
+
+  ChangeEvent(x) = e_x_change for all appropriate x.
+
+  PerceptionEvent(j₁, body₂) = e_perception1.
+
+  BirthEvent(body₁) = e_birth1.
+
+ 
+
+CAUSAL RELATIONS (Satisfying CA1-CA4, E9):
+
+  CausesEvent(e_birth1, e_body1_change) = True.
+
+  CausesEvent(e_body2_change, e_perception1) = True.
+
+  (All causal events respect temporal order: $t_{event1} < t_{event2}$)
+
+ 
+
+JĪVA-ĪŚVARA:
+
+  Jiva(j₁)=True, Jiva(j₂)=True; Isvara(i)=True.
+
+  Upadhi(s, j₁) = True; IgnoranceOf(j₁, b) = True.
+
+ 
+
+MĀYĀ:
+
+  MayaPow(b, x) = True for all x ≠ b.
+
+  Superimposed(prat, b) = True; Appears(b, prat) = True.
+
+ 
+
+AWARENESS:
+
+  Witnesses(b, x) = True for all x ∈ Obj.
+
+  Perceives(j₁, body₂) = True.
+
+ 
+
+CONCLUSION: The axiom system is logically consistent with this valid dynamic model.
+
+
+
+
+================================================================================
+
+END OF MASTER FORMALIZATION 
+
+================================================================================

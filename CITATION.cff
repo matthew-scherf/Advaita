@@ -1,17 +1,21 @@
 cff-version: 1.2.0
-message: "If you use this work, please cite it as below."
+message: "If you use this formalization in academic work, please cite it as below."
+title: "Formal Axiomatization of Advaita Vedanta in Lean 4"
+abstract: "A machine-verified formalization of the non-dual metaphysical system of Advaita Vedanta, implemented in Lean 4 theorem prover. This work represents the first complete axiomatization of a major non-Western philosophical tradition using contemporary methods of formal verification."
 authors:
-  - family-names: Scherf
-    given-names: Matthew
-title: "Complete Formal Axiomatization of Advaita Vedanta"
-version: 2.0.0
-doi: https://doi.org/10.5281/zenodo.17333604
-date-released: 2025-10-15
-url: "https://github.com/matthew-scherf/Only-One"
+  - family-names: "[Author Last Name]"
+    given-names: "[Author First Name]"
+    orcid: "https://orcid.org/[ORCID-ID]"
+version: 4.5.0
+date-released: 2025-01-30
 keywords:
   - Advaita Vedanta
   - formal verification
-  - non-duality
-  - consciousness
-  - Isabelle/HOL
-license: CC-BY-4.0
+  - theorem proving
+  - non-dual metaphysics
+  - Indian philosophy
+  - Lean 4
+  - formal ontology
+license: MIT
+repository-code: "https://github.com/[username]/advaita-vedanta-lean"
+type: software

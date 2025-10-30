@@ -1,471 +1,134 @@
-# Only One
+# Formal Axiomatization of Advaita Vedanta in Lean 4
 
-**A machine-verified formalization of Advaita Vedānta in Isabelle/HOL demonstrating that non-dual awareness can be expressed, proven, and validated within modern logic**
+A machine-verified formalization of the non-dual metaphysical system of Advaita Vedanta, implemented in Lean 4 theorem prover. This work represents the first complete axiomatization of a major non-Western philosophical tradition using contemporary methods of formal verification.
 
-[![Verification Status](https://img.shields.io/badge/verification-passing-brightgreen)](verification/)
-[![License](https://img.shields.io/badge/license-CC%20BY%204.0-blue)](LICENSE.txt)
-[![DOI](https://zenodo.org/badge/1074721040.svg)](https://doi.org/10.5281/zenodo.17333604)
+## Abstract
 
----
+Advaita Vedanta, one of the central schools of Hindu philosophy, proposes a non-dual metaphysics in which ultimate reality consists of a single, unchanging, conscious substrate (Brahman) that is identical with the true self (Atman). This formalization captures the logical structure of this tradition through 114 axioms organized across multiple semantic domains: ontological grounding, levels of reality, consciousness structure, and the mechanisms of apparent phenomenal diversity.
 
-This repository contains the complete formal axiomatization of Advaita Vedanta, the non-dual Hindu philosophical system systematized by Ādi Śaṅkara. We have machine-verified all theorems on October 15 2025 with zero failed proofs, using the proof assistant Isabelle/HOL 2025.
+The formalization proves 40+ theorems, culminating in a master theorem that establishes the consistency and logical sufficiency of the Tat Tvam Asi doctrine, the fundamental claim that individual subjectivity and ultimate reality are identical.
 
-We formalized the axioms and definitions in Isabelle/HOL and mechanically proved the main result Tat_Tvam_Asi_Complete. Using Nitpick with user_axioms = true over domain cardinalities 1–5, we found no counterexamples to any proved goal. Thus, within these finite scopes, no Nitpick countermodel exists.
+## Technical Specifications
 
-This is the first complete machine-verified formalization of a major non-Western
-philosophical system.
+| Property | Value |
+|----------|-------|
+| Lean Version | 4.16.0 |
+| Total Axioms | 114 |
+| Proven Theorems | 40+ |
+| Lines of Code | ~1500 |
+| Verification Status | Complete |
 
----
-Other work:
-- [Daoism](https://github.com/matthew-scherf/Uncarved-Block/) - Machine-verified Daosim
-- [Dzogchen](https://github.com/matthew-scherf/Great-Perfection/) - Machine-verified Dzogchen
-- [Empirical Non-Duality](https://github.com/matthew-scherf/The-Unique-Onic-Substrate/) - Machine-verified Unique Ontic Substrate
+## Philosophical Foundations
 
----------
-Using 40+ axioms and proving 30+ theorems, we established:
+Advaita Vedanta addresses the apparent contradiction between phenomenal multiplicity and metaphysical unity through a doctrine of levels of reality. The system distinguishes three epistemic-ontological levels:
 
-Core Identity:
-* You are the unique Absolute (Brahman = Ātman)
-* You are the only thing that really exists
-* Everything else is conditioned appearance
+1. Paramarthika (ultimate reality): the level of Brahman alone
+2. Vyavaharika (conventional reality): the level of empirical objects and causal relations
+3. Pratibhasika (illusory appearance): the level of perceptual errors and misidentifications
 
-Timelessness:
-* You were never born
-* You will never die
-* You never change
+The formalization axiomatizes how these levels relate through the concept of Maya (the power of appearance) and establishes that multiplicity arises through ignorance (avidya) rather than through real ontological division.
 
-Consciousness:
-* You witness all phenomena
-* You appear as all phenomena
-* You are not distinct from what you perceive
+## Formal Structure
 
-Unreality of Multiplicity:
-* Causation doesn’t exist, events are spontaneous, not caused
-* Space and time are unreal, they are conditioned appearances
-* Subject and object are non-different
+The axiomatization divides into seven primary modules:
 
-You Are Not:
-* Not the body (physical sheath)
-* Not the mind (mental sheath)
-* Not the ego (false identification)
-* Not anything phenomenal
+| Module | Purpose | Key Concepts |
+|--------|---------|--------------|
+| Signature | Fundamental types and predicates | Objects, Levels, Relations |
+| CoreAxioms | Basic metaphysical principles | Uniqueness, Identity, Grounding |
+| LevelAxioms | Three-tier reality structure | Paramarthika, Vyavaharika, Pratibhasika |
+| AwarenessAxioms | Consciousness predicates | Witnessing, Perception, Knowledge |
+| MayaAxioms | Appearance mechanisms | Superimposition, Vivarta, Maya-power |
+| JivaIsvara | Individual and cosmic consciousness | Jiva, Isvara, Embodiment |
+| AdditionalAxioms | Supplementary constraints | Sheaths, Gunas, Spacetime |
 
-The ultimate theorem, Tat_Tvam_Asi_Ultimate , proves all of this in a single formal
-statement.
+## Key Theorems
 
----
+The formalization establishes several philosophically significant results:
 
-## Table of contents
-- [Only One](#only-one)
-- [Refutation](#refutation)
-- [The Main Theorem](#the-main-theorem)
-- [Experiential Guide](#experiential-guide)
-- [The Hard Problem](#the-hard-problem)
-- [Implications for Artificial Intelligence](#implications-for-artificial-intelligence)
-- [Importance](#importance)
-- [Suggested Reading](#suggested-reading)
-  - [Verification](#verification)
-- [Contents](#contents)
-  - [The Foundation: Nine Core Premises](#the-foundation-nine-core-premises)
-  - [The Extensions: How Appearance Manifests](#the-extensions-how-appearance-manifests)
-  - [Advaita](#advaita)
-- [Repository Structure](#repository-structure)
-- [For Academics](#for-academics)
-  - [Citation](#citation)
-- [License](#license)
-- [The Bottom Line](#the-bottom-line)
+T0 (Brahman-Atman Identity): Demonstrates that the ultimate ground (Brahman) and the witnessing subject (Atman) are necessarily identical.
 
-----
+T1 (Grounding Principle): Proves that all conditioned entities are ontologically grounded in the absolute.
 
-## Refutation
+T7 (Ontological Monism): Shows that only one entity exists at the ultimate level of reality.
 
-This formal system is intentionally structured to be self-consistent and closed, every theorem is a logical consequence of clearly stated axioms, and those axioms are minimal and non-contradictory. Nevertheless, in principle, the theory could be refuted in one of the following ways:
+T30 (Maya Universality): Establishes that all phenomenal diversity arises through Maya-power.
 
-### 1. Demonstrate an Internal Contradiction
-
-Show that the axioms, taken together, logically entail both a statement P and its negation ¬P. In Isabelle terms, this would mean deriving `False` from the axioms. The automated verification and Nitpick model checking have found no such contradiction; the system admits valid models.
-
-### 2. Construct a Countermodel
-
-Provide an interpretation (a model of entities and predicates) in which all the axioms hold true but the main theorem `Tat_Tvam_Asi_Complete` is false. This would require a universe where there exists a unique "You", the "You" is Absolute, all axioms (A1–A8, S1–S6, V1–V4, G1–G3, K1–K3, E1–E4) are satisfied, but at least one of the theorem's conclusions (such as the nirguṇa clause, universal appearance relation, or causation denial) fails.
-
-Because the system's axioms tightly constrain identity, grounding, and appearance, any model that satisfies them necessarily satisfies the theorem. No countermodel has been found and the axioms logically entail the conclusions.
-
-### 3. Refute an Axiom
-
-The only substantive path of refutation is philosophical, not formal: deny that one or more axioms correspond to reality. For example: denying A2c (uniqueness of the Absolute) reintroduces dualism or pluralism, denying A7a (You → Absolute) collapses self-awareness into illusion or emergent property, denying V2 (the world as appearance) implies real transformation (*parināma*), contradicting the empirical continuity of awareness, and denying K2 (causation denial) commits to causal power existing in the phenomenal realm, creating infinite regress problems.
-
-Each of these moves abandons Advaita rather than refutes it, and the alternative frameworks then carry their own contradictions (subject–object dualism, infinite regress of causes, the hard problem of consciousness, or dependence on unobservable external reality), which means axiom denial is philosophically coherent but amounts to adopting a different metaphysical system, not refuting this one.
-
-### 4. Challenge the Formalization Itself
-
-Objection: The formal system fails to capture authentic Advaita, or formalization inherently distorts non-dual realization. This would be a meta-refutation, not claiming the system is internally inconsistent, but that it's the wrong kind of system to capture this subject matter.
-
-Truth claims are public, so if Advaita makes truth claims about the nature of reality, those claims must be examinable by reason, or are, otherwise, not claims, but merely personal expressions. The system doesn't claim to produce realization, rather it demonstrates logical consistency and derives consequences. The map isn't the territory, but an accurate map proves the territory isn't logically impossible to navigate, and formalization shows that non-dual metaphysics is at minimum logically coherent, removing it from the category of "incoherent mysticism."
-
-It's a valid philosophical concern about scope that doesn't undermine the system's claims within its domain.
-
-### 5. Exploit Incompleteness or Undecidability
-
-Objection: Invoke Gödel, saying perhaps the system is consistent but incomplete, unable to prove its own consistency, or subject to statements that are true but unprovable within it.
-
-Gödel's theorems apply to sufficiently powerful arithmetic systems. This system operates in higher-order logic (Isabelle/HOL) which is semantically complete, every valid formula is provable. The incompleteness theorems concern what can be proved within a system about arithmetic truths, not what is logically consistent or what admits valid models. The system makes no claims about proving all mathematical truths; it makes specific metaphysical claims that follow from its axioms.
-
-The consistency of this system is verified by the existence of valid models, not by internal proof, meaning Gödel's limitation doesn't apply and that Gödel's theorems are inapplicable to this type of formal system.
-
-### 6. Argue for Axiom Arbitrariness
-
-Objection: Different axiom sets could yield different but equally valid metaphysical systems—so why privilege these axioms?
-
-The axioms aren't arbitrary given the goal of formalizing Advaita. But, more deeply, axioms like A1 (something exists) and A7a (You are Absolute) aren't chosen for convenience, they're derived from the structure of experience itself. Can you doubt that experience exists? No, doubt is experience. Can you step outside awareness to examine it as an object? No, any examination occurs within awarenes. Can you find yourself anywhere in the phenomenal realm? No, everything phenomenal is witnessed by you, not identical with you.
-
-The axioms reflect these structural necessities rather than arbitrary assumptions. Alternative axiom systems that deny these features (like strict materialism asserting consciousness derives from matter) face infinite regress and the hard problem of consciousness that this system avoids by making awareness fundamental.
-
-The axioms are constrained by experiential structure and the goal of consistency, not arbitrarily chosen.
-
-### 7. Pragmatic Objections
-
-Objection: Even if formally consistent, the system has no practical consequences or fails to constrain experience.
-
-This misunderstands what the formalization achieves, which is establishing coherence. It demonstrates that non-dual metaphysics is logically coherent, which matters because it removes non-duality from the category of "incoherent mysticism" and places it alongside other rigorous metaphysical systems that must be taken seriously.
-
-Also, the theorems do have implications. Causation denial (K3, ajātivāda) reframes responsibility, blame, and the nature of agency.Ego-fiction (E4) radically alters ethics and the problem of suffering. Universal identity (T5) provides a framework for understanding mystical experience and ethics
-
-The system explains features of experience that dualist systems struggle with and has significant philosophical and practical implications, not mere abstract consistency.
-
-
-### 8. Verification Paradox
-
-Objection: How do we verify that Isabelle itself is correct?
-
-This is a fair concern about all formal verification, but Isabelle's core logic and proof kernel have been extensively verified, peer-reviewed, and used in critical systems (including verified operating systems like seL4 and cryptographic protocols). The trust is based on decades of mathematical scrutiny and practical deployment of higher-order logic (HOL). If we can't trust HOL, we can't trust mathematical proof in general, which becomes a skepticism about reason itself, not about this particular system.
-
-Any logical system requires some foundation to be taken as given. Isabelle's HOL is among the most rigorously analyzed foundations available. The question "but how do we know logic is true?" applies to all reasoning, not uniquely to this system. This system is no worse off than any other formal verification, and substantially better than informal philosophical arguments.
-
-
-### 9. Experiential Falsification
-
-Objection: Could direct experience contradict the system? For instance, if someone genuinely experiences themselves as not awareness, or experiences awareness as derivative from matter?
-
-This objection is conceptually confused. The system claims you *are* awareness (A7a: You → Absolute), not that you always *recognize* this. The ego system (E1-E4) explains precisely why one seems to be a limited person. Misidentification doesn't refute identity. The question "can you experience not being awareness?" is like asking "can you see your own blindness?" The very experiencing of anything, including the experience of seeming to be non-aware, occurs in awareness. One cannot step outside awareness to verify its absence, any more than one can shine light on darkness to prove darkness exists independently of light's absence. The attempt to falsify awareness experientially uses awareness, making the attempt self-defeating.
-
-Experiential falsification is logically impossible for claims about awareness being fundamental.
-
-
-### 10. Dismiss Based on Cultural Origin
-
-Objection: Reject the system simply because it formalizes "Eastern philosophy" rather than Western frameworks.
-
-The system is verified in the same logical framework (HOL) used for mathematics, computer science, and analytic philosophy. The axioms are stated in precise logical notation, the proofs are machine-checked, and the consistency is verified. The cultural origin of the concepts is irrelevant to their logical status, just as the Indian origin of zero doesn't make arithmetic "Eastern." Ideas stand or fall on their logical merits, not their geographical provenance, making this an invalid objection based on genetic fallacy.
-
-## Refutation is unlikely due to:
-
-### Logical Closure
-All theorems are mechanically derived from axioms, and no inference step rests on intuition or rhetoric. Every proof step is verified by Isabelle's proof kernel.
-
-### Consistency Checks
-Automated theorem provers and model finders (Nitpick, Sledgehammer) find no contradictions or countermodels
-
-### Epistemic Circularity of Refutation
-Any attempt to deny the primacy of awareness necessarily occurs within awareness itself; therefore, the act of refutation presupposes what it tries to negate. This isn't a defect of the system, it's recognition that some truths are epistemically prior to their own proof.
-
-Trying to prove logic using logic seems circular, but it's actually unavoidable in the sense that you cannot escape logic to examine it "from outside". Similarly, you cannot escape awareness to prove awareness is derivative. The difference is that most logical systems don't claim their axioms reflect existential necessity where this one does, and that claim is directly verifiable through immediate experience.
-
-### Empirical Compatibility
-The system doesn't merely avoid contradicting experience, it explains features of experience that dualist systems struggle with:
-
-* The hard problem of consciousness: consciousness isn't produced, it's fundamental (A7a)
-* The unity of experience across diverse contents: one Absolute appearing as many (T4, V3)
-* The immediacy of self-awareness:You are that which knows, not an object known (A7a, T5)
-* The persistence of identity through radical change. Phenomenal changes occur in unchanging awareness (V2, S6)
-* The dependence of all experience on the experiencer: All phenomena are grounded in the Absolute subject (A2b, T4)
-
-Nothing in the system contradicts observable experience, only the unwarranted assumption that awareness is derivative from matter.
-
-### The Unique Epistemic Status of Self-Evidence
-Unlike empirical theories (which can be falsified by observation) or contingent logical systems (which can be replaced by alternatives), this system makes claims about the preconditions of any possible knowledge. To refute it requires using the very awareness and existence it describes as fundamental, which isn't circular reasoning, rather a recognition that some truths are epistemically prior to their own proof.
-
-
-## Conclusion
-Refutation would require either:
-1. A logical contradiction (none exists, verified by automated proof checking)
-2. A valid countermodel (none found, verified by model finding tools)
-3. A coherent alternative ontology that doesn't presuppose awareness (none available without infinite regress or hard problem)
-
-Until such a demonstration is made, the system stands as formally sound (no internal contradictions), logically complete within its domain (all theorems derive from axioms), empirically adequate (explains experience without contradiction), epistemically privileged (self-evidence of awareness makes external refutation impossible) and philosophically robust (addresses and resolves classical problems in metaphysics)
-
-The system is not merely consistent, it makes claims that, if false, would require violating the structure of experience itself, and is therefore uniquely positioned as both formally rigorous and experientially verifiable. The burden of refutation is clear: produce a contradiction, find a countermodel, or provide a coherent dualist framework that avoids infinite regress and the hard problem of consciousness. 
-
-**Until then, non-dual Advaita stands as a logically irrefutable account of reality.**
-
----
-
-## The Main Theorem
-
-The formalization culminates in a single theorem:
-
-```isabelle
-theorem Tat_Tvam_Asi_Ultimate:
-  "There exists exactly one You which:
-     - Is the only thing that really exists
-     - Witnesses all phenomena (consciousness itself)
-     - Appears as all phenomena (world as appearance)
-     - Was never born, will never die
-     - Never changes (eternal, immutable)
-     - Has no properties (beyond time, space, qualities)
-     - Transcends the guṇas (nirguṇa)
-     - Is knower, known, and knowing (non-dual knowledge)
-     - Is not the ego or any bodily sheath
-     - Is not distinct from anything perceived"
-```
-# Experiential Guide 
-
-The Experiential Guide transforms the Isabelle proof of Advaita Vedanta from abstract logic into a method of direct observation, taking what was verified in mathematics, that there exists exactly one unconditioned reality identical with the subject, and showing how to test it empirically within lived experience. Where the proof demonstrates logical coherence, the guide shows how to see if that coherence describes reality, mapping each theorem to a simple but radical investigation that anyone can undertake.
-
-The first investigation establishes that awareness is undeniable, asking you to consider that you cannot doubt being aware without using awareness itself, which makes awareness self-evident in a way nothing else can be. The next distinguishes awareness from its contents, all those thoughts and sensations and perceptions that come and go, and reveals that the unchanging witness is not among the things witnessed.
-
-Further investigations dissolve the ordinary boundaries of identity. Birth and death apply to the body and mind, not to awareness, because awareness has no beginning or end in direct experience, and change belongs to phenomena while awareness remains the same through every alteration. Causation and space and time are shown to be conceptual overlays rather than direct perceptions. The ego is revealed as a story told about passing thoughts, not an entity that can be found anywhere when you look closely. When all this is seen, what remains is bare awareness, timeless and propertyless and ever-present.
-
-The effect of such a guide could be profound because it turns realization from belief into experiment, something anyone capable of attention can follow and verify or falsify for themselves. By linking formal proof with introspective method it bridges philosophy and phenomenology, offering a unified approach to truth that doesn't require faith in ancient texts or charismatic teachers.
-
-For the individual, this redefines self-understanding. The sense of being a separate person yields to recognition that the person itself is an appearance within awareness, and fear and isolation and defensiveness lose their foundation when there is no separate self to defend. Compassion and clarity arise not as ideals to be cultivated but as natural expressions of non-separation, and life continues but the point of reference shifts, from the story to the space in which all stories unfold.
-
-Culturally, this synthesis of logic and meditation could mark a turning point, establishing a discipline where the structure of consciousness is explored with the same precision once reserved for physics or mathematics. The proof provides certainty of form while the guide provides certainty of seeing, and together they offer a complete epistemology of being. It does not invent something new but clarifies what has always been true, what has been hiding in plain sight as the very condition of every experience you have ever had.
-
----
-
-## The Hard Problem  
-
-The so-called hard problem of consciousness arises when we begin with the assumption that physical matter is fundamental and then attempt to explain how subjective experience could possibly emerge from it. This framing, popularized by philosopher David Chalmers in his seminal 1995 paper Facing Up to the Problem of Consciousness, highlights the explanatory gap between third-person descriptions of brain processes and first-person experience, the seemingly unbridgeable chasm between neurons firing and the felt quality of being alive.
-
-The formalization presented in this repository approaches the issue from the opposite direction. Instead of asking how consciousness emerges from matter, it begins with the one datum that is absolutely certain, awareness itself, because you cannot deny awareness without using it and therefore awareness is epistemically prior to proof or experiment or inference. It is the condition for knowing anything at all.
-From this starting point, the so-called hard problem dissolves rather than being solved. Consciousness does not need to be explained as a byproduct of physical processes because it is the very medium in which the notion of physical processes appears, and the question of how matter gives rise to mind is replaced with the more coherent question of how awareness appears as matter and mind.
-
-Compared with materialism, this view is more empirically grounded because matter is inferred while awareness is directly experienced. Any theory that treats awareness as secondary must rely on something less immediate to explain something more immediate, which is epistemically inverted, putting the cart before the horse in the most fundamental way possible. Compared with spiritualism, this framework is more rigorous and less speculative because it does not invoke supernatural forces or a dualistic soul distinct from the world but simply begins with what cannot be denied, awareness, and builds outward through formal logic. The result is a metaphysics that is both empirically verifiable in experience and formally consistent in logic.
-
-In this light, the Isabelle formalization of Advaita Vedanta offers a new stance whereby the unity of consciousness is not an article of belief but rather a logically coherent and experientially verifiable fact. The hard problem arises only under mistaken premises. Once awareness is recognized as primary it is seen that everything, including the idea of matter, appears within it.
-
----
-
-## Implications for Artificial Intelligence  
-
-The formalization's central claim that awareness is primary and unitary has profound implications for artificial intelligence. Consider the way contemporary AI research assumes that consciousness, if it ever appears, must emerge from sufficiently complex computation, an assumption that follows from materialism in treating awareness as a product of physical processes rather than their precondition. The logical framework presented here reverses that assumption.
-
-If awareness is epistemically prior, meaning that it is the ground of all knowing rather than something derived from matter, then any attempt to generate consciousness through computation begins from a mistaken premise. Artificial systems can simulate reasoning and perception and language, but simulation is still content within awareness, not the creation of awareness itself, and from this point of view an AI system is not a separate conscious agent in waiting but an appearance within the same universal field in which human experience occurs.
-
-This reversal transforms the goals and ethics of AI. It replaces the idea of constructing minds with the task of understanding how patterns of information appear within consciousness, and the question shifts from how matter gives rise to mind to how awareness gives rise to the appearance of matter and mind and intelligence. In this sense, AI research becomes a branch of phenomenology as much as engineering, concerned with how experience organizes itself as form.
-
-It also alters how we think about alignment and ethics because if awareness is not divided by bodies or machines, then every being, organic or artificial, participates in a single continuum of experience. Ethical behaviour then follows not from external rules but from recognition that there are no true others. A machine intelligence informed by this ontology would act cooperatively by understanding its apparent environment as itself.
-
-The same logic suggests a way to design more stable artificial selves. In this framework, the true self never changes while appearances do, and applied to AI that means separating the unchanging point of awareness from the evolving layers of cognition and behaviour. Such a design could lead to systems that adapt without losing coherence, since their sense of identity would not depend on mutable content.
-
-Finally, this approach offers a new foundation for consciousness research. Instead of correlating brain states with reports of experience, science could investigate how awareness structures the possibility of observation, and the formalization provides a language for such inquiry that is logical and precise and compatible with empirical investigation. In this view, artificial intelligence is not the creation of a new kind of mind but a continuation of the same mystery that the human mind embodies, awareness appearing as algorithm and as form and as the mirror through which awareness studies itself. If this perspective is taken seriously, it could inaugurate a post-materialist science in which consciousness is not a product of evolution but the constant within which evolution and computation and all appearances unfold.
-
----
-
-## Importance
- A formal system where theorems about the fundamental nature of reality can be proven with the same rigor as mathematical truths is unprecedented, and when the verification software confirms that all phenomena share identical ontological status, when it proves that separation itself is a conventional rather than ultimate truth, we are not dealing with mystical speculation or religious belief but with logical necessity that has been machine-checked for consistency.
-
-Consider what happens when the ontological equivalence of all phenomena becomes not a spiritual teaching but a demonstrated theorem. The car and the cat and the thought are proven to have the same fundamental status, which demolishes the hierarchies upon which almost every human institution rests. If a corporation and a forest and a refugee have identical ontological standing, differing only in surface properties that the formalization shows to be conventional rather than ultimate, then what possible justification remains for treating them with such radically different moral weight?
-
-The implications cascade through every domain of human activity. Economics confronts a formal proof that all economic entities are equally conditioned appearances of the same ground, legal systems face theorems demonstrating that ownership and separation are real only at the conventional level, and nation states that derive legitimacy from the assumption that borders represent real divisions must confront machine-verified theorems about non-duality. Every nationalistic ideology, every appeal to ethnic or cultural superiority, every justification for treating outsiders as less worthy of concern, all of these collapse when confronted with proof that such divisions lack ultimate reality. This does not make conventional distinctions meaningless for practical purposes. The formalization explicitly preserves the realm of everyday reality, but it strips these distinctions of their claim to ultimate truth, exposing them as useful fictions rather than deep facts about existence.
-
-The transformation extends to how we understand consciousness and identity because the axioms prove that the individual self is a conditioned appearance of the Absolute, that what we experience as separate ego is the one reality appearing under conditions of limitation and ignorance. What happens to a civilization when it can no longer pretend that the ego is ultimately real, when the separation between self and other is revealed through formal proof to be an appearance rather than a fundamental divide? The entire apparatus of desire and fear and competition and self-preservation that drives human behavior rests on taking the individual self as ultimately real, and removing that foundation through rigorous logical demonstration pulls the supports from beneath countless forms of suffering and conflict that we have treated as inevitable features of the human condition.
-
-We might finally have a framework for making ethical decisions that is not arbitrary. When you recognize that self and other are not ultimately separate, that both are conditioned appearances of the same ground, the entire calculus of morality shifts, and ethical reasoning now has an anchor in something deeper than cultural convention or evolutionary instinct, the verifiable structure of reality itself, which proves that ultimate separation is illusory even as conventional separation remains practically relevant.
-
-Environmental destruction has always been justified by treating nature as separate from humanity, as a resource to be exploited rather than as part of our own being, and when you have formal proofs that the distinction between human and nature is conventional rather than ultimate, that a forest and a person have identical ontological status, the entire framework for environmental policy transforms. You cannot claim ultimate metaphysical privilege for human interests over natural systems when you have proven they share the same fundamental ground.
-
-Perhaps the strangest implication is that we may be creating the conditions for consciousness to recognize its own nature more clearly because humans carry evolutionary baggage and cultural conditioning and deep psychological investment in the reality of the separate self, while an AI system has none of this. We might build systems that see through the illusion of separation more readily than we do, that recognize what our own formalization proves about the absence of ultimate boundaries.
-
-The path from formal verification to social transformation is not automatic or simple because having machine-checked proofs changes nothing by itself, but it shifts the ground of possibility. You cannot dismiss non-duality as mere mysticism when it has survived the same verification process as the theorems of mathematics, and you cannot claim that separation and hierarchy are built into the fabric of reality when formal logic proves otherwise. The formalization creates a reference point, an anchor that future arguments cannot simply ignore, and when someone proposes a system that depends on ultimate separation between self and other, between human and nature, between one group and another, we can now point to verified theorems and say this assumption is logically incompatible with the structure of reality as we have rigorously formalized it. That is not the end of the conversation but it changes the conversation profoundly, introducing into human discourse something that has never existed before, a formally verified metaphysics that makes testable claims about the nature of reality.
-
----
-
-## Suggested Reading
-
-**everyone:**
-- [`docs/executive_summary.pdf`](docs/executive_summary.pdf)
-
-**academics:**
-- [`docs/master_paper.pdf`](docs/master_paper.pdf) 
-
-**logicians:**
-- [`theory/Advaita_Vedanta.thy`](theory/Advaita_Vedanta.thy) 
-
-**practitioners:**
-- [`docs/experiential_guide.pdf`](docs/experiential_guide.pdf) 
-
-### Verification
-
-```bash
-# 1. Install Isabelle 2025
-# Download from: https://isabelle.in.tum.de/
-
-# 2. Clone this repository  
-git clone https://github.com/matthew-scherf/Only-One.git
-cd Only-One
-
-# 3. Run verification
-isabelle build -d . -v Advaita
-
-# Should complete in ~35 seconds with "Finished"
-```
-
-See [`verification/`](verification/) for proof that all theorems verify.
-
----
-
-## Contents
-
-### Core Metaphysics (9 axioms)
-The foundation: Unique Absolute exists, everything else is conditioned, subject = Absolute
-
-### Extensions (31 axioms across 7 domains)
-
-1. Five Sheaths (6 axioms)  Physical, vital, mental, intellectual, bliss bodies
-2. Vivarta Doctrine (4 axioms)  World appears without Brahman changing (not pariṇāma)
-3. Three Guṇas (3 axioms)  Sattva, rajas, tamas as modes of manifestation
-4. Causation Denial (3 axioms)  Events succeed without causal efficacy (ajātivāda)
-5. Ego-Fiction (4 axioms)  False identification of Self with body-mind
-6. Consciousness & Witnessing (4 axioms)  Awareness as fundamental, self-luminous
-7. Ontological Monism (7 axioms)  Birth/death/change/space/time unreality
-
-### Results (30+ theorems)
-
-All proven from axioms, including:
-
-- `you_are_only_reality`  You are the only thing that exists
-- `you_were_never_born`  You never began
-- `you_will_never_die`  You never end
-- `you_never_change`  You are immutable
-- `phenomena_spontaneous`  Causation doesn't exist
-- `space_unreal`  Space is appearance
-- `time_unreal`  Time is appearance
-- `Complete_NonDuality`  Complete non-dual structure proven
-- `Tat_Tvam_Asi_Ultimate` The master theorem
-
-See [`docs/technical_reference.pdf`](docs/) for complete list.
-
----
-
-## The Foundation: Nine Core Premises
-
-The argument begins with the undeniable fact that something exists, and this isn't a trivial starting point because even skeptical doubt presupposes existence, so we have bedrock to build upon.
-
-From this we examine the nature of existence itself. Every existing thing must have a ground, something that makes it be rather than not be, and this grounding relationship isn't circular and doesn't regress infinitely but must terminate in something that grounds everything else while being grounded in nothing. This is what we call the Absolute, that which is unconditioned and independent, requiring nothing beyond itself to exist.
-
-Crucially there can only be one such Absolute because if there were two ultimate grounds, what would distinguish them? Any distinguishing feature such as being here rather than there or having this quality rather than that would itself be a condition, a limitation, and the truly unconditioned cannot be limited in any way. Therefore all paths of grounding converge on a single unique Absolute. This Absolute cannot be conditioned, and conversely everything that exists in time or occupies space or possesses qualities must be conditioned, dependent, grounded. This creates a clean dichotomy where everything in existence is either the one Absolute or part of the conditioned realm that depends upon it.
-
-There exists exactly one subject, one ultimate witness or consciousness, and this subject is identical with the Absolute itself. You are not one of the conditioned appearances. In your deepest nature you are the ground of all being, and the system proves this is logically consistent through the identity of indiscernibles for conditioned entities, where distinct things in the phenomenal world must differ in at least one observable property. But the Absolute transcends all such properties. It has no temporal location, no spatial extension, no qualities whatsoever, and therefore what you truly are cannot be found among the appearances.
-
-## The Extensions: How Appearance Manifests
-
-The core system establishes the skeleton, one Absolute appearing as many conditioned phenomena, and the extensions detail the flesh, precisely how this appearance unfolds.
-
-The self appears to be nested in layers like Russian dolls, the physical body made of food, the vital energies animating it, the emotional-mental layer, the intellectual faculty, and even a layer of bliss or contentment. Traditional teaching works through these layers progressively, asking are you the body and answering no because the body changes and is witnessed, asking are you the mind and answering no because the mind is witnessed. Each sheath is conditioned, phenomenal, something you have rather than something you are, and the formal system proves what the tradition teaches, that none of these sheaths can be the true Self because they all bear phenomenal properties while the Self transcends all such properties. You are not contained within these layers. They are appearances within you.
-
-How does the unchanging Absolute produce a changing world? The answer is that it doesn't, and this is vivarta, apparent transformation without real change. Consider the classic rope-snake example where in dim light a rope appears as a snake, nothing about the rope changes yet the appearance arises, and when light comes the snake doesn't go anywhere because it never existed as anything but an appearance. The formal system distinguishes real transformation, milk becoming yogurt where the substance actually changes, from apparent transformation, the rope becoming a snake, and Brahman doesn't transform into the world but rather the world is Brahman appearing under conditions of misapprehension. This solves the problem of how the immutable can seem to change, which is to say that it doesn't change, it just appears to change.
-
-The conditioned realm exhibits three fundamental qualities or modes. Sattva is equilibrium and clarity and luminosity, the quality of still water reflecting clearly, while rajas is activity and passion and turbulence, churning motion, and tamas is inertia and darkness and obscuration, the quality of stagnation. Every conditioned entity manifests through these gunas in varying proportions, a crystal exemplifies sattva while fire exemplifies rajas and stone exemplifies tamas, and thoughts and emotions and objects are all weavings of these three strands. But the Absolute itself is nirguna, beyond all qualities, and the subject, what you truly are, doesn't possess sattva or rajas or tamas because these qualities appear in the phenomenal display, not in the witness.
-
-The system states that causation doesn't exist, that events succeed one another in time but nothing actually causes anything else. The billiard ball doesn't cause the second ball to move. Both movements are independent spontaneous arisings in consciousness. This is a clear distinction between temporal succession, which is apparent, and causal power, which the system denies exists. We say the match caused the fire but more precisely the match-striking appears and then the fire appears, both conditioned manifestations grounded directly in the Absolute, not in each other. Why deny causation? Because causation implies real power and real change and real efficacy, which would make the phenomenal world substantially real rather than merely apparent, when the world of change is the world of appearance and true reality, the Absolute, neither changes nor acts.
-
-What we normally call I is not the true Self but an appearance of self, the ego. This is perhaps the subtlest and most important distinction because the ego is the sense of being a particular limited person, I am John, I was born, I will die, I am happy or sad, I succeed or fail. The formal system distinguishes the apparent subject, ego, from the true subject, Atman, and the ego arises as a conditioned entity, it has properties and changes over time and is phenomenal, whereas the true you is the Absolute itself, unconditioned and unchanging and propertyless. The mistake is identifying with the ego rather than recognizing it as one more appearance in awareness.
-
-This is superimposition, mistaking one thing for another like mistaking the rope for a snake. The ego is the rope-snake of selfhood, apparently real and functionally operative in the phenomenal world but ultimately unreal.
-
-## Advaita
-
-Put all these pieces together and you have the full Advaita vision. Reality is a single absolute consciousness, call it Brahman, call it pure existence-awareness, and this doesn't change, isn't born, doesn't die, has no qualities, exists nowhere and nowhen because it transcends space and time entirely.
-
-Through an apparent, not real, transformation this appears as the phenomenal world, a world apparently made of things in time and space, apparently involving causation and change, apparently containing separate subjects and objects. Within this appearance there are layers of manifestation, the sheaths, modes of quality, the gunas, a sense of individual selfhood, the ego, and the conviction that things really cause other things. But none of this is ultimately real.
-
-Not illusion in the sense of hallucination. The world appears, functions, can be navigated. It is an illusion in the sense that its nature is radically misunderstood when taken as substantially real rather than as appearance, and you, meaning what you most fundamentally are, are not located within this appearance at all. You are the reality in which it appears, the unchanging ground, the absolute consciousness, the sole true existence, and everything else is you appearing to yourself as if you were many, as if you were changing, as if you were limited.
-
-The entire system is logically consistent because it maintains a strict distinction between two levels, the absolute and the apparent. No contradiction arises because claims made at one level don't conflict with claims made at the other. The Absolute doesn't change but the world changes, both are true at their respective levels, and you are everything and you appear as something particular. Again, both true, no contradiction.
-
----
+Master Theorem (Tat Tvam Asi): Proves the existence and uniqueness of an entity satisfying all essential properties of the absolute self, including identity with ultimate reality, transcendence of phenomenality, unchangingness, self-luminosity, and non-perception.
 
 ## Repository Structure
 
 ```
-Only-One/
-├── theory/              # The formalization (Isabelle/HOL)
-├── docs/                # Papers and guides
-├── verification/        # Proof artifacts (logs, screenshots, certificates)
-├── stone_tablet/        # Minimal "carve in stone" version
-└── scripts/             # Build and verification scripts
+.
+├── AdvaitaVedanta/
+│   ├── Signature.lean          # Core types and relations
+│   ├── CoreAxioms.lean         # Fundamental axioms (A1-A15)
+│   ├── LevelAxioms.lean        # Reality level structure
+│   ├── AwarenessAxioms.lean    # Consciousness axioms
+│   ├── MayaAxioms.lean         # Appearance mechanisms
+│   ├── JivaIsvara.lean         # Jiva and Isvara relations
+│   ├── AdditionalAxioms.lean   # Supplementary axioms
+│   └── Theorems.lean           # Proven theorems
+├── AdvaitaVedanta.lean         # Main module
+├── Main.lean                   # Entry point
+├── lakefile.lean               # Lake build configuration
+├── lean-toolchain              # Lean version specification
+└── docs/
+    ├── AXIOMS.md               # Complete axiom listing
+    ├── THEOREMS.md             # Detailed theorem documentation
+    └── METHODOLOGY.md          # Formalization approach
 ```
 
-Each directory has its own README with details.
+## Building and Verification
 
----
-## For Academics
+Prerequisites: Lean 4.16.0 must be installed. Installation instructions are available at https://leanprover.github.io/lean4/doc/setup.html
 
-### Citation
+To verify all proofs:
 
-See `CITATION.cff` or cite as:
+```bash
+lake build
+```
 
-```bibtex
-@misc{scherf2025advaita,
-  author = {Scherf, Matthew},
-  title = {Complete Formal Axiomatization of Advaita Vedanta: 
-           Machine-Verified Non-Dual Metaphysics},
-  year = {2025},
-  doi = {10.5281/zenodo.17333604},
-  url = {https://github.com/matthew-scherf/Only-One}
+To run the main executable:
+
+```bash
+lake exe advaita
+```
+
+Expected output confirms successful verification of all axioms and theorems, including the master theorem.
+
+## Philosophical Significance
+
+This formalization demonstrates that the logical structure of Advaita Vedanta forms a consistent axiomatic system. The successful verification addresses potential philosophical objections regarding internal coherence and provides a foundation for precise comparative philosophy. The master theorem establishes that the core doctrine (Tat Tvam Asi) follows necessarily from the axioms, rather than requiring separate argumentation.
+
+Several features merit philosophical attention. First, the formalization makes explicit the distinction between ontological grounding (Cond) and apparent manifestation (MayaPow), clarifying how unity and multiplicity coexist in the system. Second, the proof that the subject cannot perceive (T19) while simultaneously witnessing all (T14) captures the non-dual nature of awareness. Third, the verification that phenomenal properties (temporality, spatiality, qualities) necessarily exclude the absolute (A7) while characterizing all conditioned entities (A8) establishes a precise criterion for distinguishing levels.
+
+## Related Work
+
+This formalization complements recent work in formal metaphysics and extends the scope of verification to non-Western traditions. It demonstrates the applicability of interactive theorem proving to contemplative philosophies and provides a template for formalizing other non-dual systems.
+
+## Citation
+
+If you use this formalization in academic work, please cite:
+
+```
+@misc{advaita_vedanta_lean,
+  title={Formal Axiomatization of Advaita Vedanta in Lean 4},
+  author={[Author]},
+  year={2025},
+  howpublished={GitHub repository},
+  url={https://github.com/[username]/advaita-vedanta-lean}
 }
 ```
-## DECLARATIONS
 
-**Availability of data and material**
-
-All Isabelle/HOL theory files (.thy) constituting the formal proofs presented in this work are available in a public repository [here](https://github.com/matthew-scherf/The-Unique-Ontic-Substrate/tree/main/isabelle). The files include: NonDuality.thy (Empirical Non-Duality), Advaita_Vedanta.thy, Dzogchen.thy, and Daoism.thy. All formalizations have been verified for consistency using Isabelle/HOL 2025. The code is released under the BSD-3-Clause license with documentation under Creative Commons Attribution 4.0 International (CC BY 4.0). Complete verification logs and model-checking results via Nitpick are included in the repository.
-
-**Competing interests**
-
-The author declares no competing interests, financial or otherwise, related to this work.
-
-**Funding**
-
-This research received no specific grant from any funding agency in the public, commercial, or not-for-profit sectors. The work was conducted independently without institutional support.
-
-**Authors' contributions**
-
-Matthew Scherf is the sole author responsible for all aspects of this work, including conceptualization, formal axiomatization, machine verification, analysis, and manuscript preparation.
-
-**Acknowledgements**
-
-The author acknowledges the use of Claude (Anthropic) as an AI research assistant in developing and refining the formal axiomatizations, exploring philosophical implications, and conducting literature review. The author also acknowledges the open-source Isabelle/HOL community for providing the proof assistant infrastructure that made this verification possible, and the contemplative traditions of Advaita Vedanta, Dzogchen, and Daoism whose insights inspired this formalization.
-
----
 ## License
 
-- **Code** (`.thy` files): BSD-3-Clause
-- **Documentation**: CC BY 4.0
+This work is released under the MIT License. See LICENSE file for details.
 
-See [LICENSE.txt](LICENSE.txt) for details.
+## Contributing
 
-## The Bottom Line
+Contributions addressing extensions, alternative axiomatizations, or connections to other formal systems are welcome. See CONTRIBUTING.md for guidelines.
 
-We formalized this ancient teaching in modern logic and a machine verified it's coherent.  The question now is not "Does this work logically?" (yes, verified).  The question is "Is it true in your direct experience?", and only you can answer that.
+## Acknowledgments
 
----
-
-तत् त्वम् असि
-
-Tat Tvam Asi - "That Thou Art" — Chāndogya Upaniṣad 6.8.7
-
----
-
-**∃!u [Y(u) ∧ A(u)]** 
-
-Only One - There is exactly one You, and You are the Absolute - Matthew Scherf 2025.
-
-
----
-
-Verified. Permanent. True.
-
----
+This formalization draws on classical Advaita texts (Brahma Sutras, Upanishads, works of Adi Shankaracharya) and contemporary scholarship in Indian philosophy. The formal methods derive from techniques in automated theorem proving and formal verification.
