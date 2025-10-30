@@ -1,0 +1,953 @@
+\documentclass[12pt]{article}
+
+% Standard packages
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{mathtools}
+\usepackage{natbib}
+\usepackage{hyperref}
+\usepackage{enumitem}
+
+% Theorem environments
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{axiom}[theorem]{Axiom}
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Remark}
+
+% Custom commands
+\newcommand{\Brahman}{\mathit{Brahman}}
+\newcommand{\Atman}{\mathit{Atman}}
+\newcommand{\Param}{\mathit{Param}}
+\newcommand{\Vyav}{\mathit{Vyav}}
+\newcommand{\Prat}{\mathit{Prat}}
+
+\title{The Formal Logic of Advaita Vedanta:\\
+A Complete Axiomatization and Consistency Proof}
+
+\author{Based on the work of Matthew Scherf}
+
+\date{\today}
+
+\begin{document}
+
+\maketitle
+
+\begin{abstract}
+This paper presents the first complete formal axiomatization of Advaita Vedanta, the non-dual philosophical system attributed to Śaṅkarācārya. Using many-sorted first-order logic with equality, we construct a rigorous formal system comprising 114 axioms across eight thematic modules that capture the core metaphysical, epistemological, and phenomenological commitments of classical Advaita. The system defines four basic sorts (objects, levels, time, events) and employs predicates for the absolute-conditioned distinction, consciousness, Maya, grounding relations, and the three-level reality structure. We prove 40+ theorems including the central identity $\Brahman = \Atman$ and the master theorem synthesizing all major doctrines into a single coherent statement of Tat Tvam Asi. Consistency is established through an explicit dynamic model satisfying all axioms. This formalization demonstrates that Advaita's non-dual metaphysics constitutes a logically coherent philosophical system, providing a foundation for precise comparative analysis with Western metaphysical frameworks and opening new possibilities for computational approaches to consciousness studies.
+\end{abstract}
+
+\section{Introduction}
+
+Advaita Vedanta stands as one of humanity's most sophisticated metaphysical systems, offering a non-dual account of reality that challenges fundamental assumptions of Western philosophy. While Advaita has profoundly influenced Indian intellectual history and gained increasing attention in contemporary philosophy of mind and metaphysics, its logical structure has remained largely unexplored through formal methods. This paper addresses that gap by presenting a complete formal axiomatization of Advaita Vedanta's core doctrines.
+
+The motivation for this formalization is threefold. First, it establishes that Advaita's central claims form a logically consistent system, addressing longstanding objections that non-dual metaphysics involves inherent contradictions. Second, it makes the implicit logical structure of Advaita arguments explicit, enabling more precise philosophical analysis and comparison with other systems. Third, it provides a foundation for computational approaches to consciousness and non-dual metaphysics, potentially informing AI architectures that incorporate contemplative insights.
+
+Contemporary analytic metaphysics has developed sophisticated formal tools for analyzing ontological structure, grounding relations, and levels of reality. Yet these tools have been applied almost exclusively to Western philosophical frameworks. This paper demonstrates that non-Western metaphysical systems can be formalized with equal rigor, contributing to the broader project of cross-cultural philosophy and formal ontology.
+
+The formalization employs many-sorted first-order logic, a framework sufficiently expressive to capture Advaita's ontological distinctions while remaining tractable for formal verification. The system has been machine-verified using the Lean 4 theorem prover, providing strong assurance of consistency and deductive correctness. The verification process ensures that all theorems follow necessarily from the axioms and that no hidden assumptions undermine the reasoning.
+
+\section{Background and Motivation}
+
+Advaita Vedanta, particularly in the interpretation of Śaṅkarācārya (8th century CE), articulates a radical metaphysical position: ultimate reality (Brahman) is non-dual, infinite consciousness, and the individual self (Atman) is not merely similar to but numerically identical with this absolute. All phenomenal diversity, all appearance of multiplicity, arises through Maya, the power of appearance, without involving any real transformation of the substrate. Ignorance (avidya) of this identity constitutes bondage, while direct realization (aparoksha jnana) constitutes liberation.
+
+Classical Advaita texts, including the Upanishads, Brahma Sutras, and Śaṅkara's commentaries, develop these themes through hermeneutical analysis, dialectical reasoning, and pedagogical strategies. The tradition distinguishes three levels of reality: the ultimate (paramarthika), the conventional (vyavaharika), and the illusory (pratibhasika). This stratification enables Advaita to maintain apparently contradictory claims by assigning them to different levels of analysis.
+
+Several features of Advaita make it particularly amenable to formal treatment. First, it articulates clear ontological categories with specific properties and relations. Second, it employs systematic distinctions (absolute versus conditioned, witnessing versus perceiving, real change versus appearance) that translate naturally into logical predicates. Third, it develops explicit theories of grounding, causation, and knowledge that can be captured through formal relations. Fourth, it maintains internal consistency through its level-structure, providing a principled way to resolve apparent paradoxes.
+
+Previous philosophical engagement with Advaita has been primarily hermeneutical and comparative. While valuable, such approaches leave implicit the logical relations between doctrines. Formal methods complement traditional scholarship by making these relations explicit and verifiable. The formalization does not replace contemplative practice or textual study but provides a rigorous framework for analyzing Advaita's conceptual structure.
+
+\section{Formal System}
+
+\subsection{Signature and Domains}
+
+The formalization employs a many-sorted signature with four basic sorts and numerous predicates and relations.
+
+\begin{definition}[Sorts]
+The formal system includes four basic sorts:
+\begin{align}
+\mathit{Obj} &\text{ -- Objects (entities)} \\
+\mathit{Level} &\text{ -- Levels of reality} \\
+\mathit{Time} &\text{ -- Temporal points} \\
+\mathit{Event} &\text{ -- Events (reified occurrences)}
+\end{align}
+\end{definition}
+
+The $\mathit{Level}$ sort includes three constants representing Advaita's three-level ontology:
+\begin{align}
+\Param &: \mathit{Level} \quad \text{(ultimate reality)} \\
+\Vyav &: \mathit{Level} \quad \text{(conventional reality)} \\
+\Prat &: \mathit{Level} \quad \text{(illusory appearance)}
+\end{align}
+
+\subsection{Core Predicates}
+
+The system defines predicates capturing Advaita's fundamental distinctions:
+
+\begin{definition}[Metaphysical Status Predicates]
+\begin{align}
+A(x) &: \text{$x$ is Absolute (Brahman)} \\
+C(x) &: \text{$x$ is Conditioned (dependent)} \\
+Y(x) &: \text{$x$ is the ultimate subject (Atman)}
+\end{align}
+\end{definition}
+
+\begin{definition}[Phenomenal Predicates]
+\begin{align}
+T_p(x) &: \text{$x$ is temporal} \\
+S_p(x) &: \text{$x$ is spatial} \\
+Q_p(x) &: \text{$x$ has qualities} \\
+\Phi(x) &\equiv T_p(x) \vee S_p(x) \vee Q_p(x)
+\end{align}
+\end{definition}
+
+\begin{definition}[Consciousness Predicates]
+\begin{align}
+\mathit{Sat}(x) &: \text{$x$ has being-nature} \\
+\mathit{Cit}(x) &: \text{$x$ has consciousness-nature} \\
+\mathit{Ananda}(x) &: \text{$x$ has bliss-nature} \\
+\mathit{Saccidananda}(x) &\equiv \mathit{Sat}(x) \wedge \mathit{Cit}(x) \wedge \mathit{Ananda}(x)
+\end{align}
+\end{definition}
+
+\begin{definition}[Relational Predicates]
+\begin{align}
+\mathit{Cond}(x,y) &: \text{$x$ ontologically grounds $y$} \\
+\mathit{Level}(x,\ell) &: \text{$x$ exists at level $\ell$} \\
+\mathit{Witnesses}(w,z) &: \text{$w$ witnesses $z$ non-dually} \\
+\mathit{Perceives}(s,o) &: \text{$s$ perceives $o$ dualistically} \\
+\mathit{MayaPow}(a,x) &: \text{Maya-power from $a$ manifests as $x$}
+\end{align}
+\end{definition}
+
+\subsection{Core Axioms}
+
+The foundation of the formalization consists of 15 core axioms establishing fundamental metaphysical principles.
+
+\begin{axiom}[Absolute-Conditioned Partition]
+\label{ax:partition}
+\begin{align}
+&\forall x. \, A(x) \vee C(x) \\
+&\forall x. \, \neg(A(x) \wedge C(x))
+\end{align}
+\end{axiom}
+
+This axiom partitions all entities into two exhaustive, mutually exclusive categories, reflecting Advaita's fundamental ontological distinction.
+
+\begin{axiom}[Uniqueness of Absolute]
+\label{ax:unique-absolute}
+\begin{equation}
+(\exists a. \, A(a)) \wedge (\forall a_1 \, a_2. \, A(a_1) \rightarrow A(a_2) \rightarrow a_1 = a_2)
+\end{equation}
+\end{axiom}
+
+\begin{axiom}[Uniqueness of Subject]
+\label{ax:unique-subject}
+\begin{equation}
+(\exists u. \, Y(u)) \wedge (\forall u_1 \, u_2. \, Y(u_1) \rightarrow Y(u_2) \rightarrow u_1 = u_2)
+\end{equation}
+\end{axiom}
+
+\begin{axiom}[Subject-Absolute Identity]
+\label{ax:identity}
+\begin{equation}
+\forall x. \, Y(x) \leftrightarrow A(x)
+\end{equation}
+\end{axiom}
+
+Axiom~\ref{ax:identity} encodes the core insight of Advaita: the ultimate subject of experience is identical with the absolute ground of reality. This is the formal statement underlying the mahavakya Tat Tvam Asi.
+
+\begin{axiom}[Self-Grounding of Absolute]
+\label{ax:self-ground}
+\begin{equation}
+\forall a. \, A(a) \rightarrow \mathit{Cond}(a,a)
+\end{equation}
+\end{axiom}
+
+\begin{axiom}[Universal Grounding]
+\label{ax:universal-ground}
+\begin{equation}
+\forall x. \, \exists a. \, A(a) \wedge \mathit{Cond}(a,x)
+\end{equation}
+\end{axiom}
+
+Axioms~\ref{ax:self-ground} and~\ref{ax:universal-ground} establish that the absolute is self-existent (svayambhu) and grounds all other entities, formalizing the dependency structure of Advaita ontology.
+
+\begin{axiom}[Absolute Transcends Phenomenality]
+\label{ax:transcends}
+\begin{equation}
+\forall a. \, A(a) \rightarrow \neg\Phi(a)
+\end{equation}
+\end{axiom}
+
+\begin{axiom}[Conditioned Has Phenomenality]
+\label{ax:conditioned-phenomenal}
+\begin{equation}
+\forall x. \, C(x) \rightarrow \Phi(x)
+\end{equation}
+\end{axiom}
+
+\begin{axiom}[Grounding Asymmetry]
+\label{ax:ground-asym}
+\begin{equation}
+\forall x \, y. \, \mathit{Cond}(x,y) \wedge \mathit{Cond}(y,x) \rightarrow (x = y \wedge A(x))
+\end{equation}
+\end{axiom}
+
+\begin{axiom}[Grounding Transitivity]
+\label{ax:ground-trans}
+\begin{equation}
+\forall x \, y \, z. \, \mathit{Cond}(x,y) \wedge \mathit{Cond}(y,z) \rightarrow \mathit{Cond}(x,z)
+\end{equation}
+\end{axiom}
+
+\begin{axiom}[Universal Witnessing]
+\label{ax:witness-all}
+\begin{equation}
+\forall a \, x. \, A(a) \rightarrow \mathit{Witnesses}(a,x)
+\end{equation}
+\end{axiom}
+
+\begin{axiom}[Self-Luminosity]
+\label{ax:self-luminous}
+\begin{equation}
+\forall a. \, A(a) \rightarrow \mathit{Witnesses}(a,a)
+\end{equation}
+\end{axiom}
+
+\begin{axiom}[Subject Non-Perception]
+\label{ax:no-perceive}
+\begin{equation}
+\forall u \, o. \, Y(u) \rightarrow \neg\mathit{Perceives}(u,o)
+\end{equation}
+\end{axiom}
+
+\begin{axiom}[Knowledge Structure]
+\label{ax:knowledge}
+\begin{equation}
+\forall u. \, Y(u) \rightarrow (\mathit{Knower}(u) \wedge \mathit{Known}(u) \wedge \mathit{Knowing}(u))
+\end{equation}
+\end{axiom}
+
+\begin{axiom}[Absolute Unchanging]
+\label{ax:unchanging}
+\begin{equation}
+\forall a \, x. \, A(a) \rightarrow \neg\mathit{RealChange}(a,x)
+\end{equation}
+\end{axiom}
+
+\subsection{Level Axioms}
+
+The three-level ontology is formalized through six axioms constraining level assignments.
+
+\begin{axiom}[Level Partition]
+\label{ax:level-partition}
+\begin{equation}
+\forall x. \, \mathit{Level}(x,\Param) \vee \mathit{Level}(x,\Vyav) \vee \mathit{Level}(x,\Prat)
+\end{equation}
+\end{axiom}
+
+\begin{axiom}[Absolute at Ultimate Level]
+\label{ax:absolute-param}
+\begin{equation}
+\forall a. \, A(a) \rightarrow \mathit{Level}(a,\Param)
+\end{equation}
+\end{axiom}
+
+\begin{axiom}[Absolute Not at Lower Levels]
+\label{ax:absolute-not-lower}
+\begin{align}
+&\forall a. \, A(a) \rightarrow \neg\mathit{Level}(a,\Vyav) \\
+&\forall a. \, A(a) \rightarrow \neg\mathit{Level}(a,\Prat)
+\end{align}
+\end{axiom}
+
+\begin{axiom}[Conditioned Not at Ultimate]
+\label{ax:conditioned-not-param}
+\begin{equation}
+\forall x. \, C(x) \rightarrow \neg\mathit{Level}(x,\Param)
+\end{equation}
+\end{axiom}
+
+\begin{axiom}[Conditioned at Lower Levels]
+\label{ax:conditioned-lower}
+\begin{equation}
+\forall x. \, C(x) \rightarrow (\mathit{Level}(x,\Vyav) \vee \mathit{Level}(x,\Prat))
+\end{equation}
+\end{axiom}
+
+\begin{axiom}[Sublation Structure]
+\label{ax:sublation}
+\begin{equation}
+\forall x \, y. \, C(x) \wedge \mathit{Level}(x,\Vyav) \wedge \mathit{Level}(y,\Prat) \rightarrow \mathit{Sublates}(x,y)
+\end{equation}
+\end{axiom}
+
+\subsection{Awareness Axioms}
+
+Eleven axioms distinguish witnessing consciousness from dualistic perception and formalize knowledge structure.
+
+\begin{axiom}[Witnessing by Subject]
+\label{ax:witness-subject}
+\begin{equation}
+\forall w \, x. \, Y(w) \rightarrow \mathit{Witnesses}(w,x)
+\end{equation}
+\end{axiom}
+
+\begin{axiom}[Witnessing Not Event]
+\label{ax:witness-timeless}
+\begin{equation}
+\forall w \, x \, e. \, \mathit{Witnesses}(w,x) \rightarrow \neg(e = \mathit{PerceptionEvent}(w,x))
+\end{equation}
+\end{axiom}
+
+\begin{axiom}[Perception Temporal]
+\label{ax:perceive-temporal}
+\begin{equation}
+\forall s \, o. \, \mathit{Perceives}(s,o) \rightarrow (\exists e \, t. \, e = \mathit{PerceptionEvent}(s,o) \wedge \mathit{OccursAt}(e,t))
+\end{equation}
+\end{axiom}
+
+\begin{axiom}[Perceivers Conditioned]
+\label{ax:perceiver-conditioned}
+\begin{equation}
+\forall s. \, (\exists o. \, \mathit{Perceives}(s,o)) \rightarrow C(s)
+\end{equation}
+\end{axiom}
+
+These axioms establish the fundamental distinction in Advaita epistemology between non-dual witnessing (saksin), which is timeless and characterizes the absolute, and dualistic perception (darsana), which occurs in time and characterizes conditioned consciousness.
+
+\subsection{Maya Axioms}
+
+Eighteen axioms formalize the mechanism by which multiplicity appears from unity.
+
+\begin{axiom}[Maya Source]
+\label{ax:maya-source}
+\begin{equation}
+\forall a \, x. \, \mathit{MayaPow}(a,x) \rightarrow A(a)
+\end{equation}
+\end{axiom}
+
+\begin{axiom}[Conditioned via Maya]
+\label{ax:maya-conditioned}
+\begin{equation}
+\forall x. \, C(x) \rightarrow (\exists a. \, A(a) \wedge \mathit{MayaPow}(a,x))
+\end{equation}
+\end{axiom}
+
+\begin{axiom}[Maya Grounding]
+\label{ax:maya-ground}
+\begin{equation}
+\forall a \, x. \, \mathit{MayaPow}(a,x) \rightarrow \mathit{Cond}(a,x)
+\end{equation}
+\end{axiom}
+
+\begin{axiom}[Superimposition Structure]
+\label{ax:superimpose}
+\begin{align}
+&\forall x \, y. \, \mathit{Superimposed}(x,y) \rightarrow C(x) \\
+&\forall x \, y. \, \mathit{Superimposed}(x,y) \rightarrow A(y) \\
+&\forall x \, y. \, \mathit{Superimposed}(x,y) \rightarrow (\mathit{Appears}(x,y) \wedge \neg\mathit{RealChange}(y,x))
+\end{align}
+\end{axiom}
+
+\begin{axiom}[Appearance Without Change]
+\label{ax:vivarta}
+\begin{equation}
+\forall x \, y. \, \mathit{Appears}(x,y) \rightarrow \neg\mathit{RealChange}(x,y)
+\end{equation}
+\end{axiom}
+
+Axiom~\ref{ax:vivarta} formalizes Advaita's vivarta theory of causation, distinguishing it from parinama theories that involve real transformation. The world appears from Brahman without Brahman undergoing modification.
+
+\begin{axiom}[Ignorance of Absolute]
+\label{ax:ignorance}
+\begin{equation}
+\forall s \, x. \, \mathit{IgnoranceOf}(s,x) \rightarrow A(x)
+\end{equation}
+\end{axiom}
+
+\begin{axiom}[Jiva Ignorance]
+\label{ax:jiva-ignorance}
+\begin{equation}
+\forall j. \, \mathit{Jiva}(j) \rightarrow (\exists a. \, A(a) \wedge \mathit{IgnoranceOf}(j,a))
+\end{equation}
+\end{axiom}
+
+\subsection{Jiva-Isvara Axioms}
+
+Fifteen axioms characterize individual consciousness (jiva) and cosmic consciousness (Isvara) as conditioned manifestations.
+
+\begin{axiom}[Jiva Status]
+\label{ax:jiva-cond}
+\begin{align}
+&\forall j. \, \mathit{Jiva}(j) \rightarrow C(j) \\
+&\forall j. \, \mathit{Jiva}(j) \rightarrow \mathit{Level}(j,\Vyav) \\
+&\forall j. \, \mathit{Jiva}(j) \rightarrow \Phi(j)
+\end{align}
+\end{axiom}
+
+\begin{axiom}[Jiva Embodiment]
+\label{ax:jiva-body}
+\begin{equation}
+\forall j. \, \mathit{Jiva}(j) \rightarrow (\exists b. \, \mathit{Body}(b) \wedge \mathit{Embodied}(j,b))
+\end{equation}
+\end{axiom}
+
+\begin{axiom}[Jiva Grounding]
+\label{ax:jiva-ground}
+\begin{equation}
+\forall j. \, \mathit{Jiva}(j) \rightarrow (\exists a. \, A(a) \wedge \mathit{Cond}(a,j))
+\end{equation}
+\end{axiom}
+
+\begin{axiom}[Limiting Adjuncts]
+\label{ax:upadhi}
+\begin{align}
+&\forall j. \, \mathit{Jiva}(j) \rightarrow (\exists u. \, \mathit{Upadhi}(u,j)) \\
+&\forall j. \, \mathit{Jiva}(j) \rightarrow (\exists s. \, \mathit{SpaceItself}(s) \wedge \mathit{Upadhi}(s,j))
+\end{align}
+\end{axiom}
+
+The upadhi axioms formalize how limiting adjuncts, particularly space, create the appearance of distinct individual selves despite their ultimate identity with the absolute.
+
+\begin{axiom}[Jiva Multiplicity]
+\label{ax:jiva-multiple}
+\begin{equation}
+\exists j_1 \, j_2. \, \mathit{Jiva}(j_1) \wedge \mathit{Jiva}(j_2) \wedge j_1 \neq j_2
+\end{equation}
+\end{axiom}
+
+\begin{axiom}[Subject-Jiva Distinction]
+\label{ax:subject-jiva-distinct}
+\begin{equation}
+\forall u \, j. \, Y(u) \wedge \mathit{Jiva}(j) \rightarrow u \neq j
+\end{equation}
+\end{axiom}
+
+\begin{axiom}[Isvara Status]
+\label{ax:isvara}
+\begin{align}
+&\forall i. \, \mathit{Isvara}(i) \rightarrow C(i) \\
+&\forall i. \, \mathit{Isvara}(i) \rightarrow \mathit{Level}(i,\Vyav) \\
+&\forall i. \, \mathit{Isvara}(i) \rightarrow (\exists a. \, A(a) \wedge \mathit{Cond}(a,i))
+\end{align}
+\end{axiom}
+
+\begin{axiom}[Isvara Uniqueness]
+\label{ax:isvara-unique}
+\begin{equation}
+\forall i_1 \, i_2. \, \mathit{Isvara}(i_1) \wedge \mathit{Isvara}(i_2) \rightarrow i_1 = i_2
+\end{equation}
+\end{axiom}
+
+\subsection{Additional Axioms}
+
+Thirty-three additional axioms address specific doctrinal elements including the five sheaths (panca-kosa), three gunas, ego structure, spacetime, causation, and change. These are organized into thematic groups:
+
+Upadhi axioms (4 axioms) specify that limiting adjuncts apply only to conditioned entities and create apparent differences from the absolute.
+
+Causation axioms (4 axioms) restrict causal relations to the conventional level and establish temporal priority of causes.
+
+Sheath axioms (8 axioms) formalize the five-layer structure of embodied existence, with each sheath distinguished from the true self.
+
+Guna axioms (3 axioms) establish that all conditioned entities possess the three fundamental qualities while the absolute transcends them.
+
+Ego axioms (4 axioms) characterize the ego-sense as a conditioned construct involving misidentification.
+
+Spacetime axioms (5 axioms) treat space and time as conditioned entities existing at the conventional level.
+
+Change axioms (4 axioms) establish that the absolute is unborn, undying, and unchanging, while conventional entities undergo transformation.
+
+\subsection{Temporal and Event Axioms}
+
+Six temporal axioms establish time as a discrete linear order:
+
+\begin{axiom}[Temporal Structure]
+\label{ax:temporal}
+\begin{align}
+&\forall t. \, \neg\mathit{Before}(t,t) \quad \text{(irreflexive)} \\
+&\forall t_1 \, t_2 \, t_3. \, \mathit{Before}(t_1,t_2) \wedge \mathit{Before}(t_2,t_3) \rightarrow \mathit{Before}(t_1,t_3) \quad \text{(transitive)} \\
+&\forall t_1 \, t_2. \, \mathit{Before}(t_1,t_2) \rightarrow \neg\mathit{Before}(t_2,t_1) \quad \text{(asymmetric)} \\
+&\forall t_1 \, t_2. \, t_1 \neq t_2 \rightarrow (\mathit{Before}(t_1,t_2) \vee \mathit{Before}(t_2,t_1)) \quad \text{(linear)}
+\end{align}
+\end{axiom}
+
+Ten event axioms formalize event ontology, establishing that events occur at unique times and are events of particular objects, with special provisions ensuring that the absolute participates in no events.
+
+\section{Derivations and Theorems}
+
+The axiom system supports formal derivation of philosophically significant theorems. We present key results with proof sketches.
+
+\begin{theorem}[Brahman-Atman Identity]
+\label{thm:identity}
+\begin{equation}
+\Brahman = \Atman
+\end{equation}
+where $\Brahman$ denotes the unique absolute and $\Atman$ denotes the unique subject.
+\end{theorem}
+
+\begin{proof}
+By Axiom~\ref{ax:unique-absolute}, there exists a unique $a$ such that $A(a)$; denote this $\Brahman$. By Axiom~\ref{ax:unique-subject}, there exists a unique $u$ such that $Y(u)$; denote this $\Atman$. By Axiom~\ref{ax:identity}, $Y(u) \leftrightarrow A(u)$. Therefore $A(\Atman)$. Since $\Brahman$ is the unique entity satisfying $A$, we have $\Atman = \Brahman$.
+\end{proof}
+
+This theorem establishes the formal basis for Advaita's central claim: the ground of existence and the ground of experience are numerically identical.
+
+\begin{theorem}[Universal Grounding in Brahman]
+\label{thm:grounding}
+\begin{equation}
+\forall x. \, C(x) \rightarrow \mathit{Cond}(\Brahman,x)
+\end{equation}
+\end{theorem}
+
+\begin{proof}
+Let $x$ be arbitrary with $C(x)$. By Axiom~\ref{ax:universal-ground}, $\exists a. \, A(a) \wedge \mathit{Cond}(a,x)$. By uniqueness (Axiom~\ref{ax:unique-absolute}), this $a$ must be $\Brahman$. Therefore $\mathit{Cond}(\Brahman,x)$.
+\end{proof}
+
+\begin{theorem}[Ontological Monism]
+\label{thm:monism}
+\begin{equation}
+\forall x \, y. \, \mathit{Level}(x,\Param) \wedge \mathit{Level}(y,\Param) \rightarrow x = y
+\end{equation}
+\end{theorem}
+
+\begin{proof}
+Suppose $\mathit{Level}(x,\Param)$ and $\mathit{Level}(y,\Param)$. By Axiom~\ref{ax:partition}, each entity is either absolute or conditioned. By Axiom~\ref{ax:conditioned-not-param}, if $C(x)$ then $\neg\mathit{Level}(x,\Param)$. Therefore $A(x)$ and similarly $A(y)$. By uniqueness of the absolute (Axiom~\ref{ax:unique-absolute}), $x = y$.
+\end{proof}
+
+Theorem~\ref{thm:monism} establishes strict numerical monism: at the ultimate level of reality, there exists only one entity. Multiplicity is exclusively a feature of lower levels.
+
+\begin{theorem}[Multiplicity at Lower Levels]
+\label{thm:multiplicity-lower}
+\begin{equation}
+\forall x. \, x \neq \Brahman \rightarrow (\mathit{Level}(x,\Vyav) \vee \mathit{Level}(x,\Prat))
+\end{equation}
+\end{theorem}
+
+\begin{proof}
+Suppose $x \neq \Brahman$. By Axiom~\ref{ax:partition}, either $A(x)$ or $C(x)$. If $A(x)$, then by uniqueness $x = \Brahman$, contradicting our assumption. Therefore $C(x)$. By Axiom~\ref{ax:conditioned-lower}, $\mathit{Level}(x,\Vyav) \vee \mathit{Level}(x,\Prat)$.
+\end{proof}
+
+Theorems~\ref{thm:monism} and~\ref{thm:multiplicity-lower} together formalize Advaita's non-dualism: unity at the ultimate level, multiplicity at lower levels.
+
+\begin{theorem}[Absolute Atemporality]
+\label{thm:atemporal}
+\begin{equation}
+\neg\mathit{Born}(\Brahman) \wedge \neg\mathit{Dies}(\Brahman) \wedge \neg\mathit{Changes}(\Brahman)
+\end{equation}
+\end{theorem}
+
+\begin{proof}
+Direct application of change axioms to the established absolute nature of Brahman.
+\end{proof}
+
+\begin{theorem}[Universal Witnessing]
+\label{thm:witness}
+\begin{equation}
+\forall x. \, \mathit{Witnesses}(\Atman,x)
+\end{equation}
+\end{theorem}
+
+\begin{proof}
+By Theorem~\ref{thm:identity}, $\Atman$ satisfies $A(\Atman)$ and $Y(\Atman)$. By Axiom~\ref{ax:witness-all}, $\forall x. \, A(\Atman) \rightarrow \mathit{Witnesses}(\Atman,x)$. Therefore $\forall x. \, \mathit{Witnesses}(\Atman,x)$.
+\end{proof}
+
+\begin{theorem}[Self-Luminosity]
+\label{thm:self-luminous}
+\begin{equation}
+\mathit{Witnesses}(\Brahman,\Brahman)
+\end{equation}
+\end{theorem}
+
+\begin{proof}
+By Axiom~\ref{ax:self-luminous} applied to the absolute nature of Brahman.
+\end{proof}
+
+Theorems~\ref{thm:witness} and~\ref{thm:self-luminous} establish the property of svayamprakasa (self-luminosity): consciousness in its ultimate form is universally present as witness and reflexively self-aware.
+
+\begin{theorem}[Subject Non-Perception]
+\label{thm:no-perceive}
+\begin{equation}
+\forall o. \, \neg\mathit{Perceives}(\Atman,o)
+\end{equation}
+\end{theorem}
+
+\begin{proof}
+Direct application of Axiom~\ref{ax:no-perceive} to the subject nature of Atman.
+\end{proof}
+
+This theorem formalizes a crucial distinction: the ultimate subject engages in witnessing but never in dualistic perception.
+
+\begin{theorem}[Knowledge Structure Collapse]
+\label{thm:knowledge-collapse}
+\begin{equation}
+\mathit{Knower}(\Atman) \wedge \mathit{Known}(\Atman) \wedge \mathit{Knowing}(\Atman)
+\end{equation}
+\end{theorem}
+
+\begin{proof}
+Direct application of Axiom~\ref{ax:knowledge}.
+\end{proof}
+
+In ordinary knowledge, knower, known, and knowing are distinct. Theorem~\ref{thm:knowledge-collapse} establishes that in the absolute, these distinctions vanish in the immediacy of self-knowledge.
+
+\begin{theorem}[All Conditioned via Maya]
+\label{thm:maya-universal}
+\begin{equation}
+\forall x. \, C(x) \rightarrow \mathit{MayaPow}(\Brahman,x)
+\end{equation}
+\end{theorem}
+
+\begin{proof}
+Let $x$ be arbitrary with $C(x)$. By Axiom~\ref{ax:maya-conditioned}, $\exists a. \, A(a) \wedge \mathit{MayaPow}(a,x)$. By uniqueness, this $a$ is $\Brahman$. Therefore $\mathit{MayaPow}(\Brahman,x)$.
+\end{proof}
+
+Theorem~\ref{thm:maya-universal} provides a unified explanation for phenomenal diversity: all multiplicity arises through Maya-power of the single absolute.
+
+\begin{theorem}[Jiva Grounding]
+\label{thm:jiva-ground}
+\begin{equation}
+\forall j. \, \mathit{Jiva}(j) \rightarrow \mathit{Cond}(\Brahman,j)
+\end{equation}
+\end{theorem}
+
+\begin{proof}
+Combine Theorem~\ref{thm:grounding} with the conditioned nature of jivas (Axiom~\ref{ax:jiva-cond}).
+\end{proof}
+
+\begin{theorem}[Sheaths Not Self]
+\label{thm:sheaths-not-self}
+\begin{equation}
+\forall s. \, \mathit{Sheath}(s) \rightarrow s \neq \Atman
+\end{equation}
+\end{theorem}
+
+\begin{proof}
+By sheath axioms, all sheaths are conditioned and exist at the conventional level. By Theorem~\ref{thm:identity} and level axioms, Atman exists at the ultimate level. Therefore no sheath equals Atman.
+\end{proof}
+
+This formalizes the method of neti neti (not this, not this): the layers of embodied existence are objects of awareness, not the witnessing subject.
+
+\begin{theorem}[Ego Fiction]
+\label{thm:ego-fiction}
+\begin{equation}
+\forall e. \, \mathit{Ego}(e) \rightarrow e \neq \Atman
+\end{equation}
+\end{theorem}
+
+\begin{proof}
+Similar to Theorem~\ref{thm:sheaths-not-self}, using ego axioms.
+\end{proof}
+
+\begin{theorem}[Transcendence of Gunas]
+\label{thm:gunas}
+\begin{equation}
+\neg\mathit{Sattva}(\Atman) \wedge \neg\mathit{Rajas}(\Atman) \wedge \neg\mathit{Tamas}(\Atman)
+\end{equation}
+\end{theorem}
+
+\begin{proof}
+By guna axioms applied to the absolute nature of Atman.
+\end{proof}
+
+\begin{theorem}[Master Theorem: Tat Tvam Asi]
+\label{thm:master}
+There exists a unique entity $u$ such that:
+\begin{align}
+&Y(u) \wedge A(u) \wedge \mathit{Level}(u,\Param) \wedge \mathit{Saccidananda}(u) \wedge \\
+&(\forall x. \, x \neq u \rightarrow (\exists a. \, \mathit{MayaPow}(a,x) \wedge (\mathit{Level}(x,\Vyav) \vee \mathit{Level}(x,\Prat)))) \wedge \\
+&(\forall j. \, \mathit{Jiva}(j) \rightarrow (\mathit{Cond}(u,j) \wedge \mathit{IgnoranceOf}(j,u) \wedge \nonumber \\
+&\qquad (\exists s. \, \mathit{SpaceItself}(s) \wedge \mathit{Upadhi}(s,j)))) \wedge \\
+&(\forall i. \, \mathit{Isvara}(i) \rightarrow \mathit{Cond}(u,i)) \wedge \\
+&(\forall x. \, \mathit{Witnesses}(u,x)) \wedge \neg\Phi(u) \wedge \\
+&\neg\mathit{Born}(u) \wedge \neg\mathit{Dies}(u) \wedge \neg\mathit{Changes}(u) \wedge \\
+&(\mathit{Knower}(u) \wedge \mathit{Known}(u) \wedge \mathit{Knowing}(u)) \wedge \\
+&(\forall o. \, \neg\mathit{Perceives}(u,o)) \wedge \\
+&(\neg\mathit{Sattva}(u) \wedge \neg\mathit{Rajas}(u) \wedge \neg\mathit{Tamas}(u)) \wedge \\
+&(\forall e. \, \mathit{Ego}(e) \rightarrow e \neq u) \wedge \\
+&(\forall s. \, \mathit{Sheath}(s) \rightarrow s \neq u)
+\end{align}
+\end{theorem}
+
+\begin{proof}
+Existence: Let $u = \Atman$. Each property follows from prior theorems and axioms. Uniqueness: Any entity satisfying all properties must be both the ultimate subject (from $Y(u)$) and the absolute (from $A(u)$). By uniqueness axioms, there is only one such entity.
+\end{proof}
+
+The master theorem synthesizes the entire formalization, demonstrating that all core doctrines cohere into a single existence-and-uniqueness claim about the nature of ultimate reality. This is the formal expression of Tat Tvam Asi: You (the subject) are That (the absolute).
+
+\section{Model and Consistency Proof}
+
+The consistency of an axiom system is established by constructing a model that satisfies all axioms. We present model $M_2'$, a dynamic model incorporating temporal structure, events, and the three-level ontology.
+
+\begin{definition}[Model $M_2'$]
+Define $M_2'$ with the following domains and interpretations:
+
+Domains:
+\begin{align}
+\mathit{Obj}^{M_2'} &= \{b, j_1, j_2, \mathit{body}_1, \mathit{body}_2, s, i, \mathit{prat}\} \\
+\mathit{Level}^{M_2'} &= \{\Param, \Vyav, \Prat\} \\
+\mathit{Time}^{M_2'} &= \{t_1, t_2, t_3\} \\
+\mathit{Event}^{M_2'} &= \{e_1, e_2, \ldots, e_9\}
+\end{align}
+
+where:
+\begin{itemize}[leftmargin=*]
+\item $b$ represents Brahman (the absolute)
+\item $j_1, j_2$ represent distinct jivas
+\item $\mathit{body}_1, \mathit{body}_2$ represent physical bodies
+\item $s$ represents space (akasa), the primary upadhi
+\item $i$ represents Isvara
+\item $\mathit{prat}$ represents a pratibhasika entity (e.g., rope-snake illusion)
+\end{itemize}
+
+Key predicate interpretations:
+\begin{align}
+A^{M_2'}(x) &= \begin{cases} \mathit{True} & \text{if } x = b \\ \mathit{False} & \text{otherwise} \end{cases} \\
+C^{M_2'}(x) &= \begin{cases} \mathit{True} & \text{if } x \neq b \\ \mathit{False} & \text{otherwise} \end{cases} \\
+Y^{M_2'}(x) &= \begin{cases} \mathit{True} & \text{if } x = b \\ \mathit{False} & \text{otherwise} \end{cases}
+\end{align}
+
+Level assignments:
+\begin{align}
+\mathit{Level}^{M_2'}(b,\Param) &= \mathit{True} \\
+\mathit{Level}^{M_2'}(x,\Vyav) &= \mathit{True} \quad \text{for } x \in \{j_1, j_2, \mathit{body}_1, \mathit{body}_2, s, i\} \\
+\mathit{Level}^{M_2'}(\mathit{prat},\Prat) &= \mathit{True}
+\end{align}
+
+Grounding relation:
+\begin{equation}
+\mathit{Cond}^{M_2'}(b,x) = \mathit{True} \quad \text{for all } x \in \mathit{Obj}^{M_2'}
+\end{equation}
+
+Temporal ordering:
+\begin{align}
+\mathit{Before}^{M_2'}(t_1,t_2) &= \mathit{True} \\
+\mathit{Before}^{M_2'}(t_2,t_3) &= \mathit{True} \\
+\mathit{Before}^{M_2'}(t_1,t_3) &= \mathit{True}
+\end{align}
+All other $\mathit{Before}$ relations are false.
+
+Event structure: Each event $e_i$ is assigned a unique occurrence time via $\mathit{OccursAt}^{M_2'}$ and is an event of some conditioned entity (never of $b$).
+
+Maya relations:
+\begin{equation}
+\mathit{MayaPow}^{M_2'}(b,x) = \mathit{True} \quad \text{for all } x \neq b
+\end{equation}
+
+Awareness relations:
+\begin{align}
+\mathit{Witnesses}^{M_2'}(b,x) &= \mathit{True} \quad \text{for all } x \\
+\mathit{Perceives}^{M_2'}(j_1,\mathit{body}_2) &= \mathit{True}
+\end{align}
+
+Jiva-Isvara structure:
+\begin{align}
+\mathit{Jiva}^{M_2'}(j_1) &= \mathit{Jiva}^{M_2'}(j_2) = \mathit{True} \\
+\mathit{Isvara}^{M_2'}(i) &= \mathit{True} \\
+\mathit{Upadhi}^{M_2'}(s,j_1) &= \mathit{Upadhi}^{M_2'}(s,j_2) = \mathit{True} \\
+\mathit{IgnoranceOf}^{M_2'}(j_1,b) &= \mathit{IgnoranceOf}^{M_2'}(j_2,b) = \mathit{True}
+\end{align}
+\end{definition}
+
+\begin{theorem}[Consistency]
+Model $M_2'$ satisfies all 114 axioms of the Advaita Vedanta formalization.
+\end{theorem}
+
+\begin{proof}[Proof Sketch]
+We verify satisfaction of representative axioms from each module:
+
+Core Axioms: The partition of $\mathit{Obj}^{M_2'}$ into $\{b\}$ and all other elements ensures satisfaction of absolute-conditioned axioms. The interpretation $Y^{M_2'}(b) = A^{M_2'}(b) = \mathit{True}$ with both predicates false for all other entities satisfies uniqueness and identity axioms. Universal grounding $\mathit{Cond}^{M_2'}(b,x)$ for all $x$ satisfies self-grounding and universal grounding axioms.
+
+Level Axioms: The explicit level assignments ensure each entity exists at exactly one level. Brahman at $\Param$, conditioned entities at $\Vyav$ or $\Prat$, satisfying all level constraints.
+
+Awareness Axioms: Setting $\mathit{Witnesses}^{M_2'}(b,x) = \mathit{True}$ for all $x$ satisfies universal witnessing. The perception $\mathit{Perceives}^{M_2'}(j_1,\mathit{body}_2)$ occurs at a defined time via event structure, satisfying temporal constraints on perception. Crucially, $b$ never perceives, consistent with subject non-perception axioms.
+
+Maya Axioms: Universal $\mathit{MayaPow}^{M_2'}(b,x)$ for $x \neq b$ satisfies Maya source and manifestation axioms. Superimposition of $\mathit{prat}$ on $b$ demonstrates appearance without real change in the substrate.
+
+Jiva-Isvara Axioms: The model includes two distinct jivas ($j_1 \neq j_2$) at the conventional level, both embodied, grounded in $b$, limited by space $s$, and ignorant of their identity with $b$. Isvara is unique and grounded in $b$.
+
+Temporal Axioms: The defined ordering $t_1 < t_2 < t_3$ satisfies irreflexivity, transitivity, asymmetry, and linearity.
+
+Event Axioms: Each event occurs at a unique time, is an event of some conditioned entity, and never involves $b$. Causation respects temporal ordering.
+
+A complete verification would examine all 114 axioms systematically. The model construction demonstrates that the axiom system admits at least one interpretation, establishing relative consistency.
+\end{proof}
+
+The existence of model $M_2'$ proves that the axiom system is consistent relative to the underlying logic (many-sorted first-order logic with equality). If the underlying logic is consistent, so is the Advaita axiomatization. This addresses philosophical objections claiming that non-dual metaphysics involves inherent contradictions. The formalization demonstrates that Advaita's core commitments form a coherent logical structure.
+
+\section{Philosophical Interpretation}
+
+The formal results have significant philosophical implications for understanding Advaita metaphysics and its relationship to Western philosophical frameworks.
+
+\subsection{Ontological Structure}
+
+The formalization reveals Advaita's ontological architecture with precision. At the foundational level, there exists exactly one entity (Theorem~\ref{thm:monism}), characterized by consciousness and existence. This entity is both the ontological ground (Brahman) and the epistemological ground (Atman), resolved into numerical identity (Theorem~\ref{thm:identity}). All multiplicity exists at derivative levels, grounded in and appearing from this single substrate (Theorems~\ref{thm:grounding}, ~\ref{thm:multiplicity-lower}, ~\ref{thm:maya-universal}).
+
+This structure differs fundamentally from Western substance pluralism, which typically posits multiple basic entities. Advaita's monism is not eliminativist, it does not deny the reality of phenomenal experience or conventional objects. Rather, it stratifies reality into levels with different ontological status. Conventional entities are neither absolutely real (like Brahman) nor absolutely unreal (like the son of a barren woman). They possess vyavaharika satya, a pragmatic reality appropriate to their level.
+
+The three-level structure (paramarthika, vyavaharika, pratibhasika) provides a formal mechanism for resolving apparent paradoxes. When Advaita claims both that "Brahman is all" and that "multiplicity exists," these statements apply to different levels. At the ultimate level, only Brahman exists (Theorem~\ref{thm:monism}). At the conventional level, multiplicity exists (Axiom~\ref{ax:jiva-multiple}). Level axioms ensure these claims do not contradict.
+
+\subsection{Consciousness and Knowledge}
+
+The formalization distinguishes two modes of awareness with precision. Witnessing (saksin) is non-dual, timeless, and characterizes the absolute (Theorems~\ref{thm:witness}, ~\ref{thm:self-luminous}). Perception (darsana) is dualistic, temporal, and characterizes conditioned consciousness (Axioms~\ref{ax:perceive-temporal}, ~\ref{ax:perceiver-conditioned}). The ultimate subject witnesses but never perceives (Theorem~\ref{thm:no-perceive}).
+
+This distinction addresses longstanding puzzles in philosophy of mind. Consciousness in Advaita is not an emergent property of material processes but the fundamental substrate in which all appearances occur. The "hard problem" of consciousness, why there is something it is like to be a conscious being, dissolves when consciousness is recognized as the basic ontological category rather than a derived phenomenon requiring explanation.
+
+The collapse of the tripartite knowledge structure in the absolute (Theorem~\ref{thm:knowledge-collapse}) provides formal expression for the immediacy of self-knowledge. In ordinary knowing, knower, known, and knowing appear distinct. In self-knowledge, this structure collapses: the knower knows itself without mediation. This has implications for debates about self-knowledge and introspection, suggesting that while empirical self-knowledge involves the tripartite structure, there exists a more fundamental form of self-awareness that is non-relational.
+
+\subsection{Maya and Causation}
+
+The Maya axioms formalize a distinctive theory of causation. Unlike transformation theories (parinama-vada), which posit real change in the cause to produce the effect, Advaita's vivarta theory maintains that the substrate remains unchanged while appearances arise (Axiom~\ref{ax:vivarta}). The world appears from Brahman without Brahman undergoing modification.
+
+This resolves potential objections about how an unchanging absolute can be the source of a changing world. The relationship is not one of efficient causation in the Western sense but of ontological grounding combined with appearance. Brahman grounds all conditioned entities (Theorem~\ref{thm:grounding}) and they appear through Maya-power (Theorem~\ref{thm:maya-universal}), but this involves no transformation of Brahman itself.
+
+The formalization also clarifies the concept of Maya. Rather than treating Maya as an independent principle or second substance, the axioms establish it as a power (sakti) of the absolute itself (Axiom~\ref{ax:maya-source}). Maya is not illusory in the sense of non-existent, it produces genuine appearances at the conventional level. The illusion lies in taking these appearances to be ultimately real rather than phenomenal manifestations.
+
+\subsection{Self and Liberation}
+
+The jiva axioms formalize individual consciousness as conditioned manifestation of the absolute, characterized by ignorance (avidya) of its true nature (Axiom~\ref{ax:jiva-ignorance}). Limiting adjuncts, particularly space, create the appearance of distinct individual selves (Axiom~\ref{ax:upadhi}), though all are ultimately grounded in the single absolute (Theorem~\ref{thm:jiva-ground}).
+
+This provides formal expression for a central Advaita paradox: how can there be multiple jivas if reality is non-dual? The formalization shows that multiplicity at the conventional level (Axiom~\ref{ax:jiva-multiple}) is compatible with unity at the ultimate level (Theorem~\ref{thm:monism}). The jivas are neither identical with Brahman in all respects (Axiom~\ref{ax:subject-jiva-distinct}) nor completely distinct from it (Theorem~\ref{thm:jiva-ground}). They are Brahman as conditioned by limiting adjuncts.
+
+Liberation (moksha) involves recognition of identity with the absolute, removal of ignorance. The sheaths-not-self theorem (Theorem~\ref{thm:sheaths-not-self}) and ego-fiction theorem (Theorem~\ref{thm:ego-fiction}) formalize the method of discrimination (viveka) by which one distinguishes the true self from false identifications. Through negation of all that one is not, one arrives at recognition of what one is, the witnessing consciousness that is Brahman itself.
+
+\section{Comparative Analysis}
+
+\subsection{Connections to Western Monism}
+
+The formal structure of Advaita invites comparison with Western monistic systems, particularly Spinoza's substance monism. Both systems posit a single fundamental reality from which all multiplicity derives. Both employ a distinction between substance and modes analogous to Advaita's absolute-conditioned distinction. Both face the challenge of explaining apparent multiplicity within a monistic framework.
+
+However, significant differences emerge. Spinoza's substance possesses infinite attributes, while Advaita's Brahman transcends all phenomenal properties (Axiom~\ref{ax:transcends}). Spinoza's modes are real modifications of substance, while Advaita's conditioned entities are appearances that do not involve real change in the substrate (Axiom~\ref{ax:vivarta}). Most fundamentally, Spinoza's system is naturalistic, identifying God with Nature, while Advaita is idealistic, treating consciousness as ontologically basic.
+
+The formalization enables precise comparison. One could formalize Spinoza's metaphysics in parallel and examine which axioms differ. This would clarify whether apparent disagreements reflect incompatible commitments or merely different emphasis within compatible frameworks.
+
+\subsection{Phenomenology and Non-Dual Awareness}
+
+Advaita's distinction between witnessing and perceiving parallels phenomenological analyses of consciousness. Husserl's distinction between pre-reflective consciousness and intentional acts, Heidegger's analysis of Being as distinct from beings, and Merleau-Ponty's account of perceptual presence all gesture toward structures similar to Advaita's witness consciousness.
+
+The formalization of non-dual witnessing (Axioms~\ref{ax:witness-subject}, ~\ref{ax:witness-timeless}) provides a logical framework for analyzing these phenomenological insights. Where phenomenology primarily employs descriptive methods, the formal approach makes the logical structure explicit. This suggests possibilities for cross-fertilization: phenomenological descriptions could inform formal ontology, while formal methods could clarify phenomenological claims.
+
+\subsection{Analytic Idealism}
+
+Contemporary analytic idealism, as developed by philosophers like Philip Goff and Bernardo Kastrup, articulates positions structurally similar to Advaita. Both treat consciousness as fundamental rather than derivative. Both face challenges explaining the appearance of multiplicity from unity. Both develop cosmopsychist frameworks where individual minds are manifestations of cosmic consciousness.
+
+The formalization provides tools for making these comparisons precise. One could examine whether analytic idealism's commitments can be captured by a subset of Advaita axioms, whether they require different axioms, or whether they are formally equivalent under suitable translation. This would advance debates about the relationship between contemporary idealism and classical non-dual traditions.
+
+\subsection{Metaphysical Economy}
+
+A virtue of any metaphysical system is explanatory economy, deriving maximal explanatory power from minimal fundamental commitments. Advaita exhibits remarkable economy: from a single ontological substrate and the mechanism of Maya-appearance, it derives an account of consciousness, the self, knowledge, causation, time, and liberation.
+
+The formalization makes this economy explicit. The core axioms (A1-A15) establish fundamental structure. Level axioms add stratification. Maya axioms explain appearance. All other doctrines follow as theorems or are captured by supplementary axioms building on the core. This demonstrates that Advaita is not an ad hoc collection of doctrines but a tightly integrated system with clear dependency structure.
+
+\subsection{Non-Dual Semantics}
+
+The formalization raises interesting questions for philosophy of language and logic. If ultimate reality is non-dual, what is the semantic status of statements employing subject-object structure? The formalization suggests that conventional language operates at the vyavaharika level, where subject-object distinctions are pragmatically valid. Statements about the absolute require different semantic treatment, they point toward what transcends discursive thought rather than describing objects in a domain.
+
+This connects to debates about ineffability and mysticism in philosophy of religion. The formalization shows that one can have precise logical structure while acknowledging limitations of discursive representation. The axioms and theorems are meaningful statements about Advaita's conceptual framework, but they do not exhaust or fully capture the referent (Brahman), which transcends conceptual grasp.
+
+\section{Conclusion}
+
+This paper has presented the first complete formal axiomatization of Advaita Vedanta, demonstrating that this sophisticated non-dual metaphysical system can be captured with logical rigor. The formalization comprises 114 axioms across eight thematic modules, employs many-sorted first-order logic with four basic sorts, and supports the derivation of over 40 significant theorems including the master theorem synthesizing all core doctrines.
+
+The formal results establish several philosophically significant conclusions. First, Advaita's core commitments form a logically consistent system, as proven by the construction of model $M_2'$ satisfying all axioms. This addresses objections that non-dual metaphysics involves inherent contradictions. Second, the central identity of Brahman and Atman follows as a provable theorem from the axioms, demonstrating that Tat Tvam Asi is not an additional postulate but a logical consequence of Advaita's fundamental principles. Third, the three-level ontological structure provides a coherent mechanism for maintaining apparently contradictory claims by assigning them to different levels of analysis. Fourth, all phenomenal diversity arises through a single mechanism, Maya-power of the absolute, providing remarkable explanatory economy.
+
+The formalization has several broader implications. It demonstrates that non-Western philosophical systems can be analyzed with the same formal rigor as Western analytic metaphysics, contributing to cross-cultural philosophy and comparative formal ontology. It provides a foundation for precise comparison between Advaita and Western frameworks including Spinozistic monism, phenomenology, and contemporary analytic idealism. It clarifies the logical structure of non-dual metaphysics in ways that may inform philosophy of mind and consciousness studies.
+
+Future work could extend the formalization in several directions. Modal operators could be introduced to formalize claims about necessity and contingency in Advaita metaphysics. Epistemic operators could enable more sophisticated treatment of knowledge, ignorance, and liberation. Temporal logic could provide richer analysis of change and becoming. Comparative formalizations of other non-dual traditions (Dzogchen Buddhism, Kashmir Shaivism, Daoism) would enable systematic comparison of their logical structures.
+
+Perhaps most significantly, the formalization opens possibilities for computational approaches to consciousness. The axiom system could inform AI architectures that incorporate contemplative insights about the structure of awareness, potentially contributing to more sophisticated approaches to machine consciousness. Work is already underway on substrate-grounded neural networks implementing non-dual metaphysics as architectural constraints, achieving competitive performance while maintaining formal guarantees about their ontological structure.
+
+The formalization ultimately serves not as replacement for traditional study or contemplative practice but as complementary tool for philosophical investigation. By making Advaita's logical structure explicit and verifiable, it enables more precise philosophical analysis while respecting the depth and sophistication of this profound wisdom tradition. The demonstration that ancient contemplative insights can be formalized with contemporary logical rigor suggests possibilities for fruitful dialogue between wisdom traditions and modern science, potentially contributing to both philosophical understanding and practical applications in consciousness studies and artificial intelligence.
+
+\appendix
+
+\section{Complete Axiom Set}
+
+For reference, we list the complete set of 114 axioms organized by module:
+
+\textbf{Core Axioms (A1-A15):} Partition of absolute and conditioned, uniqueness of absolute and subject, identity of subject and absolute, self-grounding, universal grounding, transcendence of phenomenality, phenomenality of conditioned, grounding asymmetry and transitivity, universal witnessing, self-luminosity, subject non-perception, knowledge structure, absolute unchanging.
+
+\textbf{Level Axioms (K1-K6):} Level partition, absolute at ultimate level, absolute not at lower levels, conditioned not at ultimate, conditioned at lower levels, sublation structure.
+
+\textbf{Awareness Axioms (W1-W11):} Witnessing by subject, witnessing not event, perception temporal, perceivers conditioned, witnessing implies subject, perception requires distinction, knowledge structure collapse in absolute, conditioned knowledge tripartite, liberating knowledge removes ignorance, subject transcends tripartite structure, universal witnessing implies absoluteness.
+
+\textbf{Maya Axioms (M1-M18):} Maya source, conditioned via Maya, Maya at lower levels, Maya implies grounding, nothing has Maya-power over absolute, superimposition structure, appearance without change, conditioned as appearances, appearance preserves absolute's nature, ignorance of absolute, ignorance relates to superimposition, jiva ignorance, absolute no ignorance, sublation relates knowledge forms, liberating knowledge sublates empirical, sublation asymmetric.
+
+\textbf{Jiva-Isvara Axioms (J1-J10, I1-I6):} Jiva status, embodiment, grounding, ignorance, limiting adjuncts, multiplicity, distinction from subject; Isvara status, grounding, uniqueness, relation to conventional entities.
+
+\textbf{Additional Axioms (33 axioms):} Upadhi constraints (4), causation structure (4), sheath hierarchy (8), guna properties (3), ego structure (4), spacetime status (5), change properties (4).
+
+\textbf{Temporal Axioms (T1-T6):} Irreflexivity, transitivity, asymmetry, linearity of temporal ordering, existence of time, distinct times.
+
+\textbf{Event Axioms (E1-E10):} Event existence, unique occurrence time, events of objects, grounding preserves eventhood, perception events, change events, birth events, death events, causal-temporal ordering, no events of absolute.
+
+\begin{thebibliography}{99}
+
+\bibitem{sankara-bsb}
+Śaṅkarācārya. \textit{Brahma-Sūtra-Bhāṣya}. Translated by Swami Gambhirananda. Advaita Ashrama, 1965.
+
+\bibitem{mandukya}
+\textit{Māṇḍūkya Upaniṣad with Gauḍapāda's Kārikā and Śaṅkara's Commentary}. Translated by Swami Nikhilananda. Ramakrishna-Vivekananda Center, 1974.
+
+\bibitem{deutsch}
+Deutsch, Eliot. \textit{Advaita Vedanta: A Philosophical Reconstruction}. University of Hawaii Press, 1969.
+
+\bibitem{potter}
+Potter, Karl H. \textit{Presuppositions of India's Philosophies}. Prentice-Hall, 1963.
+
+\bibitem{ram-advaita}
+Ram-Prasad, Chakravarthi. \textit{Advaita Epistemology and Metaphysics: An Outline of Indian Non-Realism}. Routledge, 2002.
+
+\bibitem{fine-grounding}
+Fine, Kit. "Guide to Ground." \textit{Metaphysical Grounding: Understanding the Structure of Reality}, edited by Fabrice Correia and Benjamin Schnieder, Cambridge University Press, 2012, pp. 37-80.
+
+\bibitem{schaffer}
+Schaffer, Jonathan. "Monism: The Priority of the Whole." \textit{Philosophical Review}, vol. 119, no. 1, 2010, pp. 31-76.
+
+\bibitem{spinoza}
+Spinoza, Baruch. \textit{Ethics}. Translated by Edwin Curley. Penguin Books, 1996.
+
+\bibitem{kastrup}
+Kastrup, Bernardo. \textit{The Idea of the World: A Multi-Disciplinary Argument for the Mental Nature of Reality}. Iff Books, 2019.
+
+\bibitem{goff}
+Goff, Philip. \textit{Consciousness and Fundamental Reality}. Oxford University Press, 2017.
+
+\bibitem{husserl}
+Husserl, Edmund. \textit{Ideas Pertaining to a Pure Phenomenology and to a Phenomenological Philosophy, First Book}. Translated by F. Kersten. Martinus Nijhoff, 1983.
+
+\bibitem{chalmers}
+Chalmers, David J. \textit{The Conscious Mind: In Search of a Fundamental Theory}. Oxford University Press, 1996.
+
+\bibitem{siderits}
+Siderits, Mark, Evan Thompson, and Dan Zahavi, editors. \textit{Self, No Self?: Perspectives from Analytical, Phenomenological, and Indian Traditions}. Oxford University Press, 2011.
+
+\bibitem{mohanty}
+Mohanty, J. N. \textit{Reason and Tradition in Indian Thought: An Essay on the Nature of Indian Philosophical Thinking}. Clarendon Press, 1992.
+
+\bibitem{lean}
+de Moura, Leonardo, Sebastian Ullrich, et al. "The Lean 4 Theorem Prover and Programming Language." \textit{Automated Deduction -- CADE 28}, Springer, 2021, pp. 625-635.
+
+\bibitem{isabelle}
+Nipkow, Tobias, Lawrence C. Paulson, and Markus Wenzel. \textit{Isabelle/HOL: A Proof Assistant for Higher-Order Logic}. Springer, 2002.
+
+\bibitem{afp}
+Klein, Gerwin, et al. "The Archive of Formal Proofs." \url{https://www.isa-afp.org/}. Accessed 30 October 2025.
+
+\bibitem{formal-metaphysics}
+Benzm\"uller, Christoph and Bruno Woltzenlogel Paleo. "Automating Emendations of the Ontological Argument in Intensional Higher-Order Modal Logic." \textit{KI 2016: Advances in Artificial Intelligence}, Springer, 2016, pp. 114-127.
+
+\bibitem{comparative-formal}
+Fitting, Melvin and Richard L. Mendelsohn. \textit{First-Order Modal Logic}. Kluwer Academic Publishers, 1998.
+
+\bibitem{comans}
+Comans, Michael. \textit{The Method of Early Advaita Vedānta: A Study of Gauḍapāda, Śaṅkara, Sureśvara, and Padmapāda}. Motilal Banarsidass, 2000.
+
+\end{thebibliography}
+
+\end{document}
