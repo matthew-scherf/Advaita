@@ -8,16 +8,6 @@ Advaita Vedanta, one of the central schools of Hindu philosophy, proposes a non-
 
 The formalization proves 40+ theorems, culminating in a master theorem that establishes the consistency and logical sufficiency of the Tat Tvam Asi doctrine, the fundamental claim that individual subjectivity and ultimate reality are identical.
 
-## Technical Specifications
-
-| Property | Value |
-|----------|-------|
-| Lean Version | 4.16.0 |
-| Total Axioms | 114 |
-| Proven Theorems | 40+ |
-| Lines of Code | ~1500 |
-| Verification Status | Complete |
-
 ## Philosophical Foundations
 
 Advaita Vedanta addresses the apparent contradiction between phenomenal multiplicity and metaphysical unity through a doctrine of levels of reality. The system distinguishes three epistemic-ontological levels:
