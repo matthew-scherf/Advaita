@@ -4,7 +4,7 @@ This guide helps you get the Advaita Vedanta formalization running on your syste
 
 ## Prerequisites
 
-Install Lean 4.16.0 following the instructions at https://leanprover.github.io/lean4/doc/setup.html
+Install Lean 4.24.0 following the instructions at https://leanprover.github.io/lean4/doc/setup.html
 
 The recommended installation method uses elan, the Lean version manager:
 
@@ -25,7 +25,7 @@ Expected output: Lean (version 4.16.0, ...)
 Clone the repository:
 
 ```bash
-git clone https://github.com/[username]/advaita-vedanta-lean.git
+git clone https://github.com/matthew-scherf/advaita.git
 cd advaita-vedanta-lean
 ```
 
@@ -52,7 +52,7 @@ lake exe advaita
 Expected output:
 
 ```
-Advaita Vedanta Formal Axiomatization v4.5
+Advaita Vedanta Formal Axiomatization 
 ==========================================
 
 Status: All axioms and theorems type-checked ✓
@@ -108,22 +108,4 @@ Solution: The project requires Lean 4.16.0 specifically. Check your version with
 Issue: Compilation errors in axiom files
 Solution: Ensure you have the exact version of Lean specified in lean-toolchain. Different Lean versions may have incompatible syntax or library changes.
 
-## Next Steps
 
-After successfully building the project:
-
-Study specific modules: Examine axiom groups that interest you (e.g., Maya, consciousness, levels of reality).
-
-Explore proofs: Open Theorems.lean and step through proofs interactively to understand how theorems are derived.
-
-Extend the formalization: Consider proving additional theorems or formalizing related doctrines. See CONTRIBUTING.md for guidelines.
-
-Compare with texts: Read classical Advaita texts alongside the formalization to see how traditional doctrine translates to formal logic.
-
-## Getting Help
-
-For technical issues with Lean or Lake, consult the Lean community forum: https://leanprover.zulipchat.com/
-
-For questions about the formalization's philosophical approach, open an issue on the GitHub repository.
-
-For discussion of Advaita doctrine itself, consult scholarly resources or traditional teaching lineages rather than the formalization alone.
