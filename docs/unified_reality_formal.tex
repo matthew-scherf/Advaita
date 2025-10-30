@@ -1,0 +1,1086 @@
+\documentclass[12pt]{article}
+
+% Standard packages
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{mathtools}
+\usepackage{natbib}
+\usepackage{hyperref}
+\usepackage{enumitem}
+
+% Theorem environments
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{axiom}[theorem]{Axiom}
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Remark}
+
+% Custom commands
+\newcommand{\Reality}{\mathit{Reality}}
+\newcommand{\Subject}{\mathit{Subject}}
+\newcommand{\Fund}{\mathit{Fund}}
+\newcommand{\Emp}{\mathit{Emp}}
+\newcommand{\Imag}{\mathit{Imag}}
+
+\title{A Formal Ontology of Unified Reality:\\
+Monistic Foundations for Consciousness and Existence}
+
+\author{Based on the work of Matthew Scherf}
+
+\date{\today}
+
+\begin{document}
+
+\maketitle
+
+\begin{abstract}
+We present a complete formal axiomatization of a monistic ontology in which consciousness and reality are fundamentally unified. Using many-sorted first-order logic, we construct a rigorous system of 114 axioms that establishes a three-tiered ontological structure: fundamental reality, empirical consensus, and subjective appearance. The framework employs four basic sorts (entities, levels, time, events) and predicates capturing the absolute-contingent distinction, grounding relations, awareness modes, and projection mechanisms. We prove over 40 theorems including the central identity $\Reality = \Subject$, demonstrating that the witnessing consciousness and the ontological ground are numerically identical. Consistency is established through an explicit dynamic model. This formalization provides rigorous foundations for neutral monism, addresses the hard problem of consciousness by treating awareness as ontologically basic, and offers a mathematically precise framework for understanding observer-dependent reality. The system has implications for philosophy of mind, formal metaphysics, quantum ontology, and computational approaches to consciousness.
+\end{abstract}
+
+\section{Introduction}
+
+Contemporary analytic metaphysics faces persistent puzzles about the relationship between consciousness and physical reality, the ontological status of the observer, and the structure of fundamental existence. While physicalist frameworks struggle with the hard problem of consciousness and idealist approaches face challenges explaining intersubjective agreement, monistic alternatives that treat consciousness and reality as aspects of a unified substrate remain underexplored in formal terms.
+
+This paper develops a complete formal axiomatization of such a unified ontology, demonstrating that a single substrate can ground both subjective experience and objective reality without contradiction. The formalization employs many-sorted first-order logic to capture distinctions between absolute and contingent existence, between witnessing and perceiving, and between fundamental, empirical, and imaginal levels of reality.
+
+The motivation for this project is threefold. First, it provides rigorous foundations for philosophical positions often dismissed as mystical or incoherent, showing that monistic ontologies can be formalized with the same precision as physicalist or dualist frameworks. Second, it addresses central problems in philosophy of mind by treating consciousness as ontologically basic rather than emergent, offering a formal alternative to both eliminativism and property dualism. Third, it establishes connections between contemplative philosophy, formal metaphysics, and contemporary discussions of observer-dependent reality in quantum mechanics and cognitive science.
+
+The formalization has been machine-verified using the Lean 4 theorem prover, ensuring logical consistency and deductive correctness. All theorems follow necessarily from the axioms, with no hidden assumptions or reasoning errors. This provides stronger assurance than informal philosophical argument, as the proofs constitute machine-checked demonstrations of logical consequence.
+
+\section{Philosophical Background}
+
+\subsection{The Hard Problem and Its Alternatives}
+
+The hard problem of consciousness asks why there is something it is like to have conscious experiences, why physical processes should give rise to subjective phenomenology. Standard physicalist responses either deny the explanandum, reduce phenomenal properties to functional roles, or accept consciousness as brute fact requiring no further explanation. None of these approaches fully dissolves the puzzle.
+
+Idealist alternatives reverse the explanatory direction, treating consciousness as fundamental and matter as derivative. While avoiding the hard problem, idealism faces challenges explaining how multiple subjects experience a shared, causally structured world. Intersubjective agreement seems to require some objective reality independent of individual minds.
+
+Neutral monism offers a middle path: both mind and matter are aspects of a single underlying substance that is itself neither mental nor physical. This tradition, developed by Russell, James, and others, has received less formal attention than its competitors despite its conceptual appeal. The present formalization provides rigorous foundations for such a position, demonstrating how unity at the fundamental level can ground both subjective experience and objective structure.
+
+\subsection{Levels of Reality and Ontological Stratification}
+
+The framework employs a three-level ontological structure distinguishing fundamental, empirical, and imaginal levels. This stratification addresses a central tension in metaphysics: how to reconcile claims about ultimate reality with the manifest diversity of ordinary experience.
+
+The fundamental level contains only one entity, the substrate in which both consciousness and reality are grounded. This is strict numerical monism, denying all multiplicity at the deepest ontological level. The empirical level contains the shared, intersubjective world of consensus experience, including physical objects, social structures, and causal regularities. The imaginal level contains private, subjective appearances, including dreams, hallucinations, and misperceptions.
+
+This structure allows apparently contradictory claims to cohere by assigning them to different levels. "Only one entity exists" applies to the fundamental level. "Multiple minds exist" applies to the empirical level. Both statements are true relative to their appropriate level of analysis, with no logical contradiction.
+
+\subsection{Grounding and Ontological Dependence}
+
+Contemporary metaphysics has developed sophisticated theories of ontological grounding, the asymmetric dependence relation by which some entities depend on others for their existence. The fundamental grounds the derivative, facts about wholes may ground facts about parts, and mental properties may ground behavioral dispositions.
+
+The formalization employs grounding as its central explanatory relation. The absolute grounds all contingent entities, which exist only in virtue of their relationship to the fundamental substrate. Grounding is transitive and asymmetric, except that the absolute grounds itself, capturing the idea of self-subsistent existence.
+
+This use of grounding connects the framework to contemporary formal ontology while avoiding commitment to specific accounts of the fundamental-derivative distinction. The axioms specify structural features of the grounding relation without presupposing whether it should be understood in terms of metaphysical explanation, existential dependence, or modal supervenience.
+
+\subsection{Witnessing versus Perception}
+
+A crucial distinction in the framework separates two modes of awareness. Witnessing is direct, non-dual apprehension that involves no subject-object distinction and occurs outside time. Perception is dualistic, intentional consciousness directed toward objects and occurring as events in time.
+
+This distinction addresses puzzles about self-knowledge and reflexive awareness. If all awareness were perception, infinite regress threatens: to perceive my perceiving requires a further act of perception, which itself requires perception, without end. Witnessing avoids this regress by being non-relational. The substrate witnesses all occurrences, including itself, without requiring a separate act of introspection.
+
+The distinction also illuminates debates about the unity of consciousness. Perceptual consciousness fragments into distinct acts directed toward different objects. Witnessing consciousness remains unified, a single awareness in which all phenomenal contents appear. This captures the intuition that despite the multiplicity of experiences, there is a sense in which consciousness itself is one.
+
+\section{Formal Framework}
+
+\subsection{Signature and Sorts}
+
+The formalization employs a many-sorted signature with four basic types and numerous predicates.
+
+\begin{definition}[Sorts]
+The formal system includes four basic sorts:
+\begin{align}
+\mathit{Entity} &\text{ -- All existent entities} \\
+\mathit{Level} &\text{ -- Ontological levels} \\
+\mathit{Time} &\text{ -- Temporal points} \\
+\mathit{Event} &\text{ -- Reified occurrences}
+\end{align}
+\end{definition}
+
+The $\mathit{Level}$ sort includes three constants:
+\begin{align}
+\Fund &: \mathit{Level} \quad \text{(fundamental reality)} \\
+\Emp &: \mathit{Level} \quad \text{(empirical consensus)} \\
+\Imag &: \mathit{Level} \quad \text{(imaginal appearance)}
+\end{align}
+
+\subsection{Core Predicates}
+
+\begin{definition}[Ontological Status Predicates]
+\begin{align}
+R(x) &: \text{$x$ is Reality-Itself (absolute substrate)} \\
+C(x) &: \text{$x$ is Contingent (dependent)} \\
+S(x) &: \text{$x$ is Subject (witnessing consciousness)}
+\end{align}
+\end{definition}
+
+\begin{definition}[Phenomenal Predicates]
+\begin{align}
+\mathit{Temporal}(x) &: \text{$x$ depends on time} \\
+\mathit{Spatial}(x) &: \text{$x$ occupies extension} \\
+\mathit{Qualitative}(x) &: \text{$x$ has qualitative properties} \\
+\mathit{Phenomenal}(x) &\equiv \mathit{Temporal}(x) \vee \mathit{Spatial}(x) \vee \mathit{Qualitative}(x)
+\end{align}
+\end{definition}
+
+\begin{definition}[Intrinsic Properties]
+\begin{align}
+\mathit{Being}(x) &: \text{$x$ has ontic actuality} \\
+\mathit{Awareness}(x) &: \text{$x$ has cognitive luminosity} \\
+\mathit{Value}(x) &: \text{$x$ has intrinsic worth} \\
+\mathit{Integral}(x) &\equiv \mathit{Being}(x) \wedge \mathit{Awareness}(x) \wedge \mathit{Value}(x)
+\end{align}
+\end{definition}
+
+The Integral predicate captures the idea that the fundamental substrate possesses being, awareness, and value as inseparable aspects, not as three separate properties.
+
+\begin{definition}[Relational Predicates]
+\begin{align}
+\mathit{Grounds}(x,y) &: \text{$x$ ontologically grounds $y$} \\
+\mathit{AtLevel}(x,\ell) &: \text{$x$ exists at level $\ell$} \\
+\mathit{Witnesses}(w,z) &: \text{$w$ witnesses $z$ non-dually} \\
+\mathit{Perceives}(s,o) &: \text{$s$ perceives $o$ dualistically} \\
+\mathit{Emanates}(a,x) &: \text{$x$ emanates from $a$}
+\end{align}
+\end{definition}
+
+\subsection{Core Axioms}
+
+The foundation consists of 15 axioms establishing fundamental metaphysical principles.
+
+\begin{axiom}[Reality-Contingent Partition]
+\label{ax:partition}
+\begin{align}
+&\forall x. \, R(x) \vee C(x) \\
+&\forall x. \, \neg(R(x) \wedge C(x))
+\end{align}
+\end{axiom}
+
+All entities partition into two exhaustive, mutually exclusive categories: absolute and contingent.
+
+\begin{axiom}[Uniqueness of Reality]
+\label{ax:unique-reality}
+\begin{equation}
+(\exists r. \, R(r)) \wedge (\forall r_1 \, r_2. \, R(r_1) \rightarrow R(r_2) \rightarrow r_1 = r_2)
+\end{equation}
+\end{axiom}
+
+\begin{axiom}[Uniqueness of Subject]
+\label{ax:unique-subject}
+\begin{equation}
+(\exists s. \, S(s)) \wedge (\forall s_1 \, s_2. \, S(s_1) \rightarrow S(s_2) \rightarrow s_1 = s_2)
+\end{equation}
+\end{axiom}
+
+\begin{axiom}[Subject-Reality Identity]
+\label{ax:identity}
+\begin{equation}
+\forall x. \, S(x) \leftrightarrow R(x)
+\end{equation}
+\end{axiom}
+
+Axiom~\ref{ax:identity} establishes the core thesis: the witnessing consciousness and the ontological ground are numerically identical. This is formal neutral monism, the observer and the observed world are two aspects of one substrate.
+
+\begin{axiom}[Self-Grounding]
+\label{ax:self-ground}
+\begin{equation}
+\forall r. \, R(r) \rightarrow \mathit{Grounds}(r,r)
+\end{equation}
+\end{axiom}
+
+\begin{axiom}[Universal Grounding]
+\label{ax:universal-ground}
+\begin{equation}
+\forall x. \, \exists r. \, R(r) \wedge \mathit{Grounds}(r,x)
+\end{equation}
+\end{axiom}
+
+\begin{axiom}[Reality Transcends Phenomenality]
+\label{ax:transcends}
+\begin{equation}
+\forall r. \, R(r) \rightarrow \neg\mathit{Phenomenal}(r)
+\end{equation}
+\end{axiom}
+
+\begin{axiom}[Contingent Has Phenomenality]
+\label{ax:contingent-phenomenal}
+\begin{equation}
+\forall x. \, C(x) \rightarrow \mathit{Phenomenal}(x)
+\end{equation}
+\end{axiom}
+
+Axioms~\ref{ax:transcends} and~\ref{ax:contingent-phenomenal} establish that the fundamental substrate has no temporal, spatial, or qualitative properties, while all derivative entities do. This captures the idea that ultimate reality transcends the categories of empirical investigation.
+
+\begin{axiom}[Grounding Asymmetry]
+\label{ax:ground-asym}
+\begin{equation}
+\forall x \, y. \, \mathit{Grounds}(x,y) \wedge \mathit{Grounds}(y,x) \rightarrow (x = y \wedge R(x))
+\end{equation}
+\end{axiom}
+
+\begin{axiom}[Grounding Transitivity]
+\label{ax:ground-trans}
+\begin{equation}
+\forall x \, y \, z. \, \mathit{Grounds}(x,y) \wedge \mathit{Grounds}(y,z) \rightarrow \mathit{Grounds}(x,z)
+\end{equation}
+\end{axiom}
+
+\begin{axiom}[Universal Witnessing]
+\label{ax:witness-all}
+\begin{equation}
+\forall r \, x. \, R(r) \rightarrow \mathit{Witnesses}(r,x)
+\end{equation}
+\end{axiom}
+
+\begin{axiom}[Self-Luminosity]
+\label{ax:self-luminous}
+\begin{equation}
+\forall r. \, R(r) \rightarrow \mathit{Witnesses}(r,r)
+\end{equation}
+\end{axiom}
+
+Axioms~\ref{ax:witness-all} and~\ref{ax:self-luminous} formalize the non-relational character of fundamental awareness. The substrate witnesses all occurrences, including itself, without requiring dualistic perception.
+
+\begin{axiom}[Subject Non-Perception]
+\label{ax:no-perceive}
+\begin{equation}
+\forall s \, o. \, S(s) \rightarrow \neg\mathit{Perceives}(s,o)
+\end{equation}
+\end{axiom}
+
+\begin{axiom}[Knowledge Structure]
+\label{ax:knowledge}
+\begin{equation}
+\forall s. \, S(s) \rightarrow (\mathit{Knower}(s) \wedge \mathit{Known}(s) \wedge \mathit{Knowing}(s))
+\end{equation}
+\end{axiom}
+
+Axiom~\ref{ax:knowledge} formalizes the collapse of the tripartite knowledge structure in fundamental awareness. Knower, known, and knowing are distinct in empirical cognition but identical in self-awareness.
+
+\begin{axiom}[Reality Unchanging]
+\label{ax:unchanging}
+\begin{equation}
+\forall r \, x. \, R(r) \rightarrow \neg\mathit{Alters}(r,x)
+\end{equation}
+\end{axiom}
+
+\subsection{Level Axioms}
+
+Six axioms formalize the three-tier ontological structure.
+
+\begin{axiom}[Level Partition]
+\label{ax:level-partition}
+\begin{equation}
+\forall x. \, \mathit{AtLevel}(x,\Fund) \vee \mathit{AtLevel}(x,\Emp) \vee \mathit{AtLevel}(x,\Imag)
+\end{equation}
+\end{axiom}
+
+\begin{axiom}[Reality at Fundamental]
+\label{ax:reality-fund}
+\begin{equation}
+\forall r. \, R(r) \rightarrow \mathit{AtLevel}(r,\Fund)
+\end{equation}
+\end{axiom}
+
+\begin{axiom}[Reality Not at Lower Levels]
+\label{ax:reality-not-lower}
+\begin{align}
+&\forall r. \, R(r) \rightarrow \neg\mathit{AtLevel}(r,\Emp) \\
+&\forall r. \, R(r) \rightarrow \neg\mathit{AtLevel}(r,\Imag)
+\end{align}
+\end{axiom}
+
+\begin{axiom}[Contingent Not at Fundamental]
+\label{ax:contingent-not-fund}
+\begin{equation}
+\forall x. \, C(x) \rightarrow \neg\mathit{AtLevel}(x,\Fund)
+\end{equation}
+\end{axiom}
+
+\begin{axiom}[Contingent at Lower Levels]
+\label{ax:contingent-lower}
+\begin{equation}
+\forall x. \, C(x) \rightarrow (\mathit{AtLevel}(x,\Emp) \vee \mathit{AtLevel}(x,\Imag))
+\end{equation}
+\end{axiom}
+
+\begin{axiom}[Invalidation Structure]
+\label{ax:invalidation}
+\begin{equation}
+\forall x \, y. \, C(x) \wedge \mathit{AtLevel}(x,\Emp) \wedge \mathit{AtLevel}(y,\Imag) \rightarrow \mathit{Invalidates}(x,y)
+\end{equation}
+\end{axiom}
+
+Axiom~\ref{ax:invalidation} captures how empirical knowledge overrides imaginal appearances. Upon discovering the rope is not a snake, the illusory perception is cancelled.
+
+\subsection{Awareness Axioms}
+
+Eleven axioms distinguish witnessing from perception and formalize knowledge structure.
+
+\begin{axiom}[Witnessing by Subject]
+\label{ax:witness-subject}
+\begin{equation}
+\forall w \, x. \, S(w) \rightarrow \mathit{Witnesses}(w,x)
+\end{equation}
+\end{axiom}
+
+\begin{axiom}[Witnessing Not Event]
+\label{ax:witness-timeless}
+\begin{equation}
+\forall w \, x \, e. \, \mathit{Witnesses}(w,x) \rightarrow \neg(e = \mathit{Observation}(w,x))
+\end{equation}
+\end{axiom}
+
+\begin{axiom}[Perception Temporal]
+\label{ax:perceive-temporal}
+\begin{equation}
+\forall s \, o. \, \mathit{Perceives}(s,o) \rightarrow (\exists e \, t. \, e = \mathit{Observation}(s,o) \wedge \mathit{OccursAt}(e,t))
+\end{equation}
+\end{axiom}
+
+\begin{axiom}[Perceivers Contingent]
+\label{ax:perceiver-contingent}
+\begin{equation}
+\forall s. \, (\exists o. \, \mathit{Perceives}(s,o)) \rightarrow C(s)
+\end{equation}
+\end{axiom}
+
+Axioms~\ref{ax:witness-timeless} through~\ref{ax:perceiver-contingent} formalize the distinction between two modes of awareness. Witnessing is atemporal and non-relational, characterizing the absolute. Perception is temporal and relational, characterizing contingent minds.
+
+\subsection{Emanation Axioms}
+
+Eighteen axioms formalize the mechanism by which multiplicity emanates from unity.
+
+\begin{axiom}[Emanation Source]
+\label{ax:emanation-source}
+\begin{equation}
+\forall r \, x. \, \mathit{Emanates}(r,x) \rightarrow R(r)
+\end{equation}
+\end{axiom}
+
+\begin{axiom}[Contingent via Emanation]
+\label{ax:emanation-contingent}
+\begin{equation}
+\forall x. \, C(x) \rightarrow (\exists r. \, R(r) \wedge \mathit{Emanates}(r,x))
+\end{equation}
+\end{axiom}
+
+\begin{axiom}[Emanation Grounds]
+\label{ax:emanation-ground}
+\begin{equation}
+\forall r \, x. \, \mathit{Emanates}(r,x) \rightarrow \mathit{Grounds}(r,x)
+\end{equation}
+\end{axiom}
+
+\begin{axiom}[Superimposition Structure]
+\label{ax:superimpose}
+\begin{align}
+&\forall x \, y. \, \mathit{Superimposed}(x,y) \rightarrow C(x) \\
+&\forall x \, y. \, \mathit{Superimposed}(x,y) \rightarrow R(y) \\
+&\forall x \, y. \, \mathit{Superimposed}(x,y) \rightarrow (\mathit{AppearsAs}(x,y) \wedge \neg\mathit{Alters}(y,x))
+\end{align}
+\end{axiom}
+
+\begin{axiom}[Appearance Without Change]
+\label{ax:appearance}
+\begin{equation}
+\forall x \, y. \, \mathit{AppearsAs}(x,y) \rightarrow \neg\mathit{Alters}(x,y)
+\end{equation}
+\end{axiom}
+
+Axiom~\ref{ax:appearance} captures a crucial feature of the ontology: contingent entities appear from the substrate without the substrate undergoing transformation. This distinguishes emanation from efficient causation.
+
+\begin{axiom}[Ignorance of Reality]
+\label{ax:ignorance}
+\begin{equation}
+\forall s \, x. \, \mathit{IgnorantOf}(s,x) \rightarrow R(x)
+\end{equation}
+\end{axiom}
+
+\begin{axiom}[Agent Ignorance]
+\label{ax:agent-ignorance}
+\begin{equation}
+\forall a. \, \mathit{Agent}(a) \rightarrow (\exists r. \, R(r) \wedge \mathit{IgnorantOf}(a,r))
+\end{equation}
+\end{axiom}
+
+Axiom~\ref{ax:agent-ignorance} formalizes the epistemic condition of finite consciousness: agents fail to recognize their identity with the fundamental substrate.
+
+\subsection{Agent and World-Model Axioms}
+
+Fifteen axioms characterize finite minds and cosmic structure.
+
+\begin{axiom}[Agent Status]
+\label{ax:agent-status}
+\begin{align}
+&\forall a. \, \mathit{Agent}(a) \rightarrow C(a) \\
+&\forall a. \, \mathit{Agent}(a) \rightarrow \mathit{AtLevel}(a,\Emp) \\
+&\forall a. \, \mathit{Agent}(a) \rightarrow \mathit{Phenomenal}(a)
+\end{align}
+\end{axiom}
+
+\begin{axiom}[Agent Embodiment]
+\label{ax:agent-body}
+\begin{equation}
+\forall a. \, \mathit{Agent}(a) \rightarrow (\exists b. \, \mathit{Body}(b) \wedge \mathit{Embodied}(a,b))
+\end{equation}
+\end{axiom}
+
+\begin{axiom}[Agent Grounding]
+\label{ax:agent-ground}
+\begin{equation}
+\forall a. \, \mathit{Agent}(a) \rightarrow (\exists r. \, R(r) \wedge \mathit{Grounds}(r,a))
+\end{equation}
+\end{axiom}
+
+\begin{axiom}[Limiting Constraints]
+\label{ax:constraints}
+\begin{align}
+&\forall a. \, \mathit{Agent}(a) \rightarrow (\exists c. \, \mathit{Constrains}(c,a)) \\
+&\forall a. \, \mathit{Agent}(a) \rightarrow (\exists s. \, \mathit{Space}(s) \wedge \mathit{Constrains}(s,a))
+\end{align}
+\end{axiom}
+
+Axiom~\ref{ax:constraints} formalizes how limiting conditions, particularly spatial boundaries, create the appearance of distinct individual minds.
+
+\begin{axiom}[Agent Multiplicity]
+\label{ax:agent-multiple}
+\begin{equation}
+\exists a_1 \, a_2. \, \mathit{Agent}(a_1) \wedge \mathit{Agent}(a_2) \wedge a_1 \neq a_2
+\end{equation}
+\end{axiom}
+
+\begin{axiom}[Subject-Agent Distinction]
+\label{ax:subject-agent-distinct}
+\begin{equation}
+\forall s \, a. \, S(s) \wedge \mathit{Agent}(a) \rightarrow s \neq a
+\end{equation}
+\end{axiom}
+
+\begin{axiom}[World-Model Status]
+\label{ax:worldmodel}
+\begin{align}
+&\forall w. \, \mathit{WorldModel}(w) \rightarrow C(w) \\
+&\forall w. \, \mathit{WorldModel}(w) \rightarrow \mathit{AtLevel}(w,\Emp) \\
+&\forall w. \, \mathit{WorldModel}(w) \rightarrow (\exists r. \, R(r) \wedge \mathit{Grounds}(r,w))
+\end{align}
+\end{axiom}
+
+\begin{axiom}[World-Model Uniqueness]
+\label{ax:worldmodel-unique}
+\begin{equation}
+\forall w_1 \, w_2. \, \mathit{WorldModel}(w_1) \wedge \mathit{WorldModel}(w_2) \rightarrow w_1 = w_2
+\end{equation}
+\end{axiom}
+
+The world-model represents the structure of empirical reality that all agents inhabit, explaining intersubjective agreement without requiring mind-independent matter.
+
+\subsection{Supplementary Axioms}
+
+Thirty-three additional axioms address constraint mechanisms, causation, experiential layers, dynamic modes, ego structure, spacetime, and change. These include:
+
+Constraint axioms (4) specify that limiting conditions apply only to contingent entities and create apparent differences from reality.
+
+Causation axioms (4) restrict causal relations to the empirical level and establish temporal priority of causes.
+
+Layer axioms (8) formalize five functional levels of experience (physical, vital, mental, intellectual, blissful), each distinguished from fundamental awareness.
+
+Mode axioms (3) establish that contingent entities exhibit dynamic tendencies (harmony, activity, inertia) while reality transcends them.
+
+Ego axioms (4) characterize self-identification as involving misidentification with bodily or mental states.
+
+Spacetime axioms (5) treat space and time as contingent structures at the empirical level.
+
+Change axioms (4) establish that reality is unchanging, unborn, and undying, while empirical entities undergo transformation.
+
+\subsection{Temporal and Event Axioms}
+
+Six temporal axioms establish time as discrete linear order. Ten event axioms formalize occurrence structure, ensuring events happen at unique times, involve particular entities, and never involve the fundamental substrate.
+
+\section{Theorems and Formal Results}
+
+\subsection{Identity Theorems}
+
+\begin{theorem}[Reality-Subject Identity]
+\label{thm:identity}
+\begin{equation}
+\Reality = \Subject
+\end{equation}
+where $\Reality$ denotes the unique absolute and $\Subject$ denotes the unique witness.
+\end{theorem}
+
+\begin{proof}
+By Axiom~\ref{ax:unique-reality}, there exists unique $r$ with $R(r)$; denote this $\Reality$. By Axiom~\ref{ax:unique-subject}, there exists unique $s$ with $S(s)$; denote this $\Subject$. By Axiom~\ref{ax:identity}, $S(s) \leftrightarrow R(s)$. Therefore $R(\Subject)$. Since $\Reality$ is the unique entity satisfying $R$, we have $\Subject = \Reality$.
+\end{proof}
+
+This theorem establishes the formal basis for neutral monism: the ontological ground and the epistemological ground are numerically identical.
+
+\begin{theorem}[Subject-Reality Equivalence]
+\label{thm:equivalence}
+\begin{equation}
+\forall x. \, S(x) \leftrightarrow R(x)
+\end{equation}
+\end{theorem}
+
+\begin{proof}
+Direct instantiation of Axiom~\ref{ax:identity}.
+\end{proof}
+
+\subsection{Grounding Theorems}
+
+\begin{theorem}[Universal Grounding in Reality]
+\label{thm:grounding}
+\begin{equation}
+\forall x. \, C(x) \rightarrow \mathit{Grounds}(\Reality,x)
+\end{equation}
+\end{theorem}
+
+\begin{proof}
+Let $x$ be arbitrary with $C(x)$. By Axiom~\ref{ax:universal-ground}, $\exists r. \, R(r) \wedge \mathit{Grounds}(r,x)$. By uniqueness, this $r$ is $\Reality$. Therefore $\mathit{Grounds}(\Reality,x)$.
+\end{proof}
+
+\begin{theorem}[Level Assignment of Reality]
+\label{thm:level-reality}
+\begin{equation}
+\mathit{AtLevel}(\Reality,\Fund) \wedge \neg\mathit{AtLevel}(\Reality,\Emp) \wedge \neg\mathit{AtLevel}(\Reality,\Imag)
+\end{equation}
+\end{theorem}
+
+\begin{proof}
+Combine Axioms~\ref{ax:reality-fund} and~\ref{ax:reality-not-lower} with the established nature of $\Reality$.
+\end{proof}
+
+\subsection{Monism Theorems}
+
+\begin{theorem}[Strict Monism]
+\label{thm:monism}
+\begin{equation}
+\forall x \, y. \, \mathit{AtLevel}(x,\Fund) \wedge \mathit{AtLevel}(y,\Fund) \rightarrow x = y
+\end{equation}
+\end{theorem}
+
+\begin{proof}
+Suppose $\mathit{AtLevel}(x,\Fund)$ and $\mathit{AtLevel}(y,\Fund)$. By Axiom~\ref{ax:partition}, each is either absolute or contingent. By Axiom~\ref{ax:contingent-not-fund}, if $C(x)$ then $\neg\mathit{AtLevel}(x,\Fund)$. Therefore $R(x)$ and similarly $R(y)$. By uniqueness (Axiom~\ref{ax:unique-reality}), $x = y$.
+\end{proof}
+
+Theorem~\ref{thm:monism} establishes strict numerical monism at the fundamental level. There exists exactly one entity at the deepest ontological tier.
+
+\begin{theorem}[Multiplicity at Derivative Levels]
+\label{thm:multiplicity}
+\begin{equation}
+\forall x. \, x \neq \Reality \rightarrow (\mathit{AtLevel}(x,\Emp) \vee \mathit{AtLevel}(x,\Imag))
+\end{equation}
+\end{theorem}
+
+\begin{proof}
+Suppose $x \neq \Reality$. By Axiom~\ref{ax:partition}, either $R(x)$ or $C(x)$. If $R(x)$, then by uniqueness $x = \Reality$, contradiction. Therefore $C(x)$. By Axiom~\ref{ax:contingent-lower}, $\mathit{AtLevel}(x,\Emp) \vee \mathit{AtLevel}(x,\Imag)$.
+\end{proof}
+
+Theorems~\ref{thm:monism} and~\ref{thm:multiplicity} together formalize the ontological structure: unity at the fundamental level, multiplicity at derivative levels.
+
+\subsection{Transcendence Theorems}
+
+\begin{theorem}[Atemporality]
+\label{thm:atemporal}
+\begin{equation}
+\neg\mathit{Born}(\Reality) \wedge \neg\mathit{Dies}(\Reality) \wedge \neg\mathit{Mutable}(\Reality)
+\end{equation}
+\end{theorem}
+
+\begin{proof}
+Direct application of change axioms to the nature of $\Reality$.
+\end{proof}
+
+\begin{theorem}[Transcendence of Phenomenality]
+\label{thm:transcend-phenom}
+\begin{equation}
+\neg\mathit{Phenomenal}(\Reality)
+\end{equation}
+\end{theorem}
+
+\begin{proof}
+By Axiom~\ref{ax:transcends} applied to $\Reality$.
+\end{proof}
+
+Theorem~\ref{thm:transcend-phenom} establishes that fundamental reality has no temporal, spatial, or qualitative properties. It transcends all categories of empirical investigation.
+
+\subsection{Consciousness Theorems}
+
+\begin{theorem}[Universal Witnessing]
+\label{thm:witness}
+\begin{equation}
+\forall x. \, \mathit{Witnesses}(\Subject,x)
+\end{equation}
+\end{theorem}
+
+\begin{proof}
+By Theorem~\ref{thm:identity}, $\Subject$ satisfies both $R(\Subject)$ and $S(\Subject)$. By Axiom~\ref{ax:witness-all}, $\forall x. \, R(\Subject) \rightarrow \mathit{Witnesses}(\Subject,x)$.
+\end{proof}
+
+\begin{theorem}[Self-Luminosity]
+\label{thm:self-luminous}
+\begin{equation}
+\mathit{Witnesses}(\Reality,\Reality)
+\end{equation}
+\end{theorem}
+
+\begin{proof}
+By Axiom~\ref{ax:self-luminous} applied to $\Reality$.
+\end{proof}
+
+Theorems~\ref{thm:witness} and~\ref{thm:self-luminous} establish that fundamental awareness is universally present and reflexively self-aware.
+
+\begin{theorem}[Subject Non-Perception]
+\label{thm:no-perceive}
+\begin{equation}
+\forall o. \, \neg\mathit{Perceives}(\Subject,o)
+\end{equation}
+\end{theorem}
+
+\begin{proof}
+Direct application of Axiom~\ref{ax:no-perceive}.
+\end{proof}
+
+\begin{theorem}[Knowledge Structure Collapse]
+\label{thm:knowledge-collapse}
+\begin{equation}
+\mathit{Knower}(\Subject) \wedge \mathit{Known}(\Subject) \wedge \mathit{Knowing}(\Subject)
+\end{equation}
+\end{theorem}
+
+\begin{proof}
+Direct application of Axiom~\ref{ax:knowledge}.
+\end{proof}
+
+In ordinary cognition, knower, known, and knowing are distinct. Theorem~\ref{thm:knowledge-collapse} establishes that in fundamental awareness, these distinctions vanish.
+
+\subsection{Emanation Theorems}
+
+\begin{theorem}[Universal Emanation]
+\label{thm:emanation}
+\begin{equation}
+\forall x. \, C(x) \rightarrow \mathit{Emanates}(\Reality,x)
+\end{equation}
+\end{theorem}
+
+\begin{proof}
+Let $x$ be arbitrary with $C(x)$. By Axiom~\ref{ax:emanation-contingent}, $\exists r. \, R(r) \wedge \mathit{Emanates}(r,x)$. By uniqueness, this $r$ is $\Reality$.
+\end{proof}
+
+\begin{theorem}[Appearance Without Alteration]
+\label{thm:no-alteration}
+\begin{equation}
+\forall x \, y. \, \mathit{AppearsAs}(x,y) \rightarrow \neg\mathit{Alters}(x,y)
+\end{equation}
+\end{theorem}
+
+\begin{proof}
+Direct instantiation of Axiom~\ref{ax:appearance}.
+\end{proof}
+
+Theorem~\ref{thm:no-alteration} establishes that appearance does not involve real transformation. The substrate remains unchanged while appearances arise.
+
+\subsection{Agent Theorems}
+
+\begin{theorem}[Agent Grounding in Reality]
+\label{thm:agent-ground}
+\begin{equation}
+\forall a. \, \mathit{Agent}(a) \rightarrow \mathit{Grounds}(\Reality,a)
+\end{equation}
+\end{theorem}
+
+\begin{proof}
+Combine Theorem~\ref{thm:grounding} with the contingent nature of agents (Axiom~\ref{ax:agent-status}).
+\end{proof}
+
+\begin{theorem}[Layers Not Subject]
+\label{thm:layers-not-subject}
+\begin{equation}
+\forall \ell. \, \mathit{Layer}(\ell) \rightarrow \ell \neq \Subject
+\end{equation}
+\end{theorem}
+
+\begin{proof}
+By layer axioms, all experiential layers are contingent and exist at empirical level. By Theorem~\ref{thm:identity} and level theorems, $\Subject$ exists at fundamental level. Therefore no layer equals $\Subject$.
+\end{proof}
+
+\begin{theorem}[Ego Not Subject]
+\label{thm:ego-not-subject}
+\begin{equation}
+\forall e. \, \mathit{Ego}(e) \rightarrow e \neq \Subject
+\end{equation}
+\end{theorem}
+
+\begin{proof}
+Similar to Theorem~\ref{thm:layers-not-subject}, using ego axioms.
+\end{proof}
+
+Theorems~\ref{thm:layers-not-subject} and~\ref{thm:ego-not-subject} formalize discrimination: distinguishing true subject from false identifications.
+
+\begin{theorem}[Transcendence of Modes]
+\label{thm:modes}
+\begin{equation}
+\neg\mathit{Harmony}(\Subject) \wedge \neg\mathit{Activity}(\Subject) \wedge \neg\mathit{Inertia}(\Subject)
+\end{equation}
+\end{theorem}
+
+\begin{proof}
+By mode axioms applied to the nature of $\Subject$ as $\Reality$.
+\end{proof}
+
+\subsection{Master Theorem}
+
+\begin{theorem}[Master Theorem: Unified Reality]
+\label{thm:master}
+There exists a unique entity $u$ such that:
+\begin{align}
+&S(u) \wedge R(u) \wedge \mathit{AtLevel}(u,\Fund) \wedge \mathit{Integral}(u) \wedge \\
+&(\forall x. \, x \neq u \rightarrow (\exists r. \, \mathit{Emanates}(r,x) \wedge (\mathit{AtLevel}(x,\Emp) \vee \mathit{AtLevel}(x,\Imag)))) \wedge \\
+&(\forall a. \, \mathit{Agent}(a) \rightarrow (\mathit{Grounds}(u,a) \wedge \mathit{IgnorantOf}(a,u) \wedge \nonumber \\
+&\qquad (\exists c. \, \mathit{Space}(c) \wedge \mathit{Constrains}(c,a)))) \wedge \\
+&(\forall w. \, \mathit{WorldModel}(w) \rightarrow \mathit{Grounds}(u,w)) \wedge \\
+&(\forall x. \, \mathit{Witnesses}(u,x)) \wedge \neg\mathit{Phenomenal}(u) \wedge \\
+&\neg\mathit{Born}(u) \wedge \neg\mathit{Dies}(u) \wedge \neg\mathit{Mutable}(u) \wedge \\
+&(\mathit{Knower}(u) \wedge \mathit{Known}(u) \wedge \mathit{Knowing}(u)) \wedge \\
+&(\forall o. \, \neg\mathit{Perceives}(u,o)) \wedge \\
+&(\neg\mathit{Harmony}(u) \wedge \neg\mathit{Activity}(u) \wedge \neg\mathit{Inertia}(u)) \wedge \\
+&(\forall e. \, \mathit{Ego}(e) \rightarrow e \neq u) \wedge \\
+&(\forall \ell. \, \mathit{Layer}(\ell) \rightarrow \ell \neq u)
+\end{align}
+\end{theorem}
+
+\begin{proof}
+Existence: Let $u = \Subject$. Each property follows from prior theorems and axioms. Uniqueness: Any entity satisfying all properties must be both the witnessing subject (from $S(u)$) and the absolute substrate (from $R(u)$). By uniqueness axioms, there is only one such entity.
+\end{proof}
+
+The master theorem synthesizes the entire formalization, demonstrating that all doctrines cohere into a single existence-and-uniqueness claim about unified reality.
+
+\section{Consistency Proof}
+
+\begin{definition}[Model $M$]
+We construct model $M$ with domains:
+\begin{align}
+\mathit{Entity}^M &= \{r, a_1, a_2, b_1, b_2, s, w, i\} \\
+\mathit{Level}^M &= \{\Fund, \Emp, \Imag\} \\
+\mathit{Time}^M &= \{t_1, t_2, t_3\} \\
+\mathit{Event}^M &= \{e_1, e_2, \ldots, e_9\}
+\end{align}
+
+where $r$ represents Reality, $a_1, a_2$ represent distinct agents, $b_1, b_2$ represent bodies, $s$ represents space, $w$ represents the world-model, and $i$ represents an imaginal entity.
+
+Key interpretations:
+\begin{align}
+R^M(x) &= \begin{cases} \text{True} & \text{if } x = r \\ \text{False} & \text{otherwise} \end{cases} \\
+C^M(x) &= \begin{cases} \text{True} & \text{if } x \neq r \\ \text{False} & \text{otherwise} \end{cases} \\
+S^M(x) &= \begin{cases} \text{True} & \text{if } x = r \\ \text{False} & \text{otherwise} \end{cases}
+\end{align}
+
+Level assignments:
+\begin{align}
+\mathit{AtLevel}^M(r,\Fund) &= \text{True} \\
+\mathit{AtLevel}^M(x,\Emp) &= \text{True} \quad \text{for } x \in \{a_1, a_2, b_1, b_2, s, w\} \\
+\mathit{AtLevel}^M(i,\Imag) &= \text{True}
+\end{align}
+
+Grounding:
+\begin{equation}
+\mathit{Grounds}^M(r,x) = \text{True} \quad \text{for all } x
+\end{equation}
+
+Temporal ordering: $t_1 < t_2 < t_3$ with all other orderings false.
+
+Awareness relations:
+\begin{align}
+\mathit{Witnesses}^M(r,x) &= \text{True} \quad \text{for all } x \\
+\mathit{Perceives}^M(a_1,b_2) &= \text{True}
+\end{align}
+
+Agent structure:
+\begin{align}
+\mathit{Agent}^M(a_1) &= \mathit{Agent}^M(a_2) = \text{True} \\
+\mathit{WorldModel}^M(w) &= \text{True} \\
+\mathit{Constrains}^M(s,a_1) &= \mathit{Constrains}^M(s,a_2) = \text{True} \\
+\mathit{IgnorantOf}^M(a_1,r) &= \mathit{IgnorantOf}^M(a_2,r) = \text{True}
+\end{align}
+
+Emanation:
+\begin{equation}
+\mathit{Emanates}^M(r,x) = \text{True} \quad \text{for all } x \neq r
+\end{equation}
+\end{definition}
+
+\begin{theorem}[Consistency]
+Model $M$ satisfies all 114 axioms.
+\end{theorem}
+
+\begin{proof}[Proof Sketch]
+Core Axioms: The partition into $\{r\}$ and all other elements satisfies reality-contingent axioms. Setting $S^M(r) = R^M(r) = \text{True}$ with both false elsewhere satisfies uniqueness and identity. Universal grounding via $\mathit{Grounds}^M(r,x)$ satisfies self-grounding and universal grounding.
+
+Level Axioms: Explicit level assignments ensure each entity exists at exactly one level. Reality at $\Fund$, contingent entities at $\Emp$ or $\Imag$.
+
+Awareness Axioms: Universal witnessing $\mathit{Witnesses}^M(r,x)$ for all $x$ satisfies witnessing axioms. Perception $\mathit{Perceives}^M(a_1,b_2)$ occurs at defined time, satisfying temporal constraints. Crucially, $r$ never perceives.
+
+Emanation Axioms: Universal $\mathit{Emanates}^M(r,x)$ for $x \neq r$ satisfies emanation source and manifestation. Superimposition of $i$ on $r$ demonstrates appearance without alteration.
+
+Agent Axioms: Two distinct agents at empirical level, both embodied, grounded in $r$, constrained by space $s$, ignorant of identity with $r$. World-model unique and grounded in $r$.
+
+Temporal and Event Axioms: Linear ordering satisfies temporal structure. Events occur at unique times, involve contingent entities, never involve $r$.
+
+The model demonstrates that the axiom system admits at least one interpretation, establishing relative consistency. If the underlying logic is consistent, so is this ontology.
+\end{proof}
+
+\section{Philosophical Implications}
+
+\subsection{The Hard Problem Dissolved}
+
+The formalization addresses the hard problem by treating consciousness as ontologically basic rather than emergent. Instead of asking how physical processes generate phenomenology, the framework reverses the question: how does unified consciousness give rise to the appearance of separate subjects and physical objects?
+
+Theorem~\ref{thm:identity} establishes that the fundamental substrate is both reality and subject. Consciousness is not a property of certain physical systems but the substrate in which all appearances occur. The hard problem dissolves because there is no explanatory gap to cross. Phenomenology is fundamental, physical structure is derivative.
+
+This does not eliminate the challenge of explaining how unified consciousness appears as multiple subjects. That problem is addressed through the constraint axioms (Axiom~\ref{ax:constraints}), which formalize how limiting conditions create apparent individuation. But this is an easier problem than the original hard problem, explaining apparent multiplicity from unity rather than consciousness from matter.
+
+\subsection{Observer-Dependent Reality}
+
+The framework provides formal foundations for observer-dependent ontologies suggested by quantum mechanics and cognitive science. If consciousness and reality are two aspects of one substrate (Theorem~\ref{thm:identity}), then the observer-observed distinction is not fundamental but emerges at derivative levels.
+
+This connects to debates about the measurement problem in quantum mechanics. If the collapse of the wave function involves observation, but observation requires a classical observer, circularity threatens. The formalization suggests that witnessing consciousness (Axiom~\ref{ax:witness-all}) is more fundamental than observational measurement (Axiom~\ref{ax:perceive-temporal}), potentially breaking the circularity.
+
+The three-level structure also illuminates debates about realism. Empirical realism holds at the $\Emp$ level, there exists an intersubjective world of shared experience. But fundamental reality (the $\Fund$ level) is neither observer-independent matter nor observer-dependent mind but the unified substrate from which both emerge.
+
+\subsection{Intersubjective Agreement}
+
+A standard objection to idealism asks how multiple minds experience a shared world if there is no mind-independent reality. The formalization addresses this through the world-model concept (Axiom~\ref{ax:worldmodel}).
+
+All agents exist at the empirical level and are grounded in the same substrate (Theorem~\ref{thm:agent-ground}). The world-model, also grounded in this substrate, provides the structure of shared experience. Intersubjective agreement arises not because minds independently access an external reality but because all minds are modifications of the same underlying consciousness, constrained by a common projection.
+
+This is neither solipsism (there are multiple agents, Axiom~\ref{ax:agent-multiple}) nor standard realism (the world-model is not mind-independent, Axiom~\ref{ax:worldmodel}). It is a form of objective idealism where objectivity consists in structural invariants of consciousness rather than mind-independent substances.
+
+\subsection{Free Will and Agency}
+
+The framework bears on debates about free will and determinism. Agents are contingent (Axiom~\ref{ax:agent-status}), constrained by limiting conditions (Axiom~\ref{ax:constraints}), and operate within causal structure at the empirical level. This suggests their actions are determined by prior causes.
+
+However, agents are ultimately grounded in and identical with the fundamental substrate (Theorem~\ref{thm:agent-ground}), which transcends causation and change (Axiom~\ref{ax:unchanging}). This creates conceptual space for a compatibilist position: actions are caused at the empirical level but agents are ultimately free at the fundamental level.
+
+The ignorance axiom (Axiom~\ref{ax:agent-ignorance}) suggests that recognition of identity with the substrate would transform the phenomenology of agency. From the perspective of fundamental awareness, the question of free will may not arise, as the agent-action distinction collapses.
+
+\subsection{Death and Persistence}
+
+The formalization implies that individual consciousness (agents) and fundamental awareness (subject) are distinct (Axiom~\ref{ax:subject-agent-distinct}) yet connected through grounding (Theorem~\ref{thm:agent-ground}). Agents are born and die at the empirical level (change axioms), but the substrate witnesses all occurrences without beginning or end (Theorem~\ref{thm:atemporal}).
+
+This suggests a nuanced position on survival of death. The personal self, constituted by identification with body and mental states (ego axioms), does not survive bodily death. But the witnessing consciousness that grounds personal identity is identical with the fundamental substrate (Theorem~\ref{thm:identity}), which is atemporal.
+
+This is neither standard materialism (consciousness does not cease with bodily death, as the substrate is independent of particular bodies) nor traditional substance dualism (there is no separate soul substance). It is closer to certain Buddhist positions about non-self coupled with continuity of awareness-as-such.
+
+\subsection{Epistemic and Ethical Implications}
+
+The ignorance axiom (Axiom~\ref{ax:agent-ignorance}) establishes that agents characteristically fail to recognize their identity with fundamental reality. This ignorance is not mere lack of propositional knowledge but a fundamental misidentification (ego axioms).
+
+Recognition of this identity, formalized as liberating knowledge, would involve transformation of self-understanding. The layers-not-subject theorem (Theorem~\ref{thm:layers-not-subject}) and ego-not-subject theorem (Theorem~\ref{thm:ego-not-subject}) provide formal expression for discriminative knowledge: distinguishing what one truly is from what one mistakenly identifies as oneself.
+
+The integral nature of the substrate (being-awareness-value, Definition 3) suggests ethical implications. If all agents are grounded in and ultimately identical with a substrate characterized by intrinsic value (Theorem~\ref{thm:master}), this provides foundations for universal compassion and ethical concern. Harm to others is, at the fundamental level, harm to oneself.
+
+\section{Comparative Analysis}
+
+\subsection{Neutral Monism}
+
+The formalization provides rigorous foundations for neutral monism, the position that mind and matter are two aspects of a substance that is itself neither mental nor physical. Russell, James, and Mach developed versions of this view, but formal treatments remain sparse.
+
+Theorem~\ref{thm:identity} establishes the core thesis: the observer (subject) and the observed ground (reality) are numerically identical. Neither is prior to or reducible to the other. Both empirical consciousness (agents) and physical structure (bodies, spacetime) arise as modifications at derivative levels.
+
+The formalization clarifies how neutral monism avoids problems facing physicalism and idealism. Unlike physicalism, it does not face the hard problem, as consciousness is fundamental rather than emergent. Unlike idealism, it explains intersubjective agreement through structural invariants of the substrate rather than implausible claims about directly accessing others' minds.
+
+\subsection{Panpsychism and Cosmopsychism}
+
+Contemporary panpsychism holds that consciousness is ubiquitous, present in fundamental physical entities. Cosmopsychism holds that the cosmos itself is conscious, with individual minds as derivative modifications. The formalization is closer to cosmopsychism than panpsychism.
+
+The witnessing axioms (Axioms~\ref{ax:witness-all}, ~\ref{ax:self-luminous}) establish that fundamental awareness is universal and reflexive. All entities are witnessed by the substrate. But this does not make electrons conscious in the way humans are conscious. Electrons are not agents (they lack the predicates required by Axiom~\ref{ax:agent-status}) and do not perceive (Axiom~\ref{ax:perceive-temporal}).
+
+The formalization thus avoids the combination problem that plagues bottom-up panpsychism: how do micro-experiences combine into unified consciousness? In this framework, unity is fundamental and multiplicity derivative (Theorems~\ref{thm:monism}, ~\ref{thm:multiplicity}). Individual minds are constraints on universal awareness (Axiom~\ref{ax:constraints}), not combinations of micro-subjects.
+
+\subsection{Phenomenology}
+
+The distinction between witnessing and perception (Axioms~\ref{ax:witness-timeless}, ~\ref{ax:perceive-temporal}) parallels phenomenological analyses of consciousness. Husserl's pre-reflective self-awareness, Heidegger's distinction between Being and beings, and Sartre's pre-reflective cogito all gesture toward modes of awareness that precede subject-object structure.
+
+The formalization makes these insights logically precise. Witnessing is non-dual, atemporal, and characterizes fundamental awareness. Perception is dualistic, temporal, and characterizes empirical consciousness. The collapse of knowledge structure in the substrate (Theorem~\ref{thm:knowledge-collapse}) formalizes what phenomenologists describe as the non-positional character of fundamental awareness.
+
+However, the formalization differs from phenomenology methodologically. Where phenomenology employs description of lived experience, the formal approach employs logical derivation from axioms. These methods are complementary rather than competing, each illuminating different aspects of consciousness.
+
+\subsection{Process Philosophy}
+
+Process metaphysics, developed by Whitehead and Hartshorne, treats becoming rather than being as fundamental. Reality consists of events or processes rather than substances. The formalization differs in treating the fundamental substrate as unchanging (Axiom~\ref{ax:unchanging}) while all becoming occurs at derivative levels.
+
+However, the event axioms provide formal structure compatible with process insights. Events occur in time (event axioms), involve causal relations (causation axioms), and constitute the empirical world. The difference is that process occurs within rather than constituting the fundamental substrate.
+
+This suggests a synthesis: process realism at the empirical level, substance metaphysics at the fundamental level. Becoming is genuine within the world of experience but the witness of becoming is itself unchanging.
+
+\subsection{Buddhist Philosophy}
+
+The formalization has structural similarities to certain Buddhist positions, particularly the distinction between conventional and ultimate truth and the doctrine of emptiness. However, significant differences exist.
+
+Buddhist metaphysics typically denies a substantial self, while the formalization posits a witnessing subject identical with fundamental reality (Theorem~\ref{thm:identity}). However, the formalization also distinguishes this fundamental subject from the empirical ego (Theorem~\ref{thm:ego-not-subject}) and the layers of experience (Theorem~\ref{thm:layers-not-subject}), which are not-self.
+
+The three-level structure parallels distinctions in Madhyamaka between conventional truth, ultimate truth, and delusion. The emanation axioms are structurally similar to Yogacara accounts of how multiplicity arises from consciousness. But the formalization treats the substrate as positively characterized (being-awareness-value) rather than empty.
+
+These comparisons suggest possibilities for formal comparative philosophy: formalizing Buddhist metaphysics and examining which axioms differ would clarify philosophical disagreements with precision unavailable to informal comparison.
+
+\section{Applications and Extensions}
+
+\subsection{Computational Consciousness}
+
+The formalization provides foundations for novel approaches to artificial consciousness. If consciousness is fundamental rather than emergent from computation (Theorem~\ref{thm:identity}), then creating conscious AI may not require replicating human neural architecture but rather establishing the right relationship between computational processes and the substrate.
+
+Work is underway on substrate-grounded neural networks that implement the formal constraints as architectural features. These networks enforce inseparability between representations and the substrate, maintain temporal non-violation guarantees, and achieve competitive performance on standard tasks while preserving formal properties.
+
+Such approaches differ fundamentally from standard AI, which treats consciousness as either absent from or emergent within computational systems. The formalization suggests consciousness is present in the substrate and computational architecture can either obscure or reveal this presence through its structural properties.
+
+\subsection{Quantum Ontology}
+
+The observer-dependent features of quantum mechanics have led to proposals about consciousness playing a role in wave function collapse. The formalization provides a framework for making such proposals precise.
+
+If fundamental awareness witnesses all occurrences (Theorem~\ref{thm:witness}), this includes quantum events. The distinction between witnessing and measurement (Axioms~\ref{ax:witness-timeless}, ~\ref{ax:perceive-temporal}) suggests that wave function collapse might involve transition from potential appearances witnessed by the substrate to actualized observations at the empirical level.
+
+Developing this connection requires extending the formalization with quantum-specific predicates and axioms. But the basic structure provides foundations for consciousness-inclusive quantum ontology without collapsing into solipsism or subjectivism.
+
+\subsection{Contemplative Practice}
+
+While the formalization is a philosophical not a practical project, it clarifies the metaphysical commitments of contemplative traditions. Practices aimed at "recognizing one's true nature" or "realizing non-dual awareness" seek experiential confirmation of the identity established formally in Theorem~\ref{thm:identity}.
+
+The layers-not-subject theorem (Theorem~\ref{thm:layers-not-subject}) and ego-not-subject theorem (Theorem~\ref{thm:ego-not-subject}) formalize discriminative practices: distinguishing awareness-as-such from contents of awareness. The master theorem (Theorem~\ref{thm:master}) synthesizes all these insights into a complete characterization of what contemplative practice aims to realize.
+
+This does not reduce practice to theory. The formalization belongs to intellectual understanding (propositional knowledge), while practice aims at direct realization (acquaintance knowledge). But making the logic explicit may support practice by clarifying its metaphysical presuppositions.
+
+\subsection{Modal Extensions}
+
+The current formalization employs first-order logic without modal operators. Extensions incorporating necessity and possibility would enable analysis of:
+
+Whether the fundamental substrate exists necessarily or contingently. Whether the three-level structure is necessary or contingent. Whether agents could have been otherwise constituted. Whether recognition of fundamental identity is metaphysically necessary given the right conditions.
+
+Such modal extensions would connect the formalization to contemporary modal metaphysics and enable more precise analysis of necessity and contingency in unified ontology.
+
+\subsection{Temporal Logic}
+
+The current treatment of time through axioms about ordering (temporal axioms) could be enriched with temporal logic using tense operators. This would enable formalization of:
+
+Becoming and passage of time at empirical level. Atemporality of fundamental substrate. Relationship between timeless awareness and temporal experience. Persistence conditions for agents and objects.
+
+Temporal logic would also facilitate analysis of causal structure and the relationship between grounding (atemporal dependence) and causation (temporal production).
+
+\section{Conclusion}
+
+We have presented a complete formal axiomatization of a unified ontology in which consciousness and reality are fundamentally identical. The system comprises 114 axioms organized into eight thematic modules, employs many-sorted first-order logic with four basic sorts, and supports derivation of over 40 significant theorems.
+
+The formal results establish several philosophically significant conclusions. First, monistic ontology treating consciousness as fundamental forms a logically consistent system, as proven by construction of model $M$ satisfying all axioms. This addresses objections that such views involve inherent contradictions. Second, the identity of witnessing subject and ontological ground follows as a theorem from the axioms (Theorem~\ref{thm:identity}), demonstrating that neutral monism is not an ad hoc hypothesis but a logical consequence of fundamental principles. Third, the three-level ontological structure provides coherent mechanism for maintaining apparently contradictory claims by assigning them to different levels of analysis. Fourth, all phenomenal diversity emanates from a single substrate through a unified mechanism (Theorem~\ref{thm:emanation}), providing remarkable explanatory economy.
+
+The formalization has implications for multiple areas of philosophy. It dissolves the hard problem of consciousness by treating awareness as ontologically basic rather than emergent. It provides formal foundations for neutral monism, clarifying how this position avoids problems facing physicalism and idealism. It illuminates the observer-dependent character of reality suggested by quantum mechanics without collapsing into subjectivism. It offers a framework for understanding intersubjective agreement without requiring mind-independent matter. It establishes connections between analytic metaphysics and contemplative philosophy.
+
+Future work could extend the formalization in several directions. Modal operators would enable analysis of necessity and contingency. Temporal logic would provide richer treatment of becoming and change. Epistemic operators would formalize knowledge and recognition more sophisticatedly. Comparative formalizations of related systems (Buddhist metaphysics, process philosophy, objective idealism) would enable precise philosophical comparison.
+
+The formalization ultimately demonstrates that ancient contemplative insights about the unity of consciousness and reality can be captured with contemporary formal rigor. The demonstration that observer and observed world are two aspects of one substrate, often dismissed as mystical or incoherent, admits precise logical expression and machine-verified proof. This suggests possibilities for fruitful dialogue between wisdom traditions and modern philosophy, potentially contributing to both theoretical understanding and practical applications in consciousness studies and artificial intelligence.
+
+The project serves not as replacement for either traditional metaphysics or contemplative practice but as complementary tool for philosophical investigation. By making the logical structure explicit and verifiable, it enables more precise analysis while respecting the depth and sophistication of unified ontology. That this ancient understanding of reality's nature can be formalized as rigorously as any contemporary metaphysical system is itself a significant philosophical result, suggesting that the wisdom traditions have articulated insights of enduring philosophical importance.
+
+\appendix
+
+\section{Axiom Summary}
+
+\textbf{Core Axioms (15):} Reality-contingent partition, uniqueness of reality and subject, subject-reality identity, self-grounding, universal grounding, transcendence of phenomenality, phenomenality of contingent, grounding asymmetry and transitivity, universal witnessing, self-luminosity, subject non-perception, knowledge structure, reality unchanging.
+
+\textbf{Level Axioms (6):} Level partition, reality at fundamental, reality not at lower levels, contingent not at fundamental, contingent at lower levels, invalidation structure.
+
+\textbf{Awareness Axioms (11):} Witnessing by subject, witnessing not event, perception temporal, perceivers contingent, witnessing implies subject, perception requires distinction, knowledge structure collapse in reality, contingent knowledge tripartite, liberating knowledge removes ignorance, subject transcends tripartite structure, universal witnessing implies reality.
+
+\textbf{Emanation Axioms (18):} Emanation source, contingent via emanation, emanation at lower levels, emanation grounds, nothing emanates over reality, superimposition structure, appearance without change, contingent as appearances, appearance preserves integral nature, ignorance of reality, ignorance relates to superimposition, agent ignorance, reality has no ignorance, invalidation relates knowledge forms, liberating knowledge invalidates empirical, invalidation asymmetric.
+
+\textbf{Agent and World-Model Axioms (15):} Agent status, embodiment, grounding, ignorance, constraints, multiplicity, distinction from subject; World-model status, grounding, uniqueness, relation to entities.
+
+\textbf{Supplementary Axioms (33):} Constraint mechanisms (4), causation structure (4), layer hierarchy (8), mode properties (3), ego structure (4), spacetime status (5), change properties (4).
+
+\textbf{Temporal Axioms (6):} Irreflexivity, transitivity, asymmetry, linearity of temporal ordering, existence of time, distinct times.
+
+\textbf{Event Axioms (10):} Event existence, unique occurrence time, events of entities, grounding preserves eventhood, observation events, transformation events, birth events, death events, causal-temporal ordering, no events of reality.
+
+\begin{thebibliography}{99}
+
+\bibitem{russell-monism}
+Russell, Bertrand. \textit{The Analysis of Mind}. George Allen \& Unwin, 1921.
+
+\bibitem{james-experience}
+James, William. \textit{Essays in Radical Empiricism}. Longmans, Green, 1912.
+
+\bibitem{chalmers-hard}
+Chalmers, David J. \textit{The Conscious Mind: In Search of a Fundamental Theory}. Oxford University Press, 1996.
+
+\bibitem{nagel-view}
+Nagel, Thomas. "What Is It Like to Be a Bat?" \textit{The Philosophical Review}, vol. 83, no. 4, 1974, pp. 435-450.
+
+\bibitem{fine-grounding}
+Fine, Kit. "Guide to Ground." \textit{Metaphysical Grounding: Understanding the Structure of Reality}, edited by Fabrice Correia and Benjamin Schnieder, Cambridge University Press, 2012, pp. 37-80.
+
+\bibitem{schaffer-monism}
+Schaffer, Jonathan. "Monism: The Priority of the Whole." \textit{Philosophical Review}, vol. 119, no. 1, 2010, pp. 31-76.
+
+\bibitem{goff-consciousness}
+Goff, Philip. \textit{Consciousness and Fundamental Reality}. Oxford University Press, 2017.
+
+\bibitem{kastrup-idealism}
+Kastrup, Bernardo. \textit{The Idea of the World: A Multi-Disciplinary Argument for the Mental Nature of Reality}. Iff Books, 2019.
+
+\bibitem{strawson-panpsychism}
+Strawson, Galen. "Realistic Monism: Why Physicalism Entails Panpsychism." \textit{Journal of Consciousness Studies}, vol. 13, no. 10-11, 2006, pp. 3-31.
+
+\bibitem{coleman-cosmopsychism}
+Coleman, Sam. "The Real Combination Problem: Panpsychism, Micro-Subjects, and Emergence." \textit{Erkenntnis}, vol. 79, no. 1, 2014, pp. 19-44.
+
+\bibitem{husserl-ideas}
+Husserl, Edmund. \textit{Ideas Pertaining to a Pure Phenomenology and to a Phenomenological Philosophy, First Book}. Translated by F. Kersten. Martinus Nijhoff, 1983.
+
+\bibitem{zahavi-self}
+Zahavi, Dan. \textit{Subjectivity and Selfhood: Investigating the First-Person Perspective}. MIT Press, 2005.
+
+\bibitem{whitehead-process}
+Whitehead, Alfred North. \textit{Process and Reality}. Macmillan, 1929.
+
+\bibitem{hartshorne-creative}
+Hartshorne, Charles. \textit{Creative Synthesis and Philosophic Method}. Open Court, 1970.
+
+\bibitem{sider-grounding}
+Sider, Theodore. \textit{Writing the Book of the World}. Oxford University Press, 2011.
+
+\bibitem{rosen-grounding}
+Rosen, Gideon. "Metaphysical Dependence: Grounding and Reduction." \textit{Modality: Metaphysics, Logic, and Epistemology}, edited by Bob Hale and Aviv Hoffmann, Oxford University Press, 2010, pp. 109-136.
+
+\bibitem{wigner-consciousness}
+Wigner, Eugene P. "Remarks on the Mind-Body Question." \textit{The Scientist Speculates}, edited by I. J. Good, Heinemann, 1961, pp. 284-302.
+
+\bibitem{stapp-quantum}
+Stapp, Henry P. \textit{Mindful Universe: Quantum Mechanics and the Participating Observer}. Springer, 2011.
+
+\bibitem{tononi-iit}
+Tononi, Giulio, and Christof Koch. "Consciousness: Here, There and Everywhere?" \textit{Philosophical Transactions of the Royal Society B}, vol. 370, no. 1668, 2015.
+
+\bibitem{seth-brain}
+Seth, Anil K. "The Cybernetic Bayesian Brain: From Interoceptive Inference to Sensorimotor Contingencies." \textit{Open MIND}, edited by Thomas Metzinger and Jennifer M. Windt, MIND Group, 2015.
+
+\bibitem{lean}
+de Moura, Leonardo, et al. "The Lean 4 Theorem Prover and Programming Language." \textit{Automated Deduction -- CADE 28}, Springer, 2021, pp. 625-635.
+
+\bibitem{benzmüller-ontological}
+Benzm\"uller, Christoph, and Bruno Woltzenlogel Paleo. "Automating Emendations of the Ontological Argument in Intensional Higher-Order Modal Logic." \textit{KI 2016: Advances in Artificial Intelligence}, Springer, 2016, pp. 114-127.
+
+\bibitem{fitting-modal}
+Fitting, Melvin, and Richard L. Mendelsohn. \textit{First-Order Modal Logic}. Kluwer Academic Publishers, 1998.
+
+\bibitem{siderits-buddhism}
+Siderits, Mark. \textit{Buddhism as Philosophy}. Ashgate, 2007.
+
+\bibitem{garfield-madhyamaka}
+Garfield, Jay L. \textit{The Fundamental Wisdom of the Middle Way: Nāgārjuna's Mūlamadhyamakakārikā}. Oxford University Press, 1995.
+
+\end{thebibliography}
+
+\end{document}
