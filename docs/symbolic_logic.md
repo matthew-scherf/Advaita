@@ -1,8 +1,6 @@
-Here’s your **Complete Formal Axiomatization of Advaita Vedanta (v4.5)** beautifully formatted in Markdown (GitHub-style `.md`), preserving the technical hierarchy and readability while using proper headings, code formatting for formal elements, and visual separation for clarity:
-
 ---
 
-# 🕉️ Complete Formal Axiomatization of Advaita Vedanta
+# Complete Formal Axiomatization of Advaita Vedanta
 
 ---
 
