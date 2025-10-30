@@ -104,10 +104,10 @@ If you use this formalization in academic work, please cite:
 ```
 @misc{advaita_vedanta_lean,
   title={Formal Axiomatization of Advaita Vedanta in Lean 4},
-  author={[Author]},
+  author={[Matthew Scherf]},
   year={2025},
   howpublished={GitHub repository},
-  url={https://github.com/[username]/advaita-vedanta-lean}
+  url={https://github.com/[matthew-scherf]/advaita}
 }
 ```
 
